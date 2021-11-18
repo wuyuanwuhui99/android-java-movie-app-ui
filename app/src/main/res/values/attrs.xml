@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="circle" format="boolean" />
+        <attr name="radius" format="dimension" />
+    </declare-styleable>
+
+</resources>

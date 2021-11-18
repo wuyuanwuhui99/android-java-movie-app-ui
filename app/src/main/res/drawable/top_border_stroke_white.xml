@@ -1,0 +1,14 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape>
+            <solid android:color="@android:color/background_dark"/>
+        </shape>
+    </item>
+    <item
+        android:top="1px">
+        <!-- 主体背景颜色值 -->
+        <shape>
+            <solid android:color="#fff"/>
+        </shape>
+    </item>
+</layer-list>
