@@ -40,7 +40,7 @@
                     android:layout_width="0dp"
                     android:paddingLeft="10dp"
                     android:background="@null"
-                    android:hint="请输入课程名称"
+                    android:hint="请输入影片名称"
                     android:textColorHint="#bbb"
                     android:maxLength="30"
                     android:singleLine="true"
@@ -101,15 +101,15 @@
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:id="@+id/study"
+            android:id="@+id/movie"
             >
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:id="@+id/study_img"
+                android:id="@+id/movie_img"
                 android:src="@mipmap/icon_movie"/>
             <TextView
-                android:id="@+id/study_text"
+                android:id="@+id/movie_text"
                 android:paddingTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -125,15 +125,15 @@
             android:gravity="center_horizontal"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:id="@+id/my_course"
+            android:id="@+id/tv"
             >
             <ImageView
-                android:id="@+id/my_course_img"
+                android:id="@+id/tv_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:src="@mipmap/icon_tv"/>
             <TextView
-                android:id="@+id/my_course_text"
+                android:id="@+id/tv_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="10dp"
@@ -155,7 +155,7 @@
                 android:id="@+id/user_img"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:src="@mipmap/icon_user_active"/>
+                android:src="@mipmap/icon_user"/>
             <TextView
                 android:id="@+id/user_text"
                 android:paddingTop="10dp"
