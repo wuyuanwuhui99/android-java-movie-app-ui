@@ -5,20 +5,35 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.player.movie.R;
+import com.player.movie.api.Api;
+import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
 import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
+import com.player.movie.http.RequestUtils;
+import com.player.movie.http.ResultEntity;
+import com.player.movie.utils.SharedPreferencesUtils;
+import com.player.movie.view.CircleImageView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -55,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         initView();//初始化view
         initEvent();//初始化事件
+        getUserData();
     }
 
     private void initView(){
@@ -211,4 +227,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvText.setTextColor(color);
         userText.setTextColor(color);
     }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 获取用户信息
+     * @date: 2021-12-04 15:59
+     */
+    private void getUserData(){
+        Call<ResultEntity> userData = RequestUtils.getInstance().getUserData();
+        userData.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                Gson gson = new Gson();
+                UserEntity userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
+                String avaterUrl = Api.HOST + userEntity.getAvater();
+                System.out.println(avaterUrl);
+                SharedPreferencesUtils.setParam("token",response.body().getToken());
+                Glide.with(MainActivity.this.getApplicationContext()).load(avaterUrl).into((CircleImageView)findViewById(R.id.avater));
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println("错误");
+            }
+        });
+    }
+
+
 }

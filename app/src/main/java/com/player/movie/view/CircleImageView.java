@@ -24,11 +24,11 @@ public class CircleImageView extends AppCompatImageView {
         this(context,null);
     }
 
-    public CircleImageView(Context context, AttributeSet attrs) {
+    public CircleImageView(Context context,AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public CircleImageView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CircleImageView(Context context,AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init();
     }
@@ -65,7 +65,7 @@ public class CircleImageView extends AppCompatImageView {
         }
     }
 
-    private Bitmap resizeBitmap(Bitmap sourceBitmap, int dstWidth, int dstHeight){
+    private Bitmap resizeBitmap(Bitmap sourceBitmap,int dstWidth,int dstHeight){
         int width = sourceBitmap.getWidth();
         int height = sourceBitmap.getHeight();
 
@@ -80,8 +80,8 @@ public class CircleImageView extends AppCompatImageView {
         return Bitmap.createBitmap(sourceBitmap,0,0,width,height,matrix,true);
     }
 
-    private void drawCircleBitmapByXfermode(Canvas canvas, Bitmap bitmap){
-        final int sc = canvas.saveLayer(0,0,getWidth(),getHeight(),null, Canvas.ALL_SAVE_FLAG);
+    private void drawCircleBitmapByXfermode(Canvas canvas,Bitmap bitmap){
+        final int sc = canvas.saveLayer(0,0,getWidth(),getHeight(),null,Canvas.ALL_SAVE_FLAG);
         //绘制dst层
         canvas.drawCircle(mSize / 2,mSize / 2,mSize / 2,mPaint);
         //设置图层混合模式为SRC_IN
