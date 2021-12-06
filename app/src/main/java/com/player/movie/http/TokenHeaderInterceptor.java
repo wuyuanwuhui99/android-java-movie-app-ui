@@ -25,6 +25,7 @@ public class TokenHeaderInterceptor  implements Interceptor {
         builder.addInterceptor(chain -> {
             Request build = chain.request().newBuilder()
                     .addHeader("Authorization", (String) SharedPreferencesUtils.getParam("token",""))
+                    .addHeader("Content-type","application/json;charset=UTF-8")
                     .build();
             return chain.proceed(build);
         });

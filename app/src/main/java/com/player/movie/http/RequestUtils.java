@@ -14,10 +14,4 @@ public  class  RequestUtils {
               .addConverterFactory(GsonConverterFactory.create())
               .build().create(RequestService.class);
    }
-
-//   static public RequestService requestService = new Retrofit.Builder()
-//           .baseUrl(Api.HOST)
-//           .client(new TokenHeaderInterceptor().getClient().build())
-//           .addConverterFactory(GsonConverterFactory.create())
-//           .build().create(RequestService.class);
 }
