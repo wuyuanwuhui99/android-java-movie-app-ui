@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
 import com.player.movie.api.Api;
+import com.player.movie.entity.CategoryEntity;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
@@ -71,7 +72,11 @@ public class HomeFragment extends Fragment {
         });
     }
 
-
+    /**
+     * @author: wuwenqiang
+     * @description: 获取banner图片
+     * @date: 2021-12-07 23:32
+     */
     public void getBannerData(){
         Call<ResultEntity> categoryListService = RequestUtils.getInstance().getCategoryList("轮播","电影");
         categoryListService.enqueue(new Callback<ResultEntity>() {
@@ -98,4 +103,24 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 按页面获取要展示的category小类
+     * @date: 2021-12-07 23:32
+     */
+    public void getAllCategoryListByPageName(){
+        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getAllCategoryListByPageName("首页");
+        categoryListService.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                List<CategoryEntity> categoryEntities = JSON.parseArray(JSON.toJSONString(response.body().getData()), CategoryEntity.class);
+
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println("错误");
+            }
+        });
+    }
 }

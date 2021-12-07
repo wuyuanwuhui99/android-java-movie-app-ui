@@ -25,20 +25,18 @@
                 android:layout_weight="1"
                 android:orientation="horizontal"
                 android:layout_marginLeft="10dp"
-                android:gravity="center_horizontal"
+                android:gravity="center_vertical"
                 android:background="@drawable/rounded_corner_search_box"
                 >
-                <EditText
+                <TextView
                     android:layout_weight="1"
-                    android:layout_height="32dp"
+                    android:layout_height="match_parent"
                     android:layout_width="0dp"
                     android:paddingLeft="10dp"
-                    android:background="@null"
-                    android:hint="请输入影片名称"
-                    android:textColorHint="#bbb"
-                    android:maxLength="30"
-                    android:singleLine="true"
-                    ></EditText>
+                    android:layout_marginTop="3dp"
+                    android:textSize="16sp"
+                    android:textColor="#ccc"
+                    android:text="请输入影片名称"/>
                 <ImageView
                     android:src="@mipmap/icon_search"
                     android:scaleType="fitCenter"
@@ -141,7 +139,7 @@
                         android:text="分类"/>
                 </LinearLayout>
             </LinearLayout>
+            <include  layout="@layout/category_fragment"/>
         </LinearLayout>
-
     </ScrollView>
 </LinearLayout>

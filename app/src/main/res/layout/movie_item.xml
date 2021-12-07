@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        app:riv_corner_radius="10dp"
+        android:background="@color/background_movie_item"
+        android:id="@+id/avater"
+        app:riv_oval="true" />
+    <TextView
+        android:layout_marginTop="10dp"
+        android:text="洪熙官之魔门妖女"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
