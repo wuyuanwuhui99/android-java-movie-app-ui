@@ -139,7 +139,12 @@
                         android:text="分类"/>
                 </LinearLayout>
             </LinearLayout>
-            <include  layout="@layout/category_fragment"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/category_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

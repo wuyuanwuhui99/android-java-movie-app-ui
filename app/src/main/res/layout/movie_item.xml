@@ -7,13 +7,11 @@
     <com.makeramen.roundedimageview.RoundedImageView
         android:layout_width="150dp"
         android:layout_height="200dp"
-        app:riv_corner_radius="10dp"
         android:background="@color/background_movie_item"
-        android:id="@+id/avater"
-        app:riv_oval="true" />
+        android:id="@+id/movie_img"/>
     <TextView
+        android:id="@+id/movie_name"
         android:layout_marginTop="10dp"
-        android:text="洪熙官之魔门妖女"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 </LinearLayout>

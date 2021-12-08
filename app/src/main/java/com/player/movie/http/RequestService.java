@@ -15,5 +15,4 @@ public interface RequestService {
 
     @GET(Api.GETALLCATEGORYLISTBYPAGENAME)
     Call<ResultEntity> getAllCategoryListByPageName(@Query("pageName")String pageName);
-
 }
