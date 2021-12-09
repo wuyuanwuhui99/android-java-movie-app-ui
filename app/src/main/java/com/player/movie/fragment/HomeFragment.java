@@ -30,7 +30,6 @@ import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

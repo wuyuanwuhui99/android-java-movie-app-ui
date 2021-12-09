@@ -1,16 +1,19 @@
 package com.player.movie.adapter;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
+import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
 
 import java.util.List;
@@ -32,12 +35,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        String path = Api.HOST + movieEntityList.get(position).getLocalImg();
+        Glide.with(BaseApplication.getContext()).load(path).into(holder.imageView);
         holder.textView.setText(movieEntityList.get(position).getMovieName());
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return movieEntityList.size();
     }
 
 

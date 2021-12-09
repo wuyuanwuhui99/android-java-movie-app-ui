@@ -9,24 +9,30 @@
         android:orientation="vertical"
         android:paddingTop="20dp">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <View
-                android:background="@color/background_blue"
-                android:layout_width="3dp"
-                android:layout_marginRight="2dp"
-                android:layout_height="20dp"/>
-            <TextView
-                android:id="@+id/category_name"
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
                 android:layout_width="wrap_content"
-                android:text=""
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content">
+                <View
+                    android:background="@color/background_blue"
+                    android:layout_width="3dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_height="20dp"/>
+                <TextView
+                    android:id="@+id/category_name"
+                    android:layout_width="wrap_content"
+                    android:text=""
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </LinearLayout>
     </LinearLayout>
 
