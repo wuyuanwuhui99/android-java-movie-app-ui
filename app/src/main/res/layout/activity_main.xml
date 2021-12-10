@@ -7,8 +7,6 @@
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
 
-
-
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,6 +16,8 @@
         android:layout_weight="1">
     </androidx.viewpager.widget.ViewPager>
     <LinearLayout
+        android:id="@+id/bottom_nav"
+        android:visibility="invisible"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:background="@drawable/top_border_stroke_white"

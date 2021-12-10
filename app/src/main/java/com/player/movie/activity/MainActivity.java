@@ -11,14 +11,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.player.movie.R;
+import com.player.movie.api.Api;
+import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
 import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
+import com.player.movie.http.RequestUtils;
+import com.player.movie.http.ResultEntity;
+import com.player.movie.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -49,22 +59,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TVFragment tvFragment;
     UserFragment userFragment;
 
+    UserEntity userEntity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();//初始化view
-        initEvent();//初始化事件
+        getUserData();
     }
 
     private void initView(){
         viewPager = findViewById(R.id.viewpager);
 
         //初始化4个切换页
-        homeFragment = new HomeFragment();
-        movieFragment = new MovieFragment();
-        tvFragment = new TVFragment();
-        userFragment = new UserFragment();
+        homeFragment = new HomeFragment(userEntity);
+        movieFragment = new MovieFragment(userEntity);
+        tvFragment = new TVFragment(userEntity);
+        userFragment = new UserFragment(userEntity);
 
         //把4个切换页添加到容器内
         listFragment.add(homeFragment);
@@ -89,7 +100,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         movieText = findViewById(R.id.movie_text);
         tvText = findViewById(R.id.tv_text);
         userText = findViewById(R.id.user_text);
+    }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 获取用户信息
+     * @date: 2021-12-04 15:59
+     */
+    private void getUserData(){
+        Call<ResultEntity> userData = RequestUtils.getInstance().getUserData();
+        userData.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                Gson gson = new Gson();
+                userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
+                SharedPreferencesUtils.setParam("token",response.body().getToken());
+                findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
+                initView();//初始化view
+                initEvent();//初始化事件
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println("错误");
+            }
+        });
     }
 
     private void initEvent(){

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,13 +25,13 @@ import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.utils.SharedPreferencesUtils;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,38 +39,36 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private View view;
+    private String avaterUrl;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_fragment,container,false);
-        getUserData();
+        Glide.with(getContext()).load(avaterUrl).into((RoundedImageView)view.findViewById(R.id.avater));
+        getKeyWord();
+        getBannerData();
+        getAllCategoryListByPageName();
         return view;
     }
 
+    public HomeFragment(UserEntity userEntity){
+        avaterUrl = Api.HOST + userEntity.getAvater();
+    }
 
-    /**
-     * @author: wuwenqiang
-     * @description: 获取用户信息
-     * @date: 2021-12-04 15:59
-     */
-    private void getUserData(){
-        Call<ResultEntity> userData = RequestUtils.getInstance().getUserData();
-        userData.enqueue(new Callback<ResultEntity>() {
+    public void getKeyWord(){
+        Call<ResultEntity> getKeyWordService = RequestUtils.getInstance().getKeyWord("电影");
+        getKeyWordService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                Gson gson = new Gson();
-                UserEntity userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
-                String avaterUrl = Api.HOST + userEntity.getAvater();
-                System.out.println(avaterUrl);
-                SharedPreferencesUtils.setParam("token",response.body().getToken());
-                Glide.with(getContext()).load(avaterUrl).into((RoundedImageView)view.findViewById(R.id.avater));
-                getBannerData();
-                getAllCategoryListByPageName();
+                Map map = JSON.parseObject(JSON.toJSONString(response.body().getData()), Map.class);
+                String movieName = (String) map.get("movieName");
+                TextView textView = view.findViewById(R.id.home_search_key);
+                textView.setText(movieName);
             }
 
             @Override
             public void onFailure(Call<ResultEntity> call, Throwable t) {
-                System.out.println("错误");
+
             }
         });
     }

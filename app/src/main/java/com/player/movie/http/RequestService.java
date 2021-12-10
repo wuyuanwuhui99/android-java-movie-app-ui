@@ -15,4 +15,7 @@ public interface RequestService {
 
     @GET(Api.GETALLCATEGORYLISTBYPAGENAME)
     Call<ResultEntity> getAllCategoryListByPageName(@Query("pageName")String pageName);
+
+    @GET(Api.GETKEYWORD)
+    Call<ResultEntity> getKeyWord(@Query("classify")String classify);
 }

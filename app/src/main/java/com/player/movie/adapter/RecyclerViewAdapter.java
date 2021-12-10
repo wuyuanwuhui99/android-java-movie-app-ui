@@ -1,9 +1,9 @@
 package com.player.movie.adapter;
 
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -38,6 +38,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         String path = Api.HOST + movieEntityList.get(position).getLocalImg();
         Glide.with(BaseApplication.getContext()).load(path).into(holder.imageView);
         holder.textView.setText(movieEntityList.get(position).getMovieName());
+        if(position == movieEntityList.size() - 1){
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.setMargins(0,0,0,0);//4个参数按顺序分别是左上右下
+            holder.itemView.setLayoutParams(layoutParams);
+        }
     }
 
     @Override
