@@ -16,13 +16,10 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.CategoryEntity;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.youth.banner.Banner;
@@ -39,38 +36,13 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private View view;
-    private String avaterUrl;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_fragment,container,false);
-        Glide.with(getContext()).load(avaterUrl).into((RoundedImageView)view.findViewById(R.id.avater));
-        getKeyWord();
         getBannerData();
         getAllCategoryListByPageName();
         return view;
-    }
-
-    public HomeFragment(UserEntity userEntity){
-        avaterUrl = Api.HOST + userEntity.getAvater();
-    }
-
-    public void getKeyWord(){
-        Call<ResultEntity> getKeyWordService = RequestUtils.getInstance().getKeyWord("电影");
-        getKeyWordService.enqueue(new Callback<ResultEntity>() {
-            @Override
-            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                Map map = JSON.parseObject(JSON.toJSONString(response.body().getData()), Map.class);
-                String movieName = (String) map.get("movieName");
-                TextView textView = view.findViewById(R.id.home_search_key);
-                textView.setText(movieName);
-            }
-
-            @Override
-            public void onFailure(Call<ResultEntity> call, Throwable t) {
-
-            }
-        });
     }
 
     /**
@@ -84,7 +56,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntity = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class);
-                Banner banner = view.findViewById(R.id.banner);
+                Banner banner = view.findViewById(R.id.home_banner);
                 banner.setAdapter(new BannerImageAdapter<MovieEntity>(movieEntity) {
                     @Override
                     public void onBindView(BannerImageHolder holder, MovieEntity movieEntity, int position, int size) {
@@ -123,7 +95,7 @@ public class HomeFragment extends Fragment {
                     bundle.putString("category", categoryEntity.getCategory());
                     bundle.putString("classify", categoryEntity.getClassify());
                     categoryFragment.setArguments(bundle);
-                    transaction.add(R.id.category_layout, categoryFragment);
+                    transaction.add(R.id.home_category_layout, categoryFragment);
                 }
                 transaction.commit();
             }

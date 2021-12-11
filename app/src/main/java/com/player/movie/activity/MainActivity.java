@@ -11,7 +11,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSON;
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.UserEntity;
@@ -25,6 +28,7 @@ import com.player.movie.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,6 +64,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     UserFragment userFragment;
 
     UserEntity userEntity;
+    LinearLayout avaterLayout;
+
+    int tabIds[]={R.id.home,R.id.movie,R.id.tv,R.id.user_center};
+    int tabIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +80,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         viewPager = findViewById(R.id.viewpager);
 
         //初始化4个切换页
-        homeFragment = new HomeFragment(userEntity);
-        movieFragment = new MovieFragment(userEntity);
-        tvFragment = new TVFragment(userEntity);
-        userFragment = new UserFragment(userEntity);
+        homeFragment = new HomeFragment();
+        movieFragment = new MovieFragment();
+        tvFragment = new TVFragment();
+        userFragment = new UserFragment();
 
         //把4个切换页添加到容器内
         listFragment.add(homeFragment);
@@ -115,7 +123,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Gson gson = new Gson();
                 userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
                 SharedPreferencesUtils.setParam("token",response.body().getToken());
+                avaterLayout = findViewById(R.id.avater_layout);
+                avaterLayout.setVisibility(View.VISIBLE);
+                Glide.with(getApplicationContext()).load(Api.HOST + userEntity.getAvater()).into((RoundedImageView)findViewById(R.id.avater));
                 findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
+                getKeyWord("电影");
                 initView();//初始化view
                 initEvent();//初始化事件
             }
@@ -127,6 +139,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 初始化点击事件
+     * @date: 2021-12-11 11:08
+     */
     private void initEvent(){
         FragmentPagerAdapter pageAdapter =new FragmentPagerAdapter(getSupportFragmentManager()) {  //适配器直接new出来
             @Override
@@ -162,6 +179,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userLinearLayout.setOnClickListener(this);
     }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 底部导航切换
+     * @date: 2021-12-11 11:08
+     */
     private void tab(int i){  //用于屏幕脱拖动时切换底下图标，只在监听屏幕拖动中调用
         int color = this.getResources().getColor(R.color.navigate_active);
         resetTab();
@@ -169,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 0:{
                 homeImg.setImageResource(R.mipmap.icon_home_active);
                 homeText.setTextColor(color);
+                avaterLayout.setVisibility(View.VISIBLE);
                 break;
             }
             case 1:
@@ -176,6 +199,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 movieImg.setImageResource(R.mipmap.icon_movie_active);
                 movieText.setTextColor(color);
                 movieFragment.initData();
+                avaterLayout.setVisibility(View.VISIBLE);
                 break;
             }
             case 2:
@@ -183,6 +207,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvImg.setImageResource(R.mipmap.icon_tv_active);
                 tvText.setTextColor(color);
                 tvFragment.initData();
+                avaterLayout.setVisibility(View.VISIBLE);
                 break;
             }
             case 3:
@@ -190,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 userImg.setImageResource(R.mipmap.icon_user_active);
                 userText.setTextColor(color);
                 userFragment.initData();
+                avaterLayout.setVisibility(View.GONE);
                 break;
             }
         }
@@ -198,11 +224,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //自定义一个方法
     private void setSelect(int i){
         viewPager.setCurrentItem(i);//切换界面
+        tabIndex = i;
     }
 
     //导航栏的点击事件
     @Override
     public void onClick(View view) {  //设置点击的为；亮色
+        if(view.getId() == tabIds[tabIndex])return;
         resetTab();
         switch (view.getId()){
             case R.id.home:{
@@ -232,7 +260,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //设置暗色
+    /**
+     * @author: wuwenqiang
+     * @description: 重置底部导航暗色
+     * @date: 2021-12-11 11:08
+     */
     private void resetTab() {
         homeImg.setImageResource(R.mipmap.icon_home);
         movieImg.setImageResource(R.mipmap.icon_movie);
@@ -246,4 +278,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         userText.setTextColor(color);
     }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 获取搜索栏关键词
+     * @date: 2021-12-11 11:08
+     */
+    public void getKeyWord(String classify){
+        Call<ResultEntity> getKeyWordService = RequestUtils.getInstance().getKeyWord(classify);
+        getKeyWordService.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                Map map = JSON.parseObject(JSON.toJSONString(response.body().getData()), Map.class);
+                String movieName = (String) map.get("movieName");
+                TextView textView = avaterLayout.findViewById(R.id.search_key);
+                textView.setText(movieName);
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+
+            }
+        });
+    }
 }
