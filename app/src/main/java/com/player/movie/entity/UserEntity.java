@@ -11,6 +11,7 @@ public class UserEntity {
     private String  birthday;
     private String  sex;
     private String  role;
+    private String sign;
     private String  password;
 
     public String getUserId() {
@@ -91,6 +92,14 @@ public class UserEntity {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getSign() {
+        return sign;
+    }
+
+    public void setSign(String sign) {
+        this.sign = sign;
     }
 
     public String getPassword() {

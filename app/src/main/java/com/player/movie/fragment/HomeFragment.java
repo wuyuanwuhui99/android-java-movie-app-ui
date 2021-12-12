@@ -1,11 +1,9 @@
 package com.player.movie.fragment;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -28,7 +26,6 @@ import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,12 +33,15 @@ import retrofit2.Response;
 
 public class HomeFragment extends Fragment {
     private View view;
+    private boolean isInit = false;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.home_fragment,container,false);
-        getBannerData();
-        getAllCategoryListByPageName();
+        if(!isInit){
+            getBannerData();
+            getAllCategoryListByPageName();
+        }
         return view;
     }
 

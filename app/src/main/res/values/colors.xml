@@ -4,9 +4,9 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="navigate">#555</color>
+    <color name="navigate">#666</color>
     <color name="navigate_active">#ffae00</color>
     <color name="background_dark">#bbb</color>
     <color name="background_blue">#1890ff</color>
-    <color name="background_movie_item">#eee</color>
+    <color name="background_user">#eee</color>
 </resources>

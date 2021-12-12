@@ -18,4 +18,11 @@ public interface RequestService {
 
     @GET(Api.GETKEYWORD)
     Call<ResultEntity> getKeyWord(@Query("classify")String classify);
+
+    @GET(Api.GETUSERMSG)
+    Call<ResultEntity> getUserMsg();
+
+    @GET(Api.GETPLAYRECORD)
+    Call<ResultEntity> getPlayRecord();
+
 }

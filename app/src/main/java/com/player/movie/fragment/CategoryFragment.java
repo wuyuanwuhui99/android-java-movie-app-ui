@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.player.movie.R;
-import com.player.movie.adapter.RecyclerViewAdapter;
+import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
@@ -46,7 +46,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class);
-                RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(movieEntityList);
+                CategoryRecyclerViewAdapter recyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
                 LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.recyclerView);

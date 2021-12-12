@@ -18,11 +18,11 @@ import com.player.movie.entity.MovieEntity;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder>{
+public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder>{
 
     private List<MovieEntity>movieEntityList;
 
-    public RecyclerViewAdapter( List<MovieEntity> movieEntityList){
+    public CategoryRecyclerViewAdapter(List<MovieEntity> movieEntityList){
         this.movieEntityList = movieEntityList;
     }
 
