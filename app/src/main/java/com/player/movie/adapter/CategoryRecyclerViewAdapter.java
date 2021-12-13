@@ -1,18 +1,24 @@
 package com.player.movie.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.BaseApplication;
 import com.player.movie.R;
+import com.player.movie.activity.MainActivity;
+import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
 
@@ -43,6 +49,13 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             layoutParams.setMargins(0,0,0,0);//4个参数按顺序分别是左上右下
             holder.itemView.setLayoutParams(layoutParams);
         }
+        holder.itemView.setOnClickListener(view -> { // 列表绑定点击事件
+            Context context = BaseApplication.getContext();
+            Intent intent = new Intent(context, MovieDetailActivity.class);
+            String movieJSONString = JSON.toJSONString(movieEntityList.get(position));
+            intent.putExtra("movieItem",movieJSONString);
+            context.startActivity(intent);
+        });
     }
 
     @Override

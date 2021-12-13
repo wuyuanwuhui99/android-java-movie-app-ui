@@ -4,7 +4,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#fff"
+    android:background="@color/background_gray"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
     <LinearLayout
@@ -15,6 +15,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
+        android:background="@drawable/border_radius"
+        android:padding="10dp"
         android:orientation="horizontal">
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="50dp"
@@ -54,8 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:id="@+id/viewpager"
-        android:layout_weight="1">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_weight="1"/>
     <LinearLayout
         android:id="@+id/bottom_nav"
         android:visibility="invisible"
