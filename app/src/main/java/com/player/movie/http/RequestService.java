@@ -4,6 +4,7 @@ import com.player.movie.api.Api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface RequestService {
@@ -24,5 +25,8 @@ public interface RequestService {
 
     @GET(Api.GETPLAYRECORD)
     Call<ResultEntity> getPlayRecord();
+
+    @GET(Api.GETSTAR)
+    Call<ResultEntity> getStarList(@Path("movieId") String movieId);
 
 }

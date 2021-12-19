@@ -11,7 +11,7 @@ public class Api {
     public static final String GETUSERMSG =  "/service/movie-getway/getUserMsg"; //获取用户四个指标信息，使用天数，关注，观看记录，浏览记录
     public static final String GETSEARCHRESULT =  "/service/movie/search"; //搜索
     public static final String LOGIN =  "/service/movie/login"; //登录
-    public static final String GETSTAR =  "/service/movie/getStar/"; //获取演员
+    public static final String GETSTAR =  "/service/movie/getStar/{movieId}"; //获取演员
     public static final String GETMOVIEURL =  "/service/movie/getMovieUrl"; //获取电影播放地址
     public static final String GETVIEWRECORD =  "/service/movie-getway/getViewRecord"; //获取浏览记录
     public static final String SAVEVIEWRECORD =  "/service/movie-getway/saveViewRecord";  //浏览历史

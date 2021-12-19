@@ -27,11 +27,10 @@
                 <TextView
                     android:id="@+id/category_name"
                     android:layout_width="wrap_content"
-                    android:text=""
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/movie_recycler_view"
                 android:layout_gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

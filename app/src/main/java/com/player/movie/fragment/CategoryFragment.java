@@ -49,7 +49,7 @@ public class CategoryFragment extends Fragment {
                 CategoryRecyclerViewAdapter recyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
                 LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+                RecyclerView recyclerView = view.findViewById(R.id.movie_recycler_view);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(recyclerViewAdapter);
             }
