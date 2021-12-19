@@ -29,4 +29,10 @@ public interface RequestService {
     @GET(Api.GETSTAR)
     Call<ResultEntity> getStarList(@Path("movieId") String movieId);
 
+    @GET(Api.GETYOURLIKES)
+    Call<ResultEntity> getYourLikes(@Query("labels") String labels,@Query("classify") String classify);
+
+    @GET(Api.GETRECOMMEND)
+    Call<ResultEntity> getRecommend(@Query("classify") String classify);
+
 }

@@ -18,14 +18,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
+import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.adapter.StarRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieStarEntity;
-import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.utils.SharedPreferencesUtils;
 
 import java.util.List;
 
@@ -42,6 +41,8 @@ public class MovieDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_detail);
         initData();
         getStarList();
+        getYourLikes();
+        getRecommend();
     }
 
     /**
@@ -121,7 +122,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieStarEntity> movieStarList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieStarEntity.class);
                 StarRecyclerViewAdapter starRecyclerViewAdapter = new StarRecyclerViewAdapter(movieStarList);
-                LinearLayoutManager layoutManager=new LinearLayoutManager(getBaseContext());  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
+                LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.star_recycler_view);
                 recyclerView.setLayoutManager(layoutManager);
@@ -130,7 +131,59 @@ public class MovieDetailActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<ResultEntity> call, Throwable t) {
-                System.out.println("错误");
+                System.out.println("获取获取主演列表失败");
+            }
+        });
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 获取猜你想看
+     * @date: 2021-12-11 12:11
+     */
+    private void getYourLikes(){
+        Call<ResultEntity> userData = RequestUtils.getInstance().getYourLikes(movieEntity.getLabel(),movieEntity.getClassify());
+        userData.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
+                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
+                LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                RecyclerView recyclerView = view.findViewById(R.id.yourlikes_recycler_view);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(categoryRecyclerViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println("获取猜你想看失败");
+            }
+        });
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 获取推荐列表
+     * @date: 2021-12-11 12:11
+     */
+    private void getRecommend(){
+        Call<ResultEntity> userData = RequestUtils.getInstance().getRecommend(movieEntity.getClassify());
+        userData.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
+                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
+                LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
+                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                RecyclerView recyclerView = view.findViewById(R.id.recommend_recycler_view);
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(categoryRecyclerViewAdapter);
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println("获取推荐列表失败");
             }
         });
     }

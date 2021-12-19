@@ -8,27 +8,10 @@
 ![app首页](./%E9%A2%84%E8%A7%882.png)
 ![app首页](./%E9%A2%84%E8%A7%883.png)
 ![app首页](./%E9%A2%84%E8%A7%884.png)
-
+![app首页](./%E9%A2%84%E8%A7%885.png)
 =============================界面预览（如果无法预览，请查看项目根目录png文件）==========================
 
-
-## 使用的插件
-
-轮播：flutter_swiper: ^1.0.6
-
-网络请求：dio: ^3.0.10
-
-屏幕相关：flutter_screenutil: ^0.5.1
-
-状态管理器: provider: ^3.1.0+1	
-
-下拉加载：flutter_easyrefresh: ^2.1.5
-
-提示组件fluttertoast: ^3.0.3
-
-缓存：shared_preferences: ^0.4.1
-
-webview：webview_flutter: ^0.3.10+4
+所有影片数据来自第三方电影网站，使用python爬虫实时抓取，然后存入到自己的mysql数据库中，所有接口均采用java开发
 
 后端接口项目和sql语句：https://github.com/wuyuanwuhui99/springboot-app-service
 

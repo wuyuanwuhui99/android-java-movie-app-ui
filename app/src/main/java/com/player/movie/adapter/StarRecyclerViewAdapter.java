@@ -41,6 +41,7 @@ public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerVi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String path = Api.HOST + movieStarList.get(position).getLocalImg();
+//        String path = movieStarList.get(position).getImg();
         Glide.with(BaseApplication.getContext()).load(path).into(holder.imageView);
         holder.textView.setText(movieStarList.get(position).getStarName());
         if(position == movieStarList.size() - 1){
