@@ -5,6 +5,7 @@ public class Api {
     //查询所有大分类
     public static final String GETUSERDATA = "/service/movie/getUserData";
     public static final String GETCATEGORYLIST = "/service/movie/getCategoryList";// 获取分类影片
+    public static final String GETTOPMOVIELIST = "/service/movie/getTopMovieList";// 根据分类前20条影片数据
     public static final String GETKEYWORD = "/service/movie/getKeyWord";//按照classify查询搜索栏的关键词
     public static final String GETALLCATEGORYBYCLASSIFY =  "/service/movie/getAllCategoryByClassify";//按classify大类查询所有catory小类
     public static final String GETALLCATEGORYLISTBYPAGENAME =  "/service/movie/getAllCategoryListByPageName"; //按页面获取要展示的category小类

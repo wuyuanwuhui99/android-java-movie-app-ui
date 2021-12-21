@@ -35,4 +35,7 @@ public interface RequestService {
     @GET(Api.GETRECOMMEND)
     Call<ResultEntity> getRecommend(@Query("classify") String classify);
 
+    @GET(Api.GETTOPMOVIELIST)
+    Call<ResultEntity> getTopMovieList(@Query("classify") String classify,@Query("category") String category);
+
 }

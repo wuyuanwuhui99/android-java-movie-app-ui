@@ -144,6 +144,7 @@
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/star_layout"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
@@ -171,6 +172,7 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/yourlikes_layout"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"

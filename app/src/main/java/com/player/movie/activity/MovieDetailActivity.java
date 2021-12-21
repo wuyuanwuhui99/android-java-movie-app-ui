@@ -116,6 +116,10 @@ public class MovieDetailActivity extends AppCompatActivity {
      * @date: 2021-12-11 12:11
      */
     private void getStarList(){
+        if(movieEntity.getMovieId() == null){
+            view.findViewById(R.id.star_layout).setVisibility(View.GONE);
+            return;
+        }
         Call<ResultEntity> userData = RequestUtils.getInstance().getStarList(movieEntity.getMovieId().toString());
         userData.enqueue(new Callback<ResultEntity>() {
             @Override
@@ -142,13 +146,20 @@ public class MovieDetailActivity extends AppCompatActivity {
      * @date: 2021-12-11 12:11
      */
     private void getYourLikes(){
-        Call<ResultEntity> userData = RequestUtils.getInstance().getYourLikes(movieEntity.getLabel(),movieEntity.getClassify());
-        userData.enqueue(new Callback<ResultEntity>() {
+        String label = movieEntity.getLabel() == null ? movieEntity.getType() : movieEntity.getLabel();
+        Call<ResultEntity> yourLikesService;
+        if(label == null){
+            String category = movieEntity.getCategory().equals("轮播") ? null : movieEntity.getCategory();
+            yourLikesService = RequestUtils.getInstance().getTopMovieList(movieEntity.getClassify(),category);
+        }else{
+            yourLikesService = RequestUtils.getInstance().getYourLikes(label, movieEntity.getClassify());
+        }
+        yourLikesService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
                 CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
-                LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
+                LinearLayoutManager layoutManager = new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.yourlikes_recycler_view);
                 recyclerView.setLayoutManager(layoutManager);
