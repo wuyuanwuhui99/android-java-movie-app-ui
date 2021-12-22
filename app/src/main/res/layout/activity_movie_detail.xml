@@ -20,12 +20,26 @@
                 android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <com.makeramen.roundedimageview.RoundedImageView
-                    android:layout_width="150dp"
+                <RelativeLayout
                     android:layout_height="200dp"
-                    app:riv_corner_radius="10dp"
-                    app:riv_oval="false"
-                    android:id="@+id/movie_detail_img"/>
+                    android:layout_width="150dp"
+                    android:onClick="goPlay"
+                    >
+                    <com.makeramen.roundedimageview.RoundedImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:riv_corner_radius="10dp"
+                        app:riv_oval="false"
+                        android:id="@+id/movie_detail_img"/>
+                    <ImageView
+                        android:id="@+id/movie_play"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:src="@mipmap/icon_detail_play"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"/>
+                </RelativeLayout>
+
                 <LinearLayout
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"

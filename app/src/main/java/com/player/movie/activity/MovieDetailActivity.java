@@ -4,18 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.google.gson.Gson;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
@@ -35,6 +36,7 @@ import retrofit2.Response;
 public class MovieDetailActivity extends AppCompatActivity {
     MovieEntity movieEntity;
     View view;
+    String movieItemString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,8 +54,8 @@ public class MovieDetailActivity extends AppCompatActivity {
      */
     private void initData(){
         Intent intent = getIntent();
-        String movieItem = intent.getStringExtra("movieItem");
-        movieEntity = JSON.parseObject(movieItem, MovieEntity.class);
+        movieItemString = intent.getStringExtra("movieItem");
+        movieEntity = JSON.parseObject(movieItemString, MovieEntity.class);
 
         view = getWindow().getDecorView();
         RoundedImageView imageView = view.findViewById(R.id.movie_detail_img);
@@ -107,6 +109,11 @@ public class MovieDetailActivity extends AppCompatActivity {
             plotText.setText("\u3000\u3000" + movieEntity.getPlot());
         }else{
             plotText.setText("\u3000\u3000暂无");
+        }
+
+        //如果movieId不存在，这不能播放电影
+        if(movieEntity.getMovieId() == null){
+            view.findViewById(R.id.movie_play).setVisibility(View.GONE);
         }
     }
 
@@ -197,5 +204,21 @@ public class MovieDetailActivity extends AppCompatActivity {
                 System.out.println("获取推荐列表失败");
             }
         });
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 点击图片跳转到播放页
+     * @date: 2021-12-22 23:13
+     */
+    public void goPlay(View v){
+        if(movieEntity.getMovieId() != null){
+            Context context = getBaseContext();
+            Intent intent = new Intent(context, MoviePlayActivity.class);
+            intent.putExtra("movieItem",movieItemString);
+            context.startActivity(intent);
+        }else{
+            Toast.makeText(getApplicationContext(), "暂无播放资源", Toast.LENGTH_SHORT).show();
+        }
     }
 }
