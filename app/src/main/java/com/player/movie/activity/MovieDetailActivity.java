@@ -66,7 +66,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(imageView);
 
         //设置电影名称
-        TextView movieName = view.findViewById(R.id.detail_movie_img);
+        TextView movieName = view.findViewById(R.id.detail_movie_name);
         movieName.setText(movieEntity.getMovieName());
 
         //主演

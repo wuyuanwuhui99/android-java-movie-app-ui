@@ -50,7 +50,7 @@
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:textColor="@color/main_font_color"
-                        android:id="@+id/detail_movie_img"
+                        android:id="@+id/detail_movie_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -62,7 +62,7 @@
                     <TextView
                         android:layout_marginTop="10dp"
                         android:textColor="@color/navigate"
-                        android:id="@+id/detail_movie_img"
+                        android:id="@+id/detail_movie_star"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <LinearLayout
@@ -99,7 +99,7 @@
                         <TextView
                             android:layout_marginLeft="10dp"
                             android:id="@+id/detail_score"
-                            android:textColor="@color/red"
+                            android:textColor="#ff0000"
                             android:textSize="18sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
