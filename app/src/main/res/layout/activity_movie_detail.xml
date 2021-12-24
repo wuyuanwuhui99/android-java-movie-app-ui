@@ -30,9 +30,9 @@
                         android:layout_height="match_parent"
                         app:riv_corner_radius="10dp"
                         app:riv_oval="false"
-                        android:id="@+id/movie_detail_img"/>
+                        android:id="@+id/detail_movie_img"/>
                     <ImageView
-                        android:id="@+id/movie_play"
+                        android:id="@+id/detail_movie_play"
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@mipmap/icon_detail_play"
@@ -50,24 +50,24 @@
                         android:textStyle="bold"
                         android:textSize="20sp"
                         android:textColor="@color/main_font_color"
-                        android:id="@+id/movie_detail_name"
+                        android:id="@+id/detail_movie_img"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:layout_marginTop="10dp"
                         android:textColor="@color/navigate"
-                        android:id="@+id/description"
+                        android:id="@+id/detail_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
                         android:layout_marginTop="10dp"
                         android:textColor="@color/navigate"
-                        android:id="@+id/movie_detail_star"
+                        android:id="@+id/detail_movie_img"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <LinearLayout
                         android:layout_marginTop="10dp"
-                        android:id="@+id/score_layout"
+                        android:id="@+id/detail_score_layout"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
@@ -98,14 +98,14 @@
                             android:layout_height="20dp"/>
                         <TextView
                             android:layout_marginLeft="10dp"
-                            android:id="@+id/score"
-                            android:textColor="#ff0000"
+                            android:id="@+id/detail_score"
+                            android:textColor="@color/red"
                             android:textSize="18sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <TextView
-                        android:id="@+id/no_score"
+                        android:id="@+id/detail_no_score"
                         android:visibility="gone"
                         android:textColor="@color/navigate"
                         android:text="暂无评分"
@@ -153,12 +153,12 @@
                 </LinearLayout>
 
                 <TextView
-                    android:id="@+id/plot"
+                    android:id="@+id/detail_plot"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/star_layout"
+                android:id="@+id/detail_star_layout"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
@@ -181,12 +181,12 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/star_recycler_view"
+                    android:id="@+id/detail_star_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/yourlikes_layout"
+                android:id="@+id/detail_yourlikes_layout"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
@@ -209,7 +209,7 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/yourlikes_recycler_view"
+                    android:id="@+id/detail_yourlikes_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
@@ -236,7 +236,7 @@
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recommend_recycler_view"
+                    android:id="@+id/detail_recommend_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>

@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
+    <color name="red">#ff0000</color>
     <color name="navigate">#666</color>
     <color name="main_font_color">#000</color>
     <color name="navigate_active">#ffae00</color>
