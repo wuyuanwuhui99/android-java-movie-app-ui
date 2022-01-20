@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:background="@color/background_gray"
     tools:context=".activity.MoviePlayActivity">
     <ScrollView
@@ -18,6 +19,7 @@
                 android:layout_height="200dp">
             </LinearLayout>
             <LinearLayout
+                android:orientation="vertical"
                 android:padding="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -25,6 +27,7 @@
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
                     android:padding="10dp"
+                    android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
@@ -41,7 +44,6 @@
                         android:id="@+id/play_score_layout"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal"
-                        android:gravity="center_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <ImageView
@@ -81,8 +83,39 @@
                         android:visibility="gone"
                         android:textColor="@color/navigate"
                         android:text="暂无评分"
+                        android:layout_marginTop="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:background="@drawable/border_radius"
+                    android:orientation="vertical"
+                    android:padding="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:gravity="center_horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.flyco.tablayout.SegmentTabLayout
+                            android:id="@+id/play_tab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="32dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="10dp"
+                            tl:tl_bar_color="#ffffff"
+                            tl:tl_indicator_color="@color/background_blue"
+                            tl:tl_indicator_corner_radius="8dp"
+                            tl:tl_tab_padding="20dp"/>
+                        <androidx.viewpager.widget.ViewPager
+                            android:id="@+id/play_vp"
+                            android:layout_width="match_parent"
+                            android:layout_height="84dp"/>
+
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

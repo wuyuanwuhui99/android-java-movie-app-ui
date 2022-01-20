@@ -38,4 +38,7 @@ public interface RequestService {
     @GET(Api.GETTOPMOVIELIST)
     Call<ResultEntity> getTopMovieList(@Query("classify") String classify,@Query("category") String category);
 
+    @GET(Api.GETMOVIEURL)
+    Call<ResultEntity> getMovieUrl(@Query("movieId") Long movieId);
+
 }

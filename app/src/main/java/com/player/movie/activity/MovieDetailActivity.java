@@ -70,7 +70,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieName.setText(movieEntity.getMovieName());
 
         //主演
-        TextView movieStar = view.findViewById(R.id.detail_movie_img);
+        TextView movieStar = view.findViewById(R.id.detail_movie_star);
         if(movieEntity.getStar() != null){
             movieStar.setText("主演：" + movieEntity.getStar());
         }else{
@@ -127,8 +127,8 @@ public class MovieDetailActivity extends AppCompatActivity {
             view.findViewById(R.id.detail_star_layout).setVisibility(View.GONE);
             return;
         }
-        Call<ResultEntity> userData = RequestUtils.getInstance().getStarList(movieEntity.getMovieId().toString());
-        userData.enqueue(new Callback<ResultEntity>() {
+        Call<ResultEntity> call = RequestUtils.getInstance().getStarList(movieEntity.getMovieId().toString());
+        call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieStarEntity> movieStarList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieStarEntity.class);
