@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:id="@+id/avater_layout"
         android:visibility="invisible"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/lg_size"
+        android:layout_marginRight="@dimen/lg_size"
+        android:layout_marginTop="@dimen/lg_size"
         android:background="@drawable/border_radius"
-        android:padding="10dp"
+        android:padding="@dimen/md_size"
         android:orientation="horizontal">
         <com.makeramen.roundedimageview.RoundedImageView
             android:layout_width="50dp"
@@ -29,7 +29,7 @@
             android:layout_height="45dp"
             android:layout_weight="1"
             android:orientation="horizontal"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="@dimen/md_size"
             android:gravity="center_vertical"
             android:background="@drawable/rounded_corner_search_box"
             >
@@ -37,7 +37,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:paddingLeft="10dp"
+                android:paddingLeft="@dimen/md_size"
                 android:layout_marginTop="3dp"
                 android:textSize="16sp"
                 android:textColor="#ccc"
@@ -46,10 +46,10 @@
             <ImageView
                 android:src="@mipmap/icon_search"
                 android:scaleType="fitCenter"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="30dp"
-                android:layout_height="30dp"></ImageView>
+                android:layout_marginLeft="@dimen/md_size"
+                android:layout_marginRight="@dimen/md_size"
+                android:layout_width="@dimen/lg_img"
+                android:layout_height="@dimen/lg_img"/>
         </LinearLayout>
     </LinearLayout>
     <androidx.viewpager.widget.ViewPager
@@ -70,18 +70,18 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/md_size"
+            android:paddingBottom="@dimen/md_size"
             android:id="@+id/home"
             >
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/lg_img"
+                android:layout_height="@dimen/lg_img"
                 android:id="@+id/home_img"
                 android:src="@mipmap/icon_home_active"/>
             <TextView
                 android:id="@+id/home_text"
-                android:paddingTop="10dp"
+                android:paddingTop="@dimen/md_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate_active"
@@ -94,18 +94,18 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/md_size"
+            android:paddingBottom="@dimen/md_size"
             android:id="@+id/movie"
             >
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/lg_img"
+                android:layout_height="@dimen/lg_img"
                 android:id="@+id/movie_img"
                 android:src="@mipmap/icon_movie"/>
             <TextView
                 android:id="@+id/movie_text"
-                android:paddingTop="10dp"
+                android:paddingTop="@dimen/md_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate"
@@ -118,20 +118,20 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/md_size"
+            android:paddingBottom="@dimen/md_size"
             android:id="@+id/tv"
             >
             <ImageView
                 android:id="@+id/tv_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/lg_img"
+                android:layout_height="@dimen/lg_img"
                 android:src="@mipmap/icon_tv"/>
             <TextView
                 android:id="@+id/tv_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:paddingTop="@dimen/md_size"
                 android:textColor="@color/navigate"
                 android:text="电视剧"/>
         </LinearLayout>
@@ -142,18 +142,18 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
+            android:paddingTop="@dimen/md_size"
+            android:paddingBottom="@dimen/md_size"
             android:id="@+id/user_center"
             >
             <ImageView
                 android:id="@+id/user_img"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/lg_img"
+                android:layout_height="@dimen/lg_img"
                 android:src="@mipmap/icon_user"/>
             <TextView
                 android:id="@+id/user_text"
-                android:paddingTop="10dp"
+                android:paddingTop="@dimen/md_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate"

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:paddingLeft="@dimen/lg_size"
+    android:paddingRight="@dimen/lg_size"
+    android:paddingBottom="@dimen/md_size"
+    android:paddingTop="@dimen/md_size"
+    android:layout_marginRight="@dimen/md_size"
+    android:textColor="@color/background_white"
+    android:id="@+id/url_item"
+    android:background="@color/background_blue"
+    >
+</TextView>
+

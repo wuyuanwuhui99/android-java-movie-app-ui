@@ -6,8 +6,8 @@
     android:background="@color/background_gray"
     android:orientation="vertical">
     <ScrollView
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="@dimen/lg_size"
+        android:paddingRight="@dimen/lg_size"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -19,8 +19,8 @@
                 android:layout_width="match_parent"
                 android:background="@drawable/border_radius"
                 android:layout_gravity="center_horizontal"
-                android:padding="10dp"
-                android:layout_marginTop="20dp"
+                android:padding="@dimen/md_size"
+                android:layout_marginTop="@dimen/lg_size"
                 android:layout_height="wrap_content">
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="70dp"
@@ -33,7 +33,7 @@
                     android:orientation="horizontal"
                     android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/md_size"
                     android:layout_height="match_parent">
                     <LinearLayout
                         android:gravity="center_vertical"
@@ -43,7 +43,7 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:textStyle="bold"
-                            android:textSize="20sp"
+                            android:textSize="@dimen/lg_font"
                             android:id="@+id/username"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"/>
@@ -54,18 +54,17 @@
                     </LinearLayout>
                     <ImageView
                         android:src="@mipmap/icon_edit"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp">
-                    </ImageView>
+                        android:layout_width="@dimen/lg_img"
+                        android:layout_height="@dimen/lg_img"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:background="@drawable/border_radius"
                 android:gravity="center_vertical"
-                android:padding="10dp"
+                android:padding="@dimen/md_size"
                 android:layout_height="80dp">
                 <LinearLayout
                     android:layout_weight="1"
@@ -74,7 +73,7 @@
                     android:gravity="center_horizontal"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:textSize="20sp"
+                        android:textSize="@dimen/lg_font"
                         android:id="@+id/user_age"
                         android:textStyle="bold"
                         android:textColor="@color/navigate"
@@ -95,7 +94,7 @@
                     <TextView
                         android:id="@+id/favorite_count"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/lg_font"
                         android:textColor="@color/navigate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -114,7 +113,7 @@
                     <TextView
                         android:id="@+id/play_record_count"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/lg_font"
                         android:textColor="@color/navigate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
@@ -133,7 +132,7 @@
                     <TextView
                         android:id="@+id/view_record_count"
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/lg_font"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <TextView
@@ -144,7 +143,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:background="@drawable/border_radius"
@@ -161,12 +160,12 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:src="@mipmap/icon_play_record"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"/>
+                            android:layout_marginTop="@dimen/md_size"
+                            android:layout_marginBottom="@dimen/md_size"
+                            android:layout_marginLeft="@dimen/lg_size"
+                            android:layout_marginRight="@dimen/md_size"
+                            android:layout_width="@dimen/lg_img"
+                            android:layout_height="@dimen/lg_img"/>
                         <TextView
                             android:text="观看记录"
                             android:layout_width="match_parent"
@@ -178,7 +177,7 @@
                         android:background="@color/background_gray"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
-                    android:padding="20dp"
+                    android:padding="@dimen/lg_size"
                     android:id="@+id/play_record_list"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
@@ -186,7 +185,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:background="@drawable/border_radius"
@@ -199,22 +198,22 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/lg_size"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_collection"/>
                         <TextView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/md_size"
                             android:layout_weight="1"
                             android:text="我的收藏"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <View
@@ -229,22 +228,22 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/lg_size"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_record"/>
                         <TextView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/md_size"
                             android:layout_weight="1"
                             android:text="我浏览过的电影"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <View
@@ -259,22 +258,22 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/lg_size"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_talk"/>
                         <TextView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/md_size"
                             android:layout_weight="1"
                             android:text="电影圈"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <View
@@ -289,22 +288,22 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/lg_size"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_music"/>
                         <TextView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/md_size"
                             android:layout_weight="1"
                             android:text="音乐"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <View
@@ -319,22 +318,22 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="20dp"
+                        android:padding="@dimen/lg_size"
                         android:orientation="horizontal"
                         android:gravity="center_vertical">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_app"/>
                         <TextView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/md_size"
                             android:layout_weight="1"
                             android:text="小程序"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <View

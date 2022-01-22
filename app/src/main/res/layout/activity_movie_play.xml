@@ -20,57 +20,57 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="20dp"
+                android:padding="@dimen/lg_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
-                    android:padding="10dp"
+                    android:padding="@dimen/md_size"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/play_movie_name"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/lg_font"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:paddingTop="10dp"
+                        android:paddingTop="@dimen/md_size"
                         android:id="@+id/play_star"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <LinearLayout
                         android:id="@+id/play_score_layout"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:layout_marginLeft="5dp"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <TextView
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:text="5.8"
                             android:textSize="18sp"
                             android:textColor="@color/red"
@@ -83,7 +83,7 @@
                         android:visibility="gone"
                         android:textColor="@color/navigate"
                         android:text="暂无评分"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
@@ -91,8 +91,8 @@
                 <LinearLayout
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
-                    android:padding="10dp"
-                    android:layout_marginTop="20dp"
+                    android:padding="@dimen/md_size"
+                    android:layout_marginTop="@dimen/lg_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
@@ -105,16 +105,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="@dimen/md_size"
                             tl:tl_bar_color="#ffffff"
                             tl:tl_indicator_color="@color/background_blue"
                             tl:tl_indicator_corner_radius="8dp"
-                            tl:tl_tab_padding="20dp"/>
-                        <androidx.viewpager.widget.ViewPager
+                            tl:tl_tab_padding="@dimen/lg_size"/>
+                        <com.player.movie.view.WrapContentHeightViewPager
                             android:id="@+id/play_vp"
                             android:layout_width="match_parent"
-                            android:layout_height="84dp"/>
-
+                            android:layout_height="wrap_content"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

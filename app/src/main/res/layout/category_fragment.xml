@@ -3,8 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/border_radius"
-    android:padding="10dp"
-    android:layout_marginTop="20dp"
+    android:padding="@dimen/md_size"
+    android:layout_marginTop="@dimen/lg_size"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,14 +16,14 @@
             android:layout_height="wrap_content">
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/md_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <View
                     android:background="@color/background_blue"
                     android:layout_width="3dp"
                     android:layout_marginRight="2dp"
-                    android:layout_height="20dp"/>
+                    android:layout_height="@dimen/lg_size"/>
                 <TextView
                     android:id="@+id/category_name"
                     android:layout_width="wrap_content"

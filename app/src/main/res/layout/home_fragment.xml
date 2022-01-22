@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="20dp"
-    android:paddingRight="20dp"
+    android:paddingLeft="@dimen/lg_size"
+    android:paddingRight="@dimen/lg_size"
     android:orientation="vertical">
     <ScrollView
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.youth.banner.Banner
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:id="@+id/home_banner"
                 android:layout_width="match_parent"
                 android:layout_height="200dp" />
@@ -25,8 +25,8 @@
                 android:background="@drawable/border_radius"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
-                android:padding="10dp"
+                android:layout_marginTop="@dimen/lg_size"
+                android:padding="@dimen/md_size"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -42,7 +42,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:text="热门"/>
                 </LinearLayout>
                 <LinearLayout
@@ -59,7 +59,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:text="预告"/>
                 </LinearLayout>
                 <LinearLayout
@@ -76,7 +76,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:text="最新"/>
                 </LinearLayout>
                 <LinearLayout
@@ -93,7 +93,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:text="分类"/>
                 </LinearLayout>
             </LinearLayout>

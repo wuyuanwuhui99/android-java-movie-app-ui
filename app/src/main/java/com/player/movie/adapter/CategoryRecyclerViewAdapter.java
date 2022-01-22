@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.BaseApplication;
 import com.player.movie.R;
-import com.player.movie.activity.MainActivity;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
@@ -42,7 +41,6 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String path = Api.HOST + movieEntityList.get(position).getLocalImg();
-//        String path = movieEntityList.get(position).getImg();
         Glide.with(BaseApplication.getContext()).load(path).into(holder.imageView);
         holder.textView.setText(movieEntityList.get(position).getMovieName());
         if(position == movieEntityList.size() - 1){

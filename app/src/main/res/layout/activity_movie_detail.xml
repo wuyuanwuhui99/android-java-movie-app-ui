@@ -7,7 +7,7 @@
     android:background="@color/background_gray"
     tools:context=".activity.MovieDetailActivity">
     <ScrollView
-        android:padding="20dp"
+        android:padding="@dimen/lg_size"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -17,7 +17,7 @@
             <LinearLayout
                 android:background="@drawable/border_radius"
                 android:orientation="horizontal"
-                android:padding="10dp"
+                android:padding="@dimen/md_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout
@@ -28,7 +28,7 @@
                     <com.makeramen.roundedimageview.RoundedImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        app:riv_corner_radius="10dp"
+                        app:riv_corner_radius="@dimen/md_size"
                         app:riv_oval="false"
                         android:id="@+id/detail_movie_img"/>
                     <ImageView
@@ -36,37 +36,37 @@
                         android:layout_centerInParent="true"
                         android:gravity="center"
                         android:src="@mipmap/icon_detail_play"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"/>
+                        android:layout_width="@dimen/lg_img"
+                        android:layout_height="@dimen/lg_img"/>
                 </RelativeLayout>
 
                 <LinearLayout
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="@dimen/md_size"
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                     <TextView
                         android:textStyle="bold"
-                        android:textSize="20sp"
+                        android:textSize="@dimen/lg_font"
                         android:textColor="@color/main_font_color"
                         android:id="@+id/detail_movie_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:textColor="@color/navigate"
                         android:id="@+id/detail_description"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:textColor="@color/navigate"
                         android:id="@+id/detail_movie_star"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <LinearLayout
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:id="@+id/detail_score_layout"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
@@ -74,30 +74,30 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:src="@mipmap/icon_empty_star"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                         <ImageView
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                         <ImageView
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                         <ImageView
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                         <ImageView
-                            android:layout_marginLeft="5dp"
+                            android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                         <TextView
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="@dimen/md_size"
                             android:id="@+id/detail_score"
                             android:textColor="#ff0000"
                             android:textSize="18sp"
@@ -112,40 +112,40 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"/>
                     <LinearLayout
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="@dimen/md_size"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <ImageView
                             android:src="@mipmap/icon_collection"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                         <ImageView
                             android:src="@mipmap/icon_comment"
-                            android:layout_marginLeft="5dp"
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"/>
+                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_width="@dimen/lg_size"
+                            android:layout_height="@dimen/lg_size"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:padding="@dimen/md_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/md_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <View
                         android:background="@color/background_blue"
                         android:layout_width="3dp"
                         android:layout_marginRight="2dp"
-                        android:layout_height="20dp"/>
+                        android:layout_height="@dimen/lg_size"/>
                     <TextView
                         android:text="剧情"
                         android:layout_width="match_parent"
@@ -159,22 +159,22 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/detail_star_layout"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:padding="@dimen/md_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/md_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <View
                         android:background="@color/background_blue"
                         android:layout_width="3dp"
                         android:layout_marginRight="2dp"
-                        android:layout_height="20dp"/>
+                        android:layout_height="@dimen/lg_size"/>
                     <TextView
                         android:text="主演"
                         android:layout_width="match_parent"
@@ -187,22 +187,22 @@
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/detail_yourlikes_layout"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:padding="@dimen/md_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/md_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <View
                         android:background="@color/background_blue"
                         android:layout_width="3dp"
                         android:layout_marginRight="2dp"
-                        android:layout_height="20dp"/>
+                        android:layout_height="@dimen/lg_size"/>
                     <TextView
                         android:text="猜你想看"
                         android:layout_width="match_parent"
@@ -214,22 +214,22 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/lg_size"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
-                android:padding="10dp"
+                android:padding="@dimen/md_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="horizontal"
-                    android:layout_marginBottom="10dp"
+                    android:layout_marginBottom="@dimen/md_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <View
                         android:background="@color/background_blue"
                         android:layout_width="3dp"
                         android:layout_marginRight="2dp"
-                        android:layout_height="20dp"/>
+                        android:layout_height="@dimen/lg_size"/>
                     <TextView
                         android:text="推荐"
                         android:layout_width="match_parent"

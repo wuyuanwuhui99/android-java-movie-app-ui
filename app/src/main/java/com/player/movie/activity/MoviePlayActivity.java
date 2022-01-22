@@ -3,7 +3,6 @@ package com.player.movie.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import com.player.movie.entity.MovieUrlEntity;
 import com.player.movie.fragment.UrlFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.view.WrapContentHeightViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,7 +123,7 @@ public class MoviePlayActivity extends AppCompatActivity {
     private void setTabFragment(){
         String [] mTitles = new String[playGroup.size()];
         SegmentTabLayout tabLayout = view.findViewById(R.id.play_tab);
-        ViewPager viewPager = view.findViewById(R.id.play_vp);
+        WrapContentHeightViewPager viewPager = view.findViewById(R.id.play_vp);
         List<UrlFragment> urlFragments = new ArrayList<>();
         for (int i=0;i<playGroup.size();i++){
             mTitles[i] = "播放地址"+(i+1);
@@ -141,6 +141,7 @@ public class MoviePlayActivity extends AppCompatActivity {
             }
         };
         viewPager.setAdapter(pageAdapter);
+        viewPager.setCurrentItem(0);//切换界面
         tabLayout.setTabData(mTitles);
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
