@@ -18,9 +18,9 @@ import com.player.movie.R;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.state.State;
 
 import java.util.List;
 import java.util.Map;
@@ -30,18 +30,15 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserFragment extends Fragment {
-    UserEntity userEntity;
     View view;
     boolean isInit = false;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.user_fragment,container,false);
+        if(view == null){
+            view = inflater.inflate(R.layout.fragment_user,container,false);
+        }
         return view;
-    }
-
-    public UserFragment(UserEntity userEntity){
-        this.userEntity = userEntity;
     }
 
     /**
@@ -63,12 +60,12 @@ public class UserFragment extends Fragment {
      * @date: 2021-12-12 19:41
      */
     public void setUserData(){
-        Glide.with(getContext()).load(Api.HOST + userEntity.getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
+        Glide.with(getContext()).load(Api.HOST + State.userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
         TextView username = view.findViewById(R.id.username);
-        username.setText(userEntity.getUsername());
-        if(userEntity.getSign() != null){
+        username.setText(State.userEntity .getUsername());
+        if(State.userEntity .getSign() != null){
             TextView sign = view.findViewById(R.id.sign);
-            sign.setText(userEntity.getSign());
+            sign.setText(State.userEntity .getSign());
         }
     }
 

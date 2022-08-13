@@ -3,55 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background_gray"
+    android:background="@color/page_background_color"
     android:orientation="vertical"
     tools:context=".activity.MainActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/avater_layout"
-        android:visibility="invisible"
-        android:layout_marginLeft="@dimen/lg_size"
-        android:layout_marginRight="@dimen/lg_size"
-        android:layout_marginTop="@dimen/lg_size"
-        android:background="@drawable/border_radius"
-        android:padding="@dimen/md_size"
-        android:orientation="horizontal">
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@mipmap/icon_avater"
-            android:id="@+id/avater"
-            app:riv_oval="true" />
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginLeft="@dimen/md_size"
-            android:gravity="center_vertical"
-            android:background="@drawable/rounded_corner_search_box"
-            >
-            <TextView
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:paddingLeft="@dimen/md_size"
-                android:layout_marginTop="3dp"
-                android:textSize="16sp"
-                android:textColor="#ccc"
-                android:id="@+id/search_key"
-                android:text="请输入影片名称"/>
-            <ImageView
-                android:src="@mipmap/icon_search"
-                android:scaleType="fitCenter"
-                android:layout_marginLeft="@dimen/md_size"
-                android:layout_marginRight="@dimen/md_size"
-                android:layout_width="@dimen/lg_img"
-                android:layout_height="@dimen/lg_img"/>
-        </LinearLayout>
-    </LinearLayout>
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -70,22 +24,22 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="@dimen/md_size"
-            android:paddingBottom="@dimen/md_size"
+            android:paddingTop="@dimen/small_margin_size"
+            android:paddingBottom="@dimen/small_margin_size"
             android:id="@+id/home"
             >
             <ImageView
-                android:layout_width="@dimen/lg_img"
-                android:layout_height="@dimen/lg_img"
+                android:layout_width="@dimen/lg_img_size"
+                android:layout_height="@dimen/lg_img_size"
                 android:id="@+id/home_img"
                 android:src="@mipmap/icon_home_active"/>
             <TextView
                 android:id="@+id/home_text"
-                android:paddingTop="@dimen/md_size"
+                android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate_active"
-                android:text="首页"/>
+                android:text="@string/home"/>
         </LinearLayout>
 
         <LinearLayout
@@ -94,22 +48,22 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="@dimen/md_size"
-            android:paddingBottom="@dimen/md_size"
+            android:paddingTop="@dimen/small_margin_size"
+            android:paddingBottom="@dimen/small_margin_size"
             android:id="@+id/movie"
             >
             <ImageView
-                android:layout_width="@dimen/lg_img"
-                android:layout_height="@dimen/lg_img"
+                android:layout_width="@dimen/lg_img_size"
+                android:layout_height="@dimen/lg_img_size"
                 android:id="@+id/movie_img"
                 android:src="@mipmap/icon_movie"/>
             <TextView
                 android:id="@+id/movie_text"
-                android:paddingTop="@dimen/md_size"
+                android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate"
-                android:text="电影"/>
+                android:text="@string/movie"/>
         </LinearLayout>
 
         <LinearLayout
@@ -118,22 +72,22 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="@dimen/md_size"
-            android:paddingBottom="@dimen/md_size"
+            android:paddingTop="@dimen/small_margin_size"
+            android:paddingBottom="@dimen/small_margin_size"
             android:id="@+id/tv"
             >
             <ImageView
                 android:id="@+id/tv_img"
-                android:layout_width="@dimen/lg_img"
-                android:layout_height="@dimen/lg_img"
+                android:layout_width="@dimen/lg_img_size"
+                android:layout_height="@dimen/lg_img_size"
                 android:src="@mipmap/icon_tv"/>
             <TextView
                 android:id="@+id/tv_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/md_size"
+                android:paddingTop="@dimen/small_margin_size"
                 android:textColor="@color/navigate"
-                android:text="电视剧"/>
+                android:text="@string/tv"/>
         </LinearLayout>
 
         <LinearLayout
@@ -142,24 +96,23 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:paddingTop="@dimen/md_size"
-            android:paddingBottom="@dimen/md_size"
+            android:paddingTop="@dimen/small_margin_size"
+            android:paddingBottom="@dimen/small_margin_size"
             android:id="@+id/user_center"
             >
             <ImageView
                 android:id="@+id/user_img"
-                android:layout_width="@dimen/lg_img"
-                android:layout_height="@dimen/lg_img"
+                android:layout_width="@dimen/lg_img_size"
+                android:layout_height="@dimen/lg_img_size"
                 android:src="@mipmap/icon_user"/>
             <TextView
                 android:id="@+id/user_text"
-                android:paddingTop="@dimen/md_size"
+                android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate"
-                android:text="用户中心"/>
+                android:text="@string/user"/>
         </LinearLayout>
 
     </LinearLayout>
-
 </LinearLayout>

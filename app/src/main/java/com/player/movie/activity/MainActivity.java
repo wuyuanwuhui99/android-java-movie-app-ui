@@ -10,13 +10,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.alibaba.fastjson.JSON;
-import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
-import com.player.movie.api.Api;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
@@ -24,11 +19,11 @@ import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.state.State;
 import com.player.movie.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -63,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     TVFragment tvFragment;
     UserFragment userFragment;
 
-    UserEntity userEntity;
-    LinearLayout avaterLayout;
-
     int tabIds[]={R.id.home,R.id.movie,R.id.tv,R.id.user_center};
     int tabIndex = 0;
 
@@ -83,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         homeFragment = new HomeFragment();
         movieFragment = new MovieFragment();
         tvFragment = new TVFragment();
-        userFragment = new UserFragment(userEntity);
+        userFragment = new UserFragment();
 
         //把4个切换页添加到容器内
         listFragment.add(homeFragment);
@@ -121,13 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 Gson gson = new Gson();
-                userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
+                State.userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
                 SharedPreferencesUtils.setParam("token",response.body().getToken());
-                avaterLayout = findViewById(R.id.avater_layout);
-                avaterLayout.setVisibility(View.VISIBLE);
-                Glide.with(getApplicationContext()).load(Api.HOST + userEntity.getAvater()).into((RoundedImageView)findViewById(R.id.avater));
                 findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
-                getKeyWord("电影");
                 initView();//初始化view
                 initEvent();//初始化事件
             }
@@ -191,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case 0:{
                 homeImg.setImageResource(R.mipmap.icon_home_active);
                 homeText.setTextColor(color);
-                avaterLayout.setVisibility(View.VISIBLE);
                 break;
             }
             case 1:
@@ -199,7 +186,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 movieImg.setImageResource(R.mipmap.icon_movie_active);
                 movieText.setTextColor(color);
                 movieFragment.initData();
-                avaterLayout.setVisibility(View.VISIBLE);
                 break;
             }
             case 2:
@@ -207,7 +193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 tvImg.setImageResource(R.mipmap.icon_tv_active);
                 tvText.setTextColor(color);
                 tvFragment.initData();
-                avaterLayout.setVisibility(View.VISIBLE);
                 break;
             }
             case 3:
@@ -215,7 +200,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 userImg.setImageResource(R.mipmap.icon_user_active);
                 userText.setTextColor(color);
                 userFragment.initData();
-                avaterLayout.setVisibility(View.GONE);
                 break;
             }
         }
@@ -276,28 +260,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         movieText.setTextColor(color);
         tvText.setTextColor(color);
         userText.setTextColor(color);
-    }
-
-    /**
-     * @author: wuwenqiang
-     * @description: 获取搜索栏关键词
-     * @date: 2021-12-11 11:08
-     */
-    public void getKeyWord(String classify){
-        Call<ResultEntity> getKeyWordService = RequestUtils.getInstance().getKeyWord(classify);
-        getKeyWordService.enqueue(new Callback<ResultEntity>() {
-            @Override
-            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                Map map = JSON.parseObject(JSON.toJSONString(response.body().getData()), Map.class);
-                String movieName = (String) map.get("movieName");
-                TextView textView = avaterLayout.findViewById(R.id.search_key);
-                textView.setText(movieName);
-            }
-
-            @Override
-            public void onFailure(Call<ResultEntity> call, Throwable t) {
-
-            }
-        });
     }
 }

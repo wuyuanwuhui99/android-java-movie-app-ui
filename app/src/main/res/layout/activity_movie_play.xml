@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background_gray"
+    android:background="@color/page_background_color"
     tools:context=".activity.MoviePlayActivity">
     <ScrollView
         android:layout_width="match_parent"
@@ -20,53 +20,53 @@
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
-                android:padding="@dimen/lg_size"
+                android:padding="@dimen/container_padding_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
-                    android:padding="@dimen/md_size"
+                    android:padding="@dimen/small_margin_size"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
                         android:id="@+id/play_movie_name"
-                        android:textSize="@dimen/lg_font"
+                        android:textSize="@dimen/big_font_size"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <TextView
-                        android:paddingTop="@dimen/md_size"
+                        android:paddingTop="@dimen/small_margin_size"
                         android:id="@+id/play_star"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                     <LinearLayout
                         android:id="@+id/play_score_layout"
-                        android:layout_marginTop="@dimen/md_size"
+                        android:layout_marginTop="@dimen/small_margin_size"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <ImageView
-                            android:layout_width="@dimen/lg_size"
-                            android:layout_height="@dimen/lg_size"
+                            android:layout_width="@dimen/container_padding_size"
+                            android:layout_height="@dimen/container_padding_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="@dimen/lg_size"
-                            android:layout_height="@dimen/lg_size"
+                            android:layout_width="@dimen/container_padding_size"
+                            android:layout_height="@dimen/container_padding_size"
                             android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="@dimen/lg_size"
-                            android:layout_height="@dimen/lg_size"
+                            android:layout_width="@dimen/container_padding_size"
+                            android:layout_height="@dimen/container_padding_size"
                             android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="@dimen/lg_size"
-                            android:layout_height="@dimen/lg_size"
+                            android:layout_width="@dimen/container_padding_size"
+                            android:layout_height="@dimen/container_padding_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
-                            android:layout_width="@dimen/lg_size"
-                            android:layout_height="@dimen/lg_size"
+                            android:layout_width="@dimen/container_padding_size"
+                            android:layout_height="@dimen/container_padding_size"
                             android:layout_marginLeft="@dimen/sm_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <TextView
@@ -82,17 +82,45 @@
                         android:id="@+id/play_no_score"
                         android:visibility="gone"
                         android:textColor="@color/navigate"
-                        android:text="暂无评分"
-                        android:layout_marginTop="@dimen/md_size"
+                        android:text="@string/play_no_score"
+                        android:layout_marginTop="@dimen/small_margin_size"
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_marginTop="@dimen/container_padding_size"
+                    android:background="@drawable/border_radius"
+                    android:orientation="vertical"
+                    android:padding="@dimen/small_margin_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="@dimen/small_margin_size"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <View
+                            android:background="@color/background_blue"
+                            android:layout_width="3dp"
+                            android:layout_marginRight="2dp"
+                            android:layout_height="@dimen/container_padding_size"/>
+                        <TextView
+                            android:text="@string/detail_plot"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/play_plot"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 </LinearLayout>
 
                 <LinearLayout
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
-                    android:padding="@dimen/md_size"
-                    android:layout_marginTop="@dimen/lg_size"
+                    android:padding="@dimen/small_margin_size"
+                    android:layout_marginTop="@dimen/container_padding_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
@@ -105,11 +133,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="32dp"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/md_size"
-                            tl:tl_bar_color="#ffffff"
+                            android:layout_marginTop="@dimen/small_margin_size"
+                            tl:tl_bar_color="@color/background_white"
                             tl:tl_indicator_color="@color/background_blue"
                             tl:tl_indicator_corner_radius="8dp"
-                            tl:tl_tab_padding="@dimen/lg_size"/>
+                            tl:tl_tab_padding="@dimen/container_padding_size"/>
                         <com.player.movie.view.WrapContentHeightViewPager
                             android:id="@+id/play_vp"
                             android:layout_width="match_parent"

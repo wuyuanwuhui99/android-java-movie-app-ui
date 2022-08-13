@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingLeft="@dimen/lg_size"
-    android:paddingRight="@dimen/lg_size"
-    android:orientation="vertical">
+    style="@style/fragment_layout">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/home_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:fillViewport="true"
-        android:id="@+id/myScrollView"
-        android:scrollbars="none"
-        >
+        android:scrollbars="none">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <com.youth.banner.Banner
-                android:layout_marginTop="@dimen/lg_size"
+                android:layout_marginTop="@dimen/container_padding_size"
                 android:id="@+id/home_banner"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="@dimen/banner_height_size" />
             <LinearLayout
                 android:background="@drawable/border_radius"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/lg_size"
-                android:padding="@dimen/md_size"
+                android:layout_marginTop="@dimen/container_padding_size"
+                android:padding="@dimen/container_padding_size"
                 android:layout_height="wrap_content">
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -35,15 +35,15 @@
                     android:gravity="center_horizontal"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/home_big_icon_size"
+                        android:layout_height="@dimen/home_big_icon_size"
                         android:src="@mipmap/icon_hot"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/md_size"
-                        android:text="热门"/>
+                        android:layout_marginTop="@dimen/container_padding_size"
+                        android:text="@string/home_hot"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -52,15 +52,15 @@
                     android:gravity="center_horizontal"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/home_big_icon_size"
+                        android:layout_height="@dimen/home_big_icon_size"
                         android:src="@mipmap/icon_play"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/md_size"
-                        android:text="预告"/>
+                        android:layout_marginTop="@dimen/small_margin_size"
+                        android:text="@string/home_play"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -69,15 +69,15 @@
                     android:gravity="center_horizontal"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/home_big_icon_size"
+                        android:layout_height="@dimen/home_big_icon_size"
                         android:src="@mipmap/icon_top"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/md_size"
-                        android:text="最新"/>
+                        android:layout_marginTop="@dimen/small_margin_size"
+                        android:text="@string/home_new"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -86,15 +86,15 @@
                     android:orientation="vertical"
                     android:layout_weight="1">
                     <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="@dimen/home_big_icon_size"
+                        android:layout_height="@dimen/home_big_icon_size"
                         android:src="@mipmap/icon_classify"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/md_size"
-                        android:text="分类"/>
+                        android:layout_marginTop="@dimen/small_margin_size"
+                        android:text="@string/home_classify"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout

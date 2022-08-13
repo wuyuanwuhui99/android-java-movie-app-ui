@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
 
     <color name="red">#ff0000</color>
     <color name="navigate">#666</color>
     <color name="main_font_color">#000</color>
     <color name="navigate_active">#ffae00</color>
-    <color name="background_dark">#bbb</color>
+    <color name="background_dark">#ccc</color>
     <color name="background_blue">#1890ff</color>
     <color name="background_white">#ffffff</color>
-    <color name="background_gray">#eee</color>
+    <color name="page_background_color">#eee</color>
 </resources>

@@ -4,10 +4,14 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="@dimen/lg_size"
-        android:layout_marginBottom="@dimen/md_size"
-        android:id="@+id/url_recycler_view"
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:layout_marginTop="@dimen/container_padding_size"-->
+<!--        android:layout_marginBottom="@dimen/small_margin_size"-->
+<!--        android:id="@+id/url_recycler_view"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content" />-->
+    <com.player.movie.view.FlowLayout
+        android:id="@+id/url_flow"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"/>
 </LinearLayout>

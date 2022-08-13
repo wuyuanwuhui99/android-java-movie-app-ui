@@ -34,18 +34,39 @@ import retrofit2.Response;
 public class TVFragment extends Fragment {
     boolean isInit = false;
     View view;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.tv_fragment,container,false);
+        if(view == null){
+            view = inflater.inflate(R.layout.fragment_tv,container,false);
+        }
         return view;
     }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 初始化调用方法
+     * @date: 2022-08-13 11:33
+     */
     public void initData(){
-        if(isInit)return;
-        isInit = true;
-        getBannerData();
-        getAllCategoryListByPageName();
+        if(!isInit){
+            isInit = true;
+            addSearchFraction();
+            getBannerData();
+            getAllCategoryListByPageName();
+        }
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 设置搜索和头像
+     * @date: 2022-08-13 11:19
+     */
+    private void addSearchFraction(){
+        FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+        transaction.replace(R.id.tv_search_layout,new SearchFragment(getResources().getString(R.string.tv)))
+                .commit();
     }
 
     /**
@@ -91,8 +112,7 @@ public class TVFragment extends Fragment {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<CategoryEntity> categoryEntities = JSON.parseArray(JSON.toJSONString(response.body().getData()), CategoryEntity.class);
-                FragmentManager fragmentManager = getFragmentManager();
-                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
                 for(CategoryEntity categoryEntity:categoryEntities){
                     CategoryFragment categoryFragment = new CategoryFragment();
                     Bundle bundle = new Bundle();

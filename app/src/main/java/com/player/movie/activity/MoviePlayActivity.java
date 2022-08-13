@@ -50,6 +50,9 @@ public class MoviePlayActivity extends AppCompatActivity {
         Intent intent = getIntent();
         movieEntity = JSON.parseObject(intent.getStringExtra("movieItem"), MovieEntity.class);
         view = getWindow().getDecorView();
+        //设置剧情
+        TextView plotTextView = view.findViewById(R.id.play_plot);
+        plotTextView.setText(movieEntity.getPlot());
         //设置电影名称
         TextView movieName = view.findViewById(R.id.play_movie_name);
         movieName.setText(movieEntity.getMovieName());

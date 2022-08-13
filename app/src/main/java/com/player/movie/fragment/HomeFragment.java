@@ -34,15 +34,30 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private View view;
     private boolean isInit = false;
+    FragmentTransaction transaction;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.home_fragment,container,false);
         if(!isInit){
+            view = inflater.inflate(R.layout.fragment_home,container,false);
+            transaction = getFragmentManager().beginTransaction();
+            addSearchFraction();
             getBannerData();
             getAllCategoryListByPageName();
+            isInit = true;
         }
         return view;
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 设置搜索和头像
+     * @date: 2022-08-13 11:19
+     */
+    private void addSearchFraction(){
+        FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+        transaction.replace(R.id.home_search_layout,new SearchFragment(getResources().getString(R.string.movie)))
+                .commit();
     }
 
     /**
