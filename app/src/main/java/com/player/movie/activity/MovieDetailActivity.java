@@ -42,6 +42,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         initData();
+        setModuleTitle();
         getStarList();
         getYourLikes();
         getRecommend();
@@ -119,6 +120,29 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     /**
      * @author: wuwenqiang
+     * @description: 设置每个模块的标题
+     * @date: 2022-08-14 11:06
+     */
+    private void setModuleTitle(){
+        String plot = getString(R.string.detail_plot);
+        TextView plotTitle = view.findViewById(R.id.detail_plot_title).findViewById(R.id.module_title);
+        plotTitle.setText(plot);
+
+        String star = getString(R.string.detail_star);
+        TextView starText = view.findViewById(R.id.detail_star_title).findViewById(R.id.module_title);
+        starText.setText(star);
+
+        String yourLike = getString(R.string.detail_your_like);
+        TextView yourLikeText = view.findViewById(R.id.detail_your_like_title).findViewById(R.id.module_title);
+        yourLikeText.setText(yourLike);
+
+        String recommend = getString(R.string.detail_recommend);
+        TextView recommendText = view.findViewById(R.id.detail_recommend_title).findViewById(R.id.module_title);
+        recommendText.setText(recommend);
+    }
+
+    /**
+     * @author: wuwenqiang
      * @description: 获取主演列表
      * @date: 2021-12-11 12:11
      */
@@ -165,7 +189,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
-                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
+                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList,MovieDetailActivity.this);
                 LinearLayoutManager layoutManager = new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.detail_yourlikes_recycler_view);
@@ -191,7 +215,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
-                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
+                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList,MovieDetailActivity.this);
                 LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.detail_recommend_recycler_view);
@@ -213,12 +237,11 @@ public class MovieDetailActivity extends AppCompatActivity {
      */
     public void goPlay(View v){
         if(movieEntity.getMovieId() != null){
-            Context context = getBaseContext();
-            Intent intent = new Intent(context, MoviePlayActivity.class);
+            Intent intent = new Intent(MovieDetailActivity.this, MoviePlayActivity.class);
             intent.putExtra("movieItem",movieItemString);
-            context.startActivity(intent);
+            startActivity(intent);
         }else{
-            Toast.makeText(getApplicationContext(), "暂无播放资源", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.detail_no_play), Toast.LENGTH_SHORT).show();
         }
     }
 }

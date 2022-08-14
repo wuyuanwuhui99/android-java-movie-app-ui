@@ -82,6 +82,8 @@ public class MoviePlayActivity extends AppCompatActivity {
             view.findViewById(R.id.play_no_score).setVisibility(View.VISIBLE);
             scoreLayout.setVisibility(View.GONE);
         }
+        TextView plot = view.findViewById(R.id.play_plot).findViewById(R.id.module_title);
+        plot.setText(getString(R.string.detail_plot));
     }
 
     /**

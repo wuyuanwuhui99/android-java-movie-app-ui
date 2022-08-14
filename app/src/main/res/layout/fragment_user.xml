@@ -143,10 +143,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
-                    <View
-                        android:layout_height="@dimen/border_size"
-                        android:layout_width="match_parent"
-                        android:background="@color/page_background_color"/>
+                    <include layout="@layout/underline"/>
                 </LinearLayout>
                 <androidx.recyclerview.widget.RecyclerView
                     android:padding="@dimen/container_padding_size"
@@ -183,10 +180,7 @@
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/page_background_color"/>
+                    <include layout="@layout/underline"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -208,10 +202,7 @@
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/page_background_color"/>
+                    <include layout="@layout/underline"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -233,10 +224,7 @@
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/page_background_color"/>
+                    <include layout="@layout/underline"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -258,10 +246,7 @@
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/page_background_color"/>
+                    <include layout="@layout/underline"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -283,10 +268,7 @@
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/page_background_color"/>
+                    <include layout="@layout/underline"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

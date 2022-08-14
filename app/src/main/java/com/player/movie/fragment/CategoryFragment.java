@@ -34,7 +34,7 @@ public class CategoryFragment extends Fragment {
         //这里就拿到了之前传递的参数
         String category = bundle.getString("category");
         String classify = bundle.getString("classify");
-        TextView textView = view.findViewById(R.id.category_name);
+        TextView textView = view.findViewById(R.id.category_title).findViewById(R.id.module_title);
         textView.setText(category);
         getCategoryData(category,classify);
         return view;
@@ -46,7 +46,7 @@ public class CategoryFragment extends Fragment {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class);
-                CategoryRecyclerViewAdapter recyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList);
+                CategoryRecyclerViewAdapter recyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList,getContext());
                 LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.movie_recycler_view);

@@ -95,21 +95,7 @@
                     android:padding="@dimen/small_margin_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="@dimen/small_margin_size"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <View
-                            android:background="@color/background_blue"
-                            android:layout_width="3dp"
-                            android:layout_marginRight="2dp"
-                            android:layout_height="@dimen/container_padding_size"/>
-                        <TextView
-                            android:text="@string/detail_plot"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                    </LinearLayout>
+                    <include android:id="@+id/play_plot" layout="@layout/module_title"/>
                     <TextView
                         android:id="@+id/play_plot"
                         android:layout_width="match_parent"

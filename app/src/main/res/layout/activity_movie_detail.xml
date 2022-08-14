@@ -136,22 +136,7 @@
                 android:padding="@dimen/small_margin_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/small_margin_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:background="@color/background_blue"
-                        android:layout_width="3dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_height="@dimen/container_padding_size"/>
-                    <TextView
-                        android:text="@string/detail_plot"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
-
+                <include android:id="@+id/detail_plot_title" layout="@layout/module_title"/>
                 <TextView
                     android:id="@+id/detail_plot"
                     android:layout_width="match_parent"
@@ -165,21 +150,7 @@
                 android:padding="@dimen/small_margin_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/small_margin_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:background="@color/background_blue"
-                        android:layout_width="3dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_height="@dimen/container_padding_size"/>
-                    <TextView
-                        android:text="@string/detail_star"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                <include android:id="@+id/detail_star_title" layout="@layout/module_title"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detail_star_recycler_view"
                     android:layout_width="match_parent"
@@ -193,21 +164,7 @@
                 android:padding="@dimen/small_margin_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/small_margin_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:background="@color/background_blue"
-                        android:layout_width="3dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_height="@dimen/container_padding_size"/>
-                    <TextView
-                        android:text="@string/detail_your_like"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                <include android:id="@+id/detail_your_like_title" layout="@layout/module_title"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detail_yourlikes_recycler_view"
                     android:layout_width="match_parent"
@@ -220,21 +177,7 @@
                 android:padding="@dimen/small_margin_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="@dimen/small_margin_size"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <View
-                        android:background="@color/background_blue"
-                        android:layout_width="3dp"
-                        android:layout_marginRight="2dp"
-                        android:layout_height="@dimen/container_padding_size"/>
-                    <TextView
-                        android:text="@string/detail_recommend"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                </LinearLayout>
+                <include android:id="@+id/detail_recommend_title" layout="@layout/module_title"/>
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/detail_recommend_recycler_view"
                     android:layout_width="match_parent"

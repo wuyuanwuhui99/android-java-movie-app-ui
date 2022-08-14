@@ -14,22 +14,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/container_padding_size"
-                android:layout_width="wrap_content"
-                android:gravity="center_vertical"
-                android:layout_height="wrap_content">
-                <View
-                    android:background="@color/background_blue"
-                    android:layout_width="@dimen/line_width_size"
-                    android:layout_marginRight="@dimen/sm_size"
-                    android:layout_height="@dimen/container_padding_size"/>
-                <TextView
-                    android:id="@+id/category_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
+           <include android:id="@+id/category_title" layout="@layout/module_title"/>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/movie_recycler_view"
                 android:layout_gravity="center"

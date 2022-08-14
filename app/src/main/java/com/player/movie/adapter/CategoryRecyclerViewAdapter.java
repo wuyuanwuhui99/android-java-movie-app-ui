@@ -26,9 +26,10 @@ import java.util.List;
 public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRecyclerViewAdapter.ViewHolder>{
 
     private List<MovieEntity>movieEntityList;
-
-    public CategoryRecyclerViewAdapter(List<MovieEntity> movieEntityList){
+    private Context context;
+    public CategoryRecyclerViewAdapter(List<MovieEntity> movieEntityList,Context context){
         this.movieEntityList = movieEntityList;
+        this.context = context;
     }
 
     @NonNull
@@ -49,7 +50,6 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
             holder.itemView.setLayoutParams(layoutParams);
         }
         holder.itemView.setOnClickListener(view -> { // 列表绑定点击事件
-            Context context = BaseApplication.getContext();
             Intent intent = new Intent(context, MovieDetailActivity.class);
             String movieJSONString = JSON.toJSONString(movieEntityList.get(position));
             intent.putExtra("movieItem",movieJSONString);
