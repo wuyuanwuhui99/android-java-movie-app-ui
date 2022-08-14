@@ -95,7 +95,7 @@
                     android:padding="@dimen/small_margin_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <include android:id="@+id/play_plot" layout="@layout/module_title"/>
+                    <include android:id="@+id/play_plot_title" layout="@layout/module_title"/>
                     <TextView
                         android:id="@+id/play_plot"
                         android:layout_width="match_parent"
