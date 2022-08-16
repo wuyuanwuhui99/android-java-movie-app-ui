@@ -1,11 +1,12 @@
 package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentPagerAdapter;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -15,12 +16,13 @@ import com.alibaba.fastjson.JSON;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.player.movie.R;
+import com.player.movie.adapter.UrlGridViewAdapter;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieUrlEntity;
-import com.player.movie.fragment.UrlFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.view.WrapContentHeightViewPager;
+import com.player.movie.myinterface.UrlClickListener;
+import com.player.movie.view.NoScrollGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ public class MoviePlayActivity extends AppCompatActivity {
     View view;
     MovieEntity movieEntity;
     List<List<MovieUrlEntity>> playGroup;
+    TextView prevUrlText = null;
+    View prevUrlGrid = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,11 +87,11 @@ public class MoviePlayActivity extends AppCompatActivity {
             scoreLayout.setVisibility(View.GONE);
         }
         TextView plot = view.findViewById(R.id.play_plot_title).findViewById(R.id.module_title);
-        plot.setText(getString(R.string.detail_plot));
+        plot.setText(R.string.detail_plot);
     }
 
     /**
-     * @author: wuwenqiang
+     * @author: wuwenqiangl
      * @description: 初始化电影播放页数据
      * @date: 2021-12-04 15:59
      */
@@ -128,30 +132,42 @@ public class MoviePlayActivity extends AppCompatActivity {
     private void setTabFragment(){
         String [] mTitles = new String[playGroup.size()];
         SegmentTabLayout tabLayout = view.findViewById(R.id.play_tab);
-        WrapContentHeightViewPager viewPager = view.findViewById(R.id.play_vp);
-        List<UrlFragment> urlFragments = new ArrayList<>();
+
+        LinearLayout playUrlLayout = view.findViewById(R.id.play_url_layout);
         for (int i=0;i<playGroup.size();i++){
             mTitles[i] = "播放地址"+(i+1);
-            urlFragments.add(new UrlFragment(playGroup.get(i)));
+            LayoutInflater inflater = LayoutInflater.from(this);
+            NoScrollGridView gridView = (NoScrollGridView) inflater.inflate(R.layout.url_grid_layout,playUrlLayout,false);
+            int finalI = i;
+            @SuppressLint("ResourceType")
+            UrlClickListener urlClickListener = textView ->{
+                textView.setBackgroundResource(R.drawable.sm_active_border_decoration);
+                textView.setTextColor(Color.parseColor(getString(R.color.navigate_active)));
+                int position = textView.getId();
+                // 当前播放的影片的实例独享
+                MovieUrlEntity movieUrlEntity = playGroup.get(finalI).get(position);
+                if(prevUrlText != null){
+                    prevUrlText.setTextColor(Color.GRAY);
+                    prevUrlText.setBackgroundResource(R.drawable.sm_border_decoration);
+                }
+                prevUrlText = textView;
+            };
+            gridView.setAdapter(new UrlGridViewAdapter(playGroup.get(i),this,playUrlLayout.getMeasuredWidth(),urlClickListener));
+            if(i!=0){
+                playUrlLayout.addView(gridView);
+            }else{
+                prevUrlGrid = gridView;
+            }
         }
-        FragmentPagerAdapter pageAdapter =new FragmentPagerAdapter(getSupportFragmentManager()) {  //适配器直接new出来
-            @Override
-            public Fragment getItem(int position) {
-                return urlFragments.get(position);//直接返回
-            }
 
-            @Override
-            public int getCount() {
-                return playGroup.size(); //放回tab数量
-            }
-        };
-        viewPager.setAdapter(pageAdapter);
-        viewPager.setCurrentItem(0);//切换界面
         tabLayout.setTabData(mTitles);
         tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
             public void onTabSelect(int position) {
-                viewPager.setCurrentItem(position);
+                View activeUrlGrid =  playUrlLayout.getChildAt(position);
+                activeUrlGrid.setVisibility(View.VISIBLE);
+                prevUrlGrid.setVisibility(View.GONE);
+                prevUrlGrid = activeUrlGrid;
             }
 
             @Override

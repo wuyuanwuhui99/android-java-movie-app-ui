@@ -124,21 +124,17 @@ public class MovieDetailActivity extends AppCompatActivity {
      * @date: 2022-08-14 11:06
      */
     private void setModuleTitle(){
-        String plot = getString(R.string.detail_plot);
         TextView plotTitle = view.findViewById(R.id.detail_plot_title).findViewById(R.id.module_title);
-        plotTitle.setText(plot);
+        plotTitle.setText(R.string.detail_plot);
 
-        String star = getString(R.string.detail_star);
         TextView starText = view.findViewById(R.id.detail_star_title).findViewById(R.id.module_title);
-        starText.setText(star);
+        starText.setText(R.string.detail_star);
 
-        String yourLike = getString(R.string.detail_your_like);
         TextView yourLikeText = view.findViewById(R.id.detail_your_like_title).findViewById(R.id.module_title);
-        yourLikeText.setText(yourLike);
+        yourLikeText.setText(R.string.detail_your_like);
 
-        String recommend = getString(R.string.detail_recommend);
         TextView recommendText = view.findViewById(R.id.detail_recommend_title).findViewById(R.id.module_title);
-        recommendText.setText(recommend);
+        recommendText.setText(R.string.detail_recommend);
     }
 
     /**
@@ -241,7 +237,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             intent.putExtra("movieItem",movieItemString);
             startActivity(intent);
         }else{
-            Toast.makeText(getApplicationContext(), getString(R.string.detail_no_play), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.detail_no_play, Toast.LENGTH_SHORT).show();
         }
     }
 }

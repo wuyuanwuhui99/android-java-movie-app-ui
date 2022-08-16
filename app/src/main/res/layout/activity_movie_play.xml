@@ -105,7 +105,7 @@
                 <LinearLayout
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
-                    android:padding="@dimen/small_margin_size"
+                    android:padding="@dimen/container_padding_size"
                     android:layout_marginTop="@dimen/container_padding_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -117,17 +117,20 @@
                         <com.flyco.tablayout.SegmentTabLayout
                             android:id="@+id/play_tab"
                             android:layout_width="wrap_content"
-                            android:layout_height="32dp"
+                            android:layout_height="@dimen/md_btn_height"
                             android:layout_gravity="center_horizontal"
-                            android:layout_marginTop="@dimen/small_margin_size"
+                            android:layout_marginTop="@dimen/container_padding_size"
                             tl:tl_bar_color="@color/background_white"
                             tl:tl_indicator_color="@color/background_blue"
                             tl:tl_indicator_corner_radius="8dp"
                             tl:tl_tab_padding="@dimen/container_padding_size"/>
-                        <com.player.movie.view.WrapContentHeightViewPager
-                            android:id="@+id/play_vp"
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/container_padding_size"
+                            android:orientation="vertical"
+                            android:id="@+id/play_url_layout"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content">
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
