@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2021-12-11 11:08
      */
     private void tab(int i){  //用于屏幕脱拖动时切换底下图标，只在监听屏幕拖动中调用
-        int color = this.getResources().getColor(R.color.navigate_active);
+        int color = getResources().getColor(R.color.navigate_active);
         resetTab();
         switch (i){
             case 0:{

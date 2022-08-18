@@ -15,6 +15,7 @@
         android:id="@+id/avater"
         app:riv_oval="true" />
     <LinearLayout
+        android:id="@+id/search_layout"
         android:layout_width="0dp"
         android:layout_height="@dimen/md_avater_size"
         android:layout_weight="1"

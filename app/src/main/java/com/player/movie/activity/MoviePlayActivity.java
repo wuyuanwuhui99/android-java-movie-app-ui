@@ -1,6 +1,7 @@
 package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -19,6 +20,8 @@ import com.player.movie.R;
 import com.player.movie.adapter.UrlGridViewAdapter;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieUrlEntity;
+import com.player.movie.fragment.LikeMovieFragment;
+import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.myinterface.UrlClickListener;
@@ -42,6 +45,7 @@ public class MoviePlayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_play);
         initData();
+        addFraction();
         getMovieUrl();
     }
 
@@ -91,13 +95,24 @@ public class MoviePlayActivity extends AppCompatActivity {
     }
 
     /**
+     * @author: wuwenqiang
+     * @description: 添加推荐和猜你想看模块
+     * @date: 2022-08-18 22:05
+     */
+    private void addFraction(){
+        FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.play_your_like_layout, new LikeMovieFragment(movieEntity))
+                .replace(R.id.play_recommend_layout, new RecommendMovieFragment(movieEntity))
+                .commit();
+    }
+
+    /**
      * @author: wuwenqiangl
      * @description: 初始化电影播放页数据
      * @date: 2021-12-04 15:59
      */
     private void getMovieUrl(){
-//        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(movieEntity.getMovieId());
-        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(100L);
+        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(movieEntity.getMovieId());
         call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

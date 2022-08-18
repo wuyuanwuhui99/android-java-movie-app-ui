@@ -14,9 +14,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:background="#000000"
+                android:background="@color/main_font_color"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="@dimen/webview_height">
             </LinearLayout>
             <LinearLayout
                 android:orientation="vertical"
@@ -26,7 +26,7 @@
                 <LinearLayout
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
-                    android:padding="@dimen/small_margin_size"
+                    android:padding="@dimen/container_padding_size"
                     android:gravity="center_vertical"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -133,8 +133,15 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+                <FrameLayout
+                    android:id="@+id/play_your_like_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <FrameLayout
+                    android:id="@+id/play_recommend_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

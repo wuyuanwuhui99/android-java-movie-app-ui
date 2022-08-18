@@ -156,33 +156,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
-            <LinearLayout
-                android:id="@+id/detail_yourlikes_layout"
-                android:layout_marginTop="@dimen/container_padding_size"
-                android:background="@drawable/border_radius"
-                android:orientation="vertical"
-                android:padding="@dimen/small_margin_size"
+            <FrameLayout
+                android:id="@+id/detail_your_like_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <include android:id="@+id/detail_your_like_title" layout="@layout/module_title"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detail_yourlikes_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_marginTop="@dimen/container_padding_size"
-                android:background="@drawable/border_radius"
-                android:orientation="vertical"
-                android:padding="@dimen/small_margin_size"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <include android:id="@+id/detail_recommend_title" layout="@layout/module_title"/>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/detail_recommend_recycler_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+                android:layout_height="wrap_content"/>
+           <FrameLayout
+               android:id="@+id/detail_recommend_layout"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

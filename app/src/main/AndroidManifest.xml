@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.MoviePlayActivity"></activity>
+        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.MoviePlayActivity" />
         <activity android:name=".activity.MovieDetailActivity" />
         <activity android:name=".activity.MainActivity">
             <intent-filter>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/container_padding_size"
+    android:background="@drawable/border_radius"
+    android:orientation="vertical"
+    android:padding="@dimen/container_padding_size">
+
+    <include
+        android:id="@+id/like_title"
+        layout="@layout/module_title" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/like_recycler_view"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

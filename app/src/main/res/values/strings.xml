@@ -8,8 +8,8 @@
     <string name="play_no_score">暂无评分</string>
     <string name="detail_plot">剧情</string>
     <string name="detail_star">主演</string>
-    <string name="detail_your_like">猜你想看</string>
-    <string name="detail_recommend">推荐</string>
+    <string name="your_like">猜你想看</string>
+    <string name="recommend">推荐</string>
     <string name="home_hot">热门</string>
     <string name="home_play">预告</string>
     <string name="home_new">最新</string>

@@ -1,6 +1,7 @@
 package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,11 +20,12 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
-import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.adapter.StarRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieStarEntity;
+import com.player.movie.fragment.LikeMovieFragment;
+import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 
@@ -42,10 +44,9 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         initData();
+        addFraction();
         setModuleTitle();
         getStarList();
-        getYourLikes();
-        getRecommend();
     }
 
     /**
@@ -99,7 +100,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 }
             }
             TextView scoreText = view.findViewById(R.id.detail_score);
-            scoreText.setText(score.toString());
+            scoreText.setText(String.valueOf(score));
         }else{
             view.findViewById(R.id.detail_no_score).setVisibility(View.VISIBLE);
             scoreLayout.setVisibility(View.GONE);
@@ -120,6 +121,18 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     /**
      * @author: wuwenqiang
+     * @description: 添加推荐和猜你想看模块
+     * @date: 2022-08-18 22:05
+     */
+    private void addFraction(){
+        FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.detail_your_like_layout, new LikeMovieFragment(movieEntity))
+                .replace(R.id.detail_recommend_layout, new RecommendMovieFragment(movieEntity))
+                .commit();
+    }
+
+    /**
+     * @author: wuwenqiang
      * @description: 设置每个模块的标题
      * @date: 2022-08-14 11:06
      */
@@ -129,12 +142,6 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         TextView starText = view.findViewById(R.id.detail_star_title).findViewById(R.id.module_title);
         starText.setText(R.string.detail_star);
-
-        TextView yourLikeText = view.findViewById(R.id.detail_your_like_title).findViewById(R.id.module_title);
-        yourLikeText.setText(R.string.detail_your_like);
-
-        TextView recommendText = view.findViewById(R.id.detail_recommend_title).findViewById(R.id.module_title);
-        recommendText.setText(R.string.detail_recommend);
     }
 
     /**
@@ -169,71 +176,12 @@ public class MovieDetailActivity extends AppCompatActivity {
 
     /**
      * @author: wuwenqiang
-     * @description: 获取猜你想看
-     * @date: 2021-12-11 12:11
-     */
-    private void getYourLikes(){
-        String label = movieEntity.getLabel() == null ? movieEntity.getType() : movieEntity.getLabel();
-        Call<ResultEntity> yourLikesService;
-        if(label == null){
-            String category = movieEntity.getCategory().equals("轮播") ? null : movieEntity.getCategory();
-            yourLikesService = RequestUtils.getInstance().getTopMovieList(movieEntity.getClassify(),category);
-        }else{
-            yourLikesService = RequestUtils.getInstance().getYourLikes(label, movieEntity.getClassify());
-        }
-        yourLikesService.enqueue(new Callback<ResultEntity>() {
-            @Override
-            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
-                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList,MovieDetailActivity.this);
-                LinearLayoutManager layoutManager = new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
-                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                RecyclerView recyclerView = view.findViewById(R.id.detail_yourlikes_recycler_view);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(categoryRecyclerViewAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<ResultEntity> call, Throwable t) {
-                System.out.println("获取猜你想看失败");
-            }
-        });
-    }
-
-    /**
-     * @author: wuwenqiang
-     * @description: 获取推荐列表
-     * @date: 2021-12-11 12:11
-     */
-    private void getRecommend(){
-        Call<ResultEntity> userData = RequestUtils.getInstance().getRecommend(movieEntity.getClassify());
-        userData.enqueue(new Callback<ResultEntity>() {
-            @Override
-            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
-                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList,MovieDetailActivity.this);
-                LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
-                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                RecyclerView recyclerView = view.findViewById(R.id.detail_recommend_recycler_view);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(categoryRecyclerViewAdapter);
-            }
-
-            @Override
-            public void onFailure(Call<ResultEntity> call, Throwable t) {
-                System.out.println("获取推荐列表失败");
-            }
-        });
-    }
-
-    /**
-     * @author: wuwenqiang
      * @description: 点击图片跳转到播放页
      * @date: 2021-12-22 23:13
      */
     public void goPlay(View v){
         if(movieEntity.getMovieId() != null){
-            Intent intent = new Intent(MovieDetailActivity.this, MoviePlayActivity.class);
+            Intent intent = new Intent(this, MoviePlayActivity.class);
             intent.putExtra("movieItem",movieItemString);
             startActivity(intent);
         }else{

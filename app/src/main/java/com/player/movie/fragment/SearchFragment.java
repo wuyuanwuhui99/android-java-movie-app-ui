@@ -1,5 +1,7 @@
 package com.player.movie.fragment;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,15 +18,14 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
-import com.player.movie.adapter.CategoryRecyclerViewAdapter;
+import com.player.movie.activity.MovieDetailActivity;
+import com.player.movie.activity.SearchActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.state.State;
 
-import java.util.List;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -35,12 +36,14 @@ public class SearchFragment extends Fragment {
     View view;
     LinearLayout avaterLayout;
     String classify;
+    MovieEntity movieEntity;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_search,container,false);
         initData();
         getKeyWord();
+        addSearchClickListener();
         return view;
     }
 
@@ -54,6 +57,16 @@ public class SearchFragment extends Fragment {
         Glide.with(getContext()).load(Api.HOST + State.userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.avater));
     }
 
+    private void addSearchClickListener(){
+        LinearLayout searchLayout = view.findViewById(R.id.search_layout);
+        searchLayout.setOnClickListener(listener->{
+            Context context = getContext();
+            Intent intent = new Intent(context, SearchActivity.class);
+            intent.putExtra("movieItem",JSON.toJSONString(movieEntity));
+            context.startActivity(intent);
+        });
+    }
+
     /**
      * @author: wuwenqiang
      * @description: 获取搜索栏关键词
@@ -64,10 +77,9 @@ public class SearchFragment extends Fragment {
         getKeyWordService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                Map map = JSON.parseObject(JSON.toJSONString(response.body().getData()), Map.class);
-                String movieName = (String) map.get("movieName");
+                movieEntity = JSON.parseObject(JSON.toJSONString(response.body().getData()), MovieEntity.class);
                 TextView textView = avaterLayout.findViewById(R.id.search_key);
-                textView.setText(movieName);
+                textView.setText(movieEntity.getMovieName());
             }
 
             @Override
