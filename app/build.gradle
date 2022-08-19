@@ -50,4 +50,6 @@ dependencies {
     //https://blog.csdn.net/qq953655369/article/details/78959444
     implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.2@aar'
 
+    implementation 'androidx.room:room-runtime:2.2.5'
+    annotationProcessor 'androidx.room:room-compiler:2.2.5'
 }

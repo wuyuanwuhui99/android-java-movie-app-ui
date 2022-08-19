@@ -26,8 +26,10 @@ import java.util.List;
 public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerViewAdapter.ViewHolder>{
 
     private List<MovieStarEntity>movieStarList;
+    Context context;
 
-    public StarRecyclerViewAdapter(List<MovieStarEntity> movieStarList){
+    public StarRecyclerViewAdapter(List<MovieStarEntity> movieStarList,Context context){
+        this.context = context;
         this.movieStarList = movieStarList;
     }
 
@@ -42,7 +44,7 @@ public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerVi
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         String path = Api.HOST + movieStarList.get(position).getLocalImg();
 //        String path = movieStarList.get(position).getImg();
-        Glide.with(BaseApplication.getContext()).load(path).into(holder.imageView);
+        Glide.with(context).load(path).into(holder.imageView);
         holder.textView.setText(movieStarList.get(position).getStarName());
         if(position == movieStarList.size() - 1){
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -50,7 +52,6 @@ public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerVi
             holder.itemView.setLayoutParams(layoutParams);
         }
         holder.itemView.setOnClickListener(view -> { // 列表绑定点击事件
-            Context context = BaseApplication.getContext();
             Intent intent = new Intent(context, MovieDetailActivity.class);
             String movieJSONString = JSON.toJSONString(movieStarList.get(position));
             intent.putExtra("movieItem",movieJSONString);

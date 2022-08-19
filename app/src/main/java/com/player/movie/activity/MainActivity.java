@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 Gson gson = new Gson();
                 State.userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
-                SharedPreferencesUtils.setParam("token",response.body().getToken());
+                SharedPreferencesUtils.setParam(MainActivity.this,"token",response.body().getToken());
                 findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
                 initView();//初始化view
                 initEvent();//初始化事件

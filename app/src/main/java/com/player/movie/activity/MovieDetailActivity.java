@@ -159,7 +159,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieStarEntity> movieStarList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieStarEntity.class);
-                StarRecyclerViewAdapter starRecyclerViewAdapter = new StarRecyclerViewAdapter(movieStarList);
+                StarRecyclerViewAdapter starRecyclerViewAdapter = new StarRecyclerViewAdapter(movieStarList,MovieDetailActivity.this);
                 LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.detail_star_recycler_view);
