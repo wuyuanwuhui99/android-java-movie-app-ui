@@ -125,7 +125,6 @@
                             tl:tl_indicator_corner_radius="8dp"
                             tl:tl_tab_padding="@dimen/container_padding_size"/>
                         <LinearLayout
-                            android:layout_marginTop="@dimen/container_padding_size"
                             android:orientation="vertical"
                             android:id="@+id/play_url_layout"
                             android:layout_width="match_parent"

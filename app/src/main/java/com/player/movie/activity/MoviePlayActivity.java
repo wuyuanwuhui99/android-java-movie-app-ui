@@ -3,9 +3,7 @@ package com.player.movie.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,15 +15,12 @@ import com.alibaba.fastjson.JSON;
 import com.flyco.tablayout.SegmentTabLayout;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.player.movie.R;
-import com.player.movie.adapter.UrlGridViewAdapter;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieUrlEntity;
 import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.myinterface.UrlClickListener;
-import com.player.movie.view.NoScrollGridView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,12 +29,13 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MoviePlayActivity extends AppCompatActivity {
+public class MoviePlayActivity extends AppCompatActivity implements View.OnClickListener{
     View view;
     MovieEntity movieEntity;
     List<List<MovieUrlEntity>> playGroup;
+    View prevUrlTabLayout = null;
     TextView prevUrlText = null;
-    View prevUrlGrid = null;
+    MovieUrlEntity actvieMovieUrlEntity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,6 +108,7 @@ public class MoviePlayActivity extends AppCompatActivity {
      * @date: 2021-12-04 15:59
      */
     private void getMovieUrl(){
+//        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(100L);
         Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(movieEntity.getMovieId());
         call.enqueue(new Callback<ResultEntity>() {
             @Override
@@ -151,28 +148,44 @@ public class MoviePlayActivity extends AppCompatActivity {
         LinearLayout playUrlLayout = view.findViewById(R.id.play_url_layout);
         for (int i=0;i<playGroup.size();i++){
             mTitles[i] = "播放地址"+(i+1);
-            LayoutInflater inflater = LayoutInflater.from(this);
-            NoScrollGridView gridView = (NoScrollGridView) inflater.inflate(R.layout.url_grid_layout,playUrlLayout,false);
-            int finalI = i;
-            @SuppressLint("ResourceType")
-            UrlClickListener urlClickListener = textView ->{
-                textView.setBackgroundResource(R.drawable.sm_active_border_decoration);
-                textView.setTextColor(Color.parseColor(getString(R.color.navigate_active)));
-                int position = textView.getId();
-                // 当前播放的影片的实例独享
-                MovieUrlEntity movieUrlEntity = playGroup.get(finalI).get(position);
-                if(prevUrlText != null){
-                    prevUrlText.setTextColor(Color.GRAY);
-                    prevUrlText.setBackgroundResource(R.drawable.sm_border_decoration);
+            LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.url_linear_layout, playUrlLayout, false);
+            List<MovieUrlEntity> movieUrlEntityList = playGroup.get(i);
+            int rows = (int) Math.ceil(movieUrlEntityList.size()/5);
+            for(int j = 0; j < rows; j++){
+                View rowView = LayoutInflater.from(this).inflate(R.layout.url_row, tabLinearLayout, false);
+                TextView []textView = new TextView[]{
+                        rowView.findViewById(R.id.url_btn_0),
+                        rowView.findViewById(R.id.url_btn_1),
+                        rowView.findViewById(R.id.url_btn_2),
+                        rowView.findViewById(R.id.url_btn_3),
+                        rowView.findViewById(R.id.url_btn_4)
+                };
+                // 如果是第一个tab而且是一个text，设置成激活状态
+                if(j == 0 && i == 0){
+                    textView[0].setBackgroundResource(R.drawable.sm_active_border_decoration);
+                    textView[0].setTextColor( getResources().getColor(R.color.navigate_active));
+                    prevUrlText = textView[0];
+                    actvieMovieUrlEntity = movieUrlEntityList.get(0);
                 }
-                prevUrlText = textView;
-            };
-            gridView.setAdapter(new UrlGridViewAdapter(playGroup.get(i),this,playUrlLayout.getMeasuredWidth(),urlClickListener));
-            if(i!=0){
-                playUrlLayout.addView(gridView);
-            }else{
-                prevUrlGrid = gridView;
+                for(int k = 0; k < 5; k++){
+                    if(j * 5 + k < movieUrlEntityList.size()){
+                        MovieUrlEntity movieUrlEntity = movieUrlEntityList.get(j * 5 + k);
+                        textView[k].setTag(movieUrlEntity);
+                        textView[k].setText(movieUrlEntity.getLabel());
+                        textView[k].setTag(movieUrlEntity);
+                        textView[k].setOnClickListener(this::onClick);
+                    }else {
+                        textView[k].setVisibility(View.GONE);
+                    }
+                }
+                tabLinearLayout.addView(rowView);
             }
+            if(i==0){
+                prevUrlTabLayout = tabLinearLayout;
+            }else{
+                tabLinearLayout.setVisibility(View.GONE);
+            }
+            playUrlLayout.addView(tabLinearLayout);
         }
 
         tabLayout.setTabData(mTitles);
@@ -181,8 +194,8 @@ public class MoviePlayActivity extends AppCompatActivity {
             public void onTabSelect(int position) {
                 View activeUrlGrid =  playUrlLayout.getChildAt(position);
                 activeUrlGrid.setVisibility(View.VISIBLE);
-                prevUrlGrid.setVisibility(View.GONE);
-                prevUrlGrid = activeUrlGrid;
+                prevUrlTabLayout.setVisibility(View.GONE);
+                prevUrlTabLayout = activeUrlGrid;
             }
 
             @Override
@@ -190,5 +203,18 @@ public class MoviePlayActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+        TextView textView = (TextView)v;
+        textView.setBackgroundResource(R.drawable.sm_active_border_decoration);
+        textView.setTextColor( getResources().getColor(R.color.navigate_active));
+
+        prevUrlText.setBackgroundResource(R.drawable.sm_border_decoration);
+        prevUrlText.setTextColor(getResources().getColor(R.color.navigate));
+        prevUrlText = textView;
+
+        actvieMovieUrlEntity = (MovieUrlEntity) textView.getTag();
     }
 }
