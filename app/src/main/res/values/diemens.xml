@@ -15,6 +15,7 @@
     <dimen name="md_border_radius_size">20dp</dimen>
     <dimen name="lg_border_radius_size">30dp</dimen>
     <dimen name="border_size">1dp</dimen>
+    <dimen name="left_border_size">-1dp</dimen>
     <dimen name="md_btn_height">40dp</dimen>
     <dimen name="webview_height">200dp</dimen>
 </resources>

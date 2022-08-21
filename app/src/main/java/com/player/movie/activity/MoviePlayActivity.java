@@ -2,18 +2,21 @@ package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.flyco.tablayout.SegmentTabLayout;
-import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.player.movie.R;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieUrlEntity;
@@ -21,6 +24,7 @@ import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -108,8 +112,8 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
      * @date: 2021-12-04 15:59
      */
     private void getMovieUrl(){
-//        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(100L);
-        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(movieEntity.getMovieId());
+        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(100L);
+//        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(movieEntity.getMovieId());
         call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -127,6 +131,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
                     }
                     group.add(movieUrlEntity);
                 }
+                initTab();
                 setTabFragment();
 ;            }
             @Override
@@ -136,6 +141,41 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
+    @SuppressLint("WrongConstant")
+    private void initTab(){
+        LinearLayout tabLayout = view.findViewById(R.id.tab_layout);
+        if(playGroup.size() < 1){
+            tabLayout.setVisibility(View.GONE);
+            return;
+        }
+        LinearLayout linearLayout  = new LinearLayout(this);
+        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        linearLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
+        linearLayout.setLayoutParams(linearLayoutParams);
+        linearLayout.setOrientation(LinearLayoutManager.HORIZONTAL);
+
+        LinearLayout.LayoutParams textLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
+        for (int i = 0; i < playGroup.size(); i++){
+            TextView textView = new TextView(this);
+            textView.setLayoutParams(textLayoutParams);
+            textView.setText(getString(R.string.play_url) + (i + 1));
+            linearLayout.addView(textView);
+            if(i == 0){
+                textView.setTextColor(Color.WHITE);
+                textView.setBackgroundResource(R.drawable.tab_left_active);
+            }else if(i == playGroup.size() - 1){
+                textView.setTextColor(getResources().getColor(R.color.background_blue));
+                textLayoutParams.leftMargin = -CommonUtils.dip2px(this,R.dimen.border_size);
+                textView.setBackgroundResource(R.drawable.tab_right_normal);
+            }else{
+                textView.setTextColor(getResources().getColor(R.color.background_blue));
+                textLayoutParams.leftMargin =-CommonUtils.dip2px(this,R.dimen.border_size);
+                textView.setBackgroundResource(R.drawable.tab_middle_normal);
+            }
+        }
+        tabLayout.addView(linearLayout);
+    }
+
     /**
      * @author: wuwenqiang
      * @description: 设置播放tab
@@ -143,8 +183,6 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
      */
     private void setTabFragment(){
         String [] mTitles = new String[playGroup.size()];
-        SegmentTabLayout tabLayout = view.findViewById(R.id.play_tab);
-
         LinearLayout playUrlLayout = view.findViewById(R.id.play_url_layout);
         for (int i=0;i<playGroup.size();i++){
             mTitles[i] = "播放地址"+(i+1);
@@ -188,21 +226,21 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
             playUrlLayout.addView(tabLinearLayout);
         }
 
-        tabLayout.setTabData(mTitles);
-        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
-            @Override
-            public void onTabSelect(int position) {
-                View activeUrlGrid =  playUrlLayout.getChildAt(position);
-                activeUrlGrid.setVisibility(View.VISIBLE);
-                prevUrlTabLayout.setVisibility(View.GONE);
-                prevUrlTabLayout = activeUrlGrid;
-            }
-
-            @Override
-            public void onTabReselect(int position) {
-
-            }
-        });
+//        tabLayout.setTabData(mTitles);
+//        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
+//            @Override
+//            public void onTabSelect(int position) {
+//                View activeUrlGrid =  playUrlLayout.getChildAt(position);
+//                activeUrlGrid.setVisibility(View.VISIBLE);
+//                prevUrlTabLayout.setVisibility(View.GONE);
+//                prevUrlTabLayout = activeUrlGrid;
+//            }
+//
+//            @Override
+//            public void onTabReselect(int position) {
+//
+//            }
+//        });
     }
 
     @Override
