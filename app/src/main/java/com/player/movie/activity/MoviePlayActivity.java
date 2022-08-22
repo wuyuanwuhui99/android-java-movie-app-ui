@@ -25,6 +25,7 @@ import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.utils.CommonUtils;
+import com.player.movie.view.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,8 +132,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
                     }
                     group.add(movieUrlEntity);
                 }
-                initTab();
-                setTabFragment();
+                setTab();
 ;            }
             @Override
             public void onFailure(Call<ResultEntity> call, Throwable t) {
@@ -141,47 +141,14 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
         });
     }
 
-    @SuppressLint("WrongConstant")
-    private void initTab(){
-        LinearLayout tabLayout = view.findViewById(R.id.tab_layout);
-        if(playGroup.size() < 1){
-            tabLayout.setVisibility(View.GONE);
-            return;
-        }
-        LinearLayout linearLayout  = new LinearLayout(this);
-        LinearLayout.LayoutParams linearLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        linearLayoutParams.gravity = Gravity.CENTER_HORIZONTAL;
-        linearLayout.setLayoutParams(linearLayoutParams);
-        linearLayout.setOrientation(LinearLayoutManager.HORIZONTAL);
 
-        LinearLayout.LayoutParams textLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
-        for (int i = 0; i < playGroup.size(); i++){
-            TextView textView = new TextView(this);
-            textView.setLayoutParams(textLayoutParams);
-            textView.setText(getString(R.string.play_url) + (i + 1));
-            linearLayout.addView(textView);
-            if(i == 0){
-                textView.setTextColor(Color.WHITE);
-                textView.setBackgroundResource(R.drawable.tab_left_active);
-            }else if(i == playGroup.size() - 1){
-                textView.setTextColor(getResources().getColor(R.color.background_blue));
-                textLayoutParams.leftMargin = -CommonUtils.dip2px(this,R.dimen.border_size);
-                textView.setBackgroundResource(R.drawable.tab_right_normal);
-            }else{
-                textView.setTextColor(getResources().getColor(R.color.background_blue));
-                textLayoutParams.leftMargin =-CommonUtils.dip2px(this,R.dimen.border_size);
-                textView.setBackgroundResource(R.drawable.tab_middle_normal);
-            }
-        }
-        tabLayout.addView(linearLayout);
-    }
 
     /**
      * @author: wuwenqiang
      * @description: 设置播放tab
      * @date: 2022-1-20 23:26
      */
-    private void setTabFragment(){
+    private void setTab(){
         String [] mTitles = new String[playGroup.size()];
         LinearLayout playUrlLayout = view.findViewById(R.id.play_url_layout);
         for (int i=0;i<playGroup.size();i++){
@@ -225,22 +192,14 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
             }
             playUrlLayout.addView(tabLinearLayout);
         }
-
-//        tabLayout.setTabData(mTitles);
-//        tabLayout.setOnTabSelectListener(new OnTabSelectListener() {
-//            @Override
-//            public void onTabSelect(int position) {
-//                View activeUrlGrid =  playUrlLayout.getChildAt(position);
-//                activeUrlGrid.setVisibility(View.VISIBLE);
-//                prevUrlTabLayout.setVisibility(View.GONE);
-//                prevUrlTabLayout = activeUrlGrid;
-//            }
-//
-//            @Override
-//            public void onTabReselect(int position) {
-//
-//            }
-//        });
+        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+        tabLayout.setTabData(mTitles);
+        tabLayout.setOnTabSelectListener(position -> {
+            View activeUrlGrid =  playUrlLayout.getChildAt(position);
+            activeUrlGrid.setVisibility(View.VISIBLE);
+            prevUrlTabLayout.setVisibility(View.GONE);
+            prevUrlTabLayout = activeUrlGrid;
+        });
     }
 
     @Override

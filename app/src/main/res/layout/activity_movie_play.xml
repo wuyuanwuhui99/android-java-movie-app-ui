@@ -114,10 +114,9 @@
                         android:gravity="center_horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:orientation="horizontal"
+                        <com.player.movie.view.TabLayout
                             android:id="@+id/tab_layout"
-                            android:gravity="center_horizontal"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"/>
                         <LinearLayout
