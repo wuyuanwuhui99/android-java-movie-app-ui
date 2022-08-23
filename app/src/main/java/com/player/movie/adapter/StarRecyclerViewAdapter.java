@@ -23,7 +23,7 @@ import com.player.movie.entity.MovieStarEntity;
 
 import java.util.List;
 
-public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerViewAdapter.ViewHolder>{
+public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerViewAdapter.ViewHolder> implements View.OnClickListener{
 
     private List<MovieStarEntity>movieStarList;
     Context context;
@@ -51,17 +51,21 @@ public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerVi
             layoutParams.setMargins(0,0,0,0);//4个参数按顺序分别是左上右下
             holder.itemView.setLayoutParams(layoutParams);
         }
-        holder.itemView.setOnClickListener(view -> { // 列表绑定点击事件
-            Intent intent = new Intent(context, MovieDetailActivity.class);
-            String movieJSONString = JSON.toJSONString(movieStarList.get(position));
-            intent.putExtra("movieItem",movieJSONString);
-            context.startActivity(intent);
-        });
+        holder.itemView.setTag(movieStarList.get(position));
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
     public int getItemCount() {
         return movieStarList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(context, MovieDetailActivity.class);
+        String movieJSONString = JSON.toJSONString(v.getTag());
+        intent.putExtra("movieItem",movieJSONString);
+        context.startActivity(intent);
     }
 
 
