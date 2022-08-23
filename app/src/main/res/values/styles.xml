@@ -6,9 +6,9 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
-    <style name="user_title">
+    <style name="normal_text_style">
         <item name="android:textColor">@color/navigate</item>
-        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
     <style name="sm_icon_size_style">
@@ -32,5 +32,12 @@
         <item name="android:paddingRight">@dimen/container_padding_size</item>
         <item name="android:paddingTop">@dimen/container_padding_size</item>
         <item name="android:orientation">vertical</item>
+    </style>
+    <style name="title_font_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/main_font_color</item>
+        <item name="android:textSize">@dimen/big_font_size</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 </resources>

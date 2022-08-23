@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/page_background_color"
     tools:context=".activity.SearchActivity">
-
+    <ScrollView android:padding="@dimen/container_padding_size"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@drawable/border_radius"
+                android:orientation="horizontal"
+                android:padding="@dimen/container_padding_size"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:background="@drawable/search_input_decoration"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="@dimen/container_padding_size"
+                    android:paddingRight="@dimen/container_padding_size"
+                    android:layout_height="match_parent">
+                    <EditText
+                        android:textColorHint="@color/background_dark"
+                        android:textColor="@color/navigate"
+                        android:background="@null"
+                        android:id="@+id/search_input"
+                        android:layout_weight="1"
+                        android:textSize="@dimen/normal_font_size"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"/>
+                    <ImageView
+                        android:id="@+id/search_clear"
+                        android:visibility="gone"
+                        android:layout_marginLeft="@dimen/small_margin_size"
+                        android:src="@mipmap/icon_clear"
+                        android:layout_width="@dimen/md_img_size"
+                        android:layout_height="@dimen/md_img_size"/>
+                </LinearLayout>
+                <Button
+                    android:id="@+id/search_btn"
+                    android:layout_marginLeft="@dimen/small_margin_size"
+                    android:background="@drawable/radius_btn_decoration"
+                    android:textColor="@color/background_white"
+                    android:layout_width="@dimen/md_btn_width"
+                    android:gravity="center"
+                    android:text="@string/search"
+                    android:hint="@string/search_hint"
+                    android:layout_height="@dimen/md_btn_height"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:visibility="gone"
+                android:id="@+id/search_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="300dp" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

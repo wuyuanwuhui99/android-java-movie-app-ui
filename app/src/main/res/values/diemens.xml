@@ -2,11 +2,12 @@
     <dimen name="container_padding_size">15dp</dimen>
     <dimen name="small_margin_size">10dp</dimen>
     <dimen name="sm_size">5dp</dimen>
+    <dimen name="normal_font_size">14sp</dimen>
     <dimen name="big_font_size">20sp</dimen>
     <dimen name="small_img_size">15dp</dimen>
     <dimen name="md_img_size">25dp</dimen>
     <dimen name="lg_img_size">30dp</dimen>
-    <dimen name="md_avater_size">50dp</dimen>
+    <dimen name="md_avater_size">40dp</dimen>
     <dimen name="big_avater_size">70dp</dimen>
     <dimen name="line_width_size">3dp</dimen>
     <dimen name="home_big_icon_size">40dp</dimen>
@@ -17,5 +18,8 @@
     <dimen name="border_size">1dp</dimen>
     <dimen name="left_border_size">-1dp</dimen>
     <dimen name="md_btn_height">40dp</dimen>
+    <dimen name="md_btn_width">80dp</dimen>
     <dimen name="webview_height">200dp</dimen>
+    <dimen name="movie_img_width">150dp</dimen>
+    <dimen name="movie_img_height">200dp</dimen>
 </resources>

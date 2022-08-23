@@ -7,9 +7,9 @@
     android:layout_marginRight="@dimen/small_margin_size"
     android:orientation="vertical">
     <com.makeramen.roundedimageview.RoundedImageView
-        android:layout_width="150dp"
-        android:layout_height="200dp"
-        app:riv_corner_radius="@dimen/small_margin_size"
+        android:layout_width="@dimen/movie_img_width"
+        android:layout_height="@dimen/movie_img_height"
+        app:riv_corner_radius="@dimen/sm_border_radius_size"
         app:riv_oval="false"
         android:id="@+id/movie_img"/>
     <TextView

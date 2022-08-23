@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -37,7 +36,6 @@ import retrofit2.Response;
 
 public class MovieDetailActivity extends AppCompatActivity {
     MovieEntity movieEntity;
-    View view;
     String movieItemString;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +57,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         movieItemString = intent.getStringExtra("movieItem");
         movieEntity = JSON.parseObject(movieItemString, MovieEntity.class);
 
-        view = getWindow().getDecorView();
-        RoundedImageView imageView = view.findViewById(R.id.detail_movie_img);
+        RoundedImageView imageView = findViewById(R.id.detail_movie_img);
 
         Glide.with(imageView)
                 .load(Api.HOST + movieEntity.getLocalImg())
@@ -68,11 +65,11 @@ public class MovieDetailActivity extends AppCompatActivity {
                 .into(imageView);
 
         //设置电影名称
-        TextView movieName = view.findViewById(R.id.detail_movie_name);
+        TextView movieName = findViewById(R.id.detail_movie_name);
         movieName.setText(movieEntity.getMovieName());
 
         //主演
-        TextView movieStar = view.findViewById(R.id.detail_movie_star);
+        TextView movieStar = findViewById(R.id.detail_movie_star);
         if(movieEntity.getStar() != null){
             movieStar.setText("主演：" + movieEntity.getStar());
         }else{
@@ -80,7 +77,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
 
         //设置电影简述
-        TextView descriptionText = view.findViewById(R.id.detail_description);
+        TextView descriptionText = findViewById(R.id.detail_description);
         if(movieEntity.getDescription() != null){
             descriptionText.setText(movieEntity.getDescription().trim());
         }else{
@@ -88,7 +85,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         }
 
         //计算得分和星星
-        LinearLayout scoreLayout = view.findViewById(R.id.detail_score_layout);
+        LinearLayout scoreLayout = findViewById(R.id.detail_score_layout);
         Double score = movieEntity.getScore();
         if(score != null && score != 0){
             for(int i = 0; i < 5; i++){
@@ -99,14 +96,14 @@ public class MovieDetailActivity extends AppCompatActivity {
                     scoreImageView.setImageResource(R.mipmap.icon_half_star);
                 }
             }
-            TextView scoreText = view.findViewById(R.id.detail_score);
+            TextView scoreText = findViewById(R.id.detail_score);
             scoreText.setText(String.valueOf(score));
         }else{
-            view.findViewById(R.id.detail_no_score).setVisibility(View.VISIBLE);
+            findViewById(R.id.detail_no_score).setVisibility(View.VISIBLE);
             scoreLayout.setVisibility(View.GONE);
         }
 
-        TextView plotText = view.findViewById(R.id.detail_plot);
+        TextView plotText = findViewById(R.id.detail_plot);
         if(movieEntity.getPlot() != null){
             plotText.setText("\u3000\u3000" + movieEntity.getPlot());
         }else{
@@ -115,7 +112,7 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         //如果movieId不存在，这不能播放电影
         if(movieEntity.getMovieId() == null){
-            view.findViewById(R.id.detail_movie_play).setVisibility(View.GONE);
+            findViewById(R.id.detail_movie_play).setVisibility(View.GONE);
         }
     }
 
@@ -137,10 +134,10 @@ public class MovieDetailActivity extends AppCompatActivity {
      * @date: 2022-08-14 11:06
      */
     private void setModuleTitle(){
-        TextView plotTitle = view.findViewById(R.id.detail_plot_title).findViewById(R.id.module_title);
+        TextView plotTitle = findViewById(R.id.detail_plot_title).findViewById(R.id.module_title);
         plotTitle.setText(R.string.detail_plot);
 
-        TextView starText = view.findViewById(R.id.detail_star_title).findViewById(R.id.module_title);
+        TextView starText = findViewById(R.id.detail_star_title).findViewById(R.id.module_title);
         starText.setText(R.string.detail_star);
     }
 
@@ -151,7 +148,7 @@ public class MovieDetailActivity extends AppCompatActivity {
      */
     private void getStarList(){
         if(movieEntity.getMovieId() == null){
-            view.findViewById(R.id.detail_star_layout).setVisibility(View.GONE);
+            findViewById(R.id.detail_star_layout).setVisibility(View.GONE);
             return;
         }
         Call<ResultEntity> call = RequestUtils.getInstance().getStarList(movieEntity.getMovieId().toString());
@@ -162,7 +159,7 @@ public class MovieDetailActivity extends AppCompatActivity {
                 StarRecyclerViewAdapter starRecyclerViewAdapter = new StarRecyclerViewAdapter(movieStarList,MovieDetailActivity.this);
                 LinearLayoutManager layoutManager=new LinearLayoutManager(MovieDetailActivity.this);  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
                 layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-                RecyclerView recyclerView = view.findViewById(R.id.detail_star_recycler_view);
+                RecyclerView recyclerView = findViewById(R.id.detail_star_recycler_view);
                 recyclerView.setLayoutManager(layoutManager);
                 recyclerView.setAdapter(starRecyclerViewAdapter);
             }

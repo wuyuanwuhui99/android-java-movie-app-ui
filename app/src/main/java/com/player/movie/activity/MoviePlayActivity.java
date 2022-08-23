@@ -2,16 +2,11 @@ package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -35,7 +30,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MoviePlayActivity extends AppCompatActivity implements View.OnClickListener{
-    View view;
     MovieEntity movieEntity;
     List<List<MovieUrlEntity>> playGroup;
     View prevUrlTabLayout = null;
@@ -58,15 +52,14 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
     private void initData(){
         Intent intent = getIntent();
         movieEntity = JSON.parseObject(intent.getStringExtra("movieItem"), MovieEntity.class);
-        view = getWindow().getDecorView();
         //设置剧情
-        TextView plotTextView = view.findViewById(R.id.play_plot);
+        TextView plotTextView = findViewById(R.id.play_plot);
         plotTextView.setText(movieEntity.getPlot());
         //设置电影名称
-        TextView movieName = view.findViewById(R.id.play_movie_name);
+        TextView movieName = findViewById(R.id.play_movie_name);
         movieName.setText(movieEntity.getMovieName());
         //设置主演
-        TextView movieStar = view.findViewById(R.id.play_star);
+        TextView movieStar = findViewById(R.id.play_star);
         if(movieEntity.getStar() != null){
             movieStar.setText(movieEntity.getStar());
         }else{
@@ -74,7 +67,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
         }
 
         //计算得分和星星
-        LinearLayout scoreLayout = view.findViewById(R.id.play_score_layout);
+        LinearLayout scoreLayout = findViewById(R.id.play_score_layout);
         Double score = movieEntity.getScore();
         if(score != null && score != 0){
             for(int i = 0; i < 5; i++){
@@ -85,13 +78,13 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
                     scoreImageView.setImageResource(R.mipmap.icon_half_star);
                 }
             }
-            TextView scoreText = view.findViewById(R.id.play_score);
+            TextView scoreText = findViewById(R.id.play_score);
             scoreText.setText(score.toString());
         }else{
-            view.findViewById(R.id.play_no_score).setVisibility(View.VISIBLE);
+            findViewById(R.id.play_no_score).setVisibility(View.VISIBLE);
             scoreLayout.setVisibility(View.GONE);
         }
-        TextView plot = view.findViewById(R.id.play_plot_title).findViewById(R.id.module_title);
+        TextView plot = findViewById(R.id.play_plot_title).findViewById(R.id.module_title);
         plot.setText(R.string.detail_plot);
     }
 
@@ -150,7 +143,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
      */
     private void setTab(){
         String [] mTitles = new String[playGroup.size()];
-        LinearLayout playUrlLayout = view.findViewById(R.id.play_url_layout);
+        LinearLayout playUrlLayout = findViewById(R.id.play_url_layout);
         for (int i=0;i<playGroup.size();i++){
             mTitles[i] = "播放地址"+(i+1);
             LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.url_linear_layout, playUrlLayout, false);
@@ -192,7 +185,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
             }
             playUrlLayout.addView(tabLinearLayout);
         }
-        TabLayout tabLayout = view.findViewById(R.id.tab_layout);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setTabData(mTitles);
         tabLayout.setOnTabSelectListener(position -> {
             View activeUrlGrid =  playUrlLayout.getChildAt(position);

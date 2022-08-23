@@ -17,12 +17,12 @@
             <LinearLayout
                 android:background="@drawable/border_radius"
                 android:orientation="horizontal"
-                android:padding="@dimen/small_margin_size"
+                android:padding="@dimen/container_padding_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <RelativeLayout
-                    android:layout_height="200dp"
-                    android:layout_width="150dp"
+                    android:layout_width="@dimen/movie_img_width"
+                    android:layout_height="@dimen/movie_img_height"
                     android:onClick="goPlay"
                     >
                     <com.makeramen.roundedimageview.RoundedImageView
@@ -47,12 +47,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:textStyle="bold"
-                        android:textSize="@dimen/big_font_size"
-                        android:textColor="@color/main_font_color"
-                        android:id="@+id/detail_movie_name"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        style="@style/title_font_style"
+                        android:id="@+id/detail_movie_name"/>
                     <TextView
                         android:layout_marginTop="@dimen/small_margin_size"
                         android:textColor="@color/navigate"
@@ -133,7 +129,7 @@
                 android:layout_marginTop="@dimen/container_padding_size"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
-                android:padding="@dimen/small_margin_size"
+                android:padding="@dimen/container_padding_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <include android:id="@+id/detail_plot_title" layout="@layout/module_title"/>
@@ -147,7 +143,7 @@
                 android:layout_marginTop="@dimen/container_padding_size"
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
-                android:padding="@dimen/small_margin_size"
+                android:padding="@dimen/container_padding_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <include android:id="@+id/detail_star_title" layout="@layout/module_title"/>

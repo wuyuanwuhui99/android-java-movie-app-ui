@@ -41,4 +41,17 @@ public interface RequestService {
     @GET(Api.GETMOVIEURL)
     Call<ResultEntity> getMovieUrl(@Query("movieId") Long movieId);
 
+    // 搜索
+    @GET(Api.GETSEARCHRESULT)
+    Call<ResultEntity> search(
+            @Query("classify") String classify,
+            @Query("category") String category,
+            @Query("label") String label,
+            @Query("star") String star,
+            @Query("director") String director,
+            @Query("keyword") String keyword,
+            @Query("pageSize") int pageSize,
+            @Query("pageNum") int pageNum
+
+    );
 }

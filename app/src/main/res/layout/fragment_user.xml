@@ -40,11 +40,8 @@
                         android:layout_weight="1"
                         android:layout_height="match_parent">
                         <TextView
-                            android:textStyle="bold"
-                            android:textSize="@dimen/big_font_size"
-                            android:id="@+id/username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"/>
+                            style="@style/title_font_style"
+                            android:id="@+id/username"/>
                         <TextView
                             android:id="@+id/sign"
                             android:layout_width="match_parent"
@@ -75,7 +72,8 @@
                         style="@style/user_data"/>
                     <TextView
                         android:text="@string/user_day"
-                        style="@style/user_title"/>
+                        android:textAlignment="center"
+                        style="@style/normal_text_style"/>
                 </LinearLayout>
                 <LinearLayout
                     android:gravity="center_horizontal"
@@ -88,7 +86,8 @@
                         style="@style/user_data"/>
                     <TextView
                         android:text="@string/user_favorite_count"
-                        style="@style/user_title"/>
+                        android:textAlignment="center"
+                        style="@style/normal_text_style"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -101,7 +100,8 @@
                         style="@style/user_data"/>
                     <TextView
                         android:text="@string/user_play_record_count"
-                        style="@style/user_title"/>
+                        android:textAlignment="center"
+                        style="@style/normal_text_style"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -114,7 +114,8 @@
                         style="@style/user_data"/>
                     <TextView
                         android:text="@string/user_view_record_count"
-                        style="@style/user_title"/>
+                        android:textAlignment="center"
+                        style="@style/normal_text_style"/>
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
