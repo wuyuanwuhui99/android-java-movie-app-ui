@@ -73,22 +73,22 @@
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"/>
                         <ImageView
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"/>
                         <ImageView
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"/>
                         <ImageView
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"/>
                         <ImageView
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"/>
@@ -119,7 +119,7 @@
                             android:layout_height="@dimen/container_padding_size"/>
                         <ImageView
                             android:src="@mipmap/icon_comment"
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"/>
                     </LinearLayout>

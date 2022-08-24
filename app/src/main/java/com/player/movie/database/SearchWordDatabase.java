@@ -22,14 +22,10 @@ public abstract class SearchWordDatabase extends RoomDatabase {
     // 获取该数据库中某张表的持久化对象
     public abstract SearchWordDao searchWordDao();
     // 单例
-    private SearchWordDatabase database;
-    public SearchWordDatabase getInstance(Context context){
+    private static SearchWordDatabase database;
+    public static synchronized SearchWordDatabase getInstance(Context context){
         if (database == null){
-            synchronized (SearchWordDatabase.class){
-                if (database == null){
-                    database = Room.databaseBuilder(context.getApplicationContext(),SearchWordDatabase.class,"search.db").build();
-                }
-            }
+            database = Room.databaseBuilder(context.getApplicationContext(),SearchWordDatabase.class,"search.db").build();
         }
         return database;
     }

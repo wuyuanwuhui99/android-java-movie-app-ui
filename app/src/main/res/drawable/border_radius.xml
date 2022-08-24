@@ -2,10 +2,5 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <!--背景颜色-->
     <solid android:color="#fff" />
-    <!--分别设置左上，右上，左下，右下-->
-    <corners
-        android:bottomLeftRadius="@dimen/small_margin_size"
-        android:bottomRightRadius="@dimen/small_margin_size"
-        android:topLeftRadius="@dimen/small_margin_size"
-        android:topRightRadius="@dimen/small_margin_size" />
+    <corners android:radius="@dimen/small_margin_size"/>
 </shape>

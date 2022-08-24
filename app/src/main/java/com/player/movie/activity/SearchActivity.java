@@ -6,18 +6,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
 import com.player.movie.R;
 import com.player.movie.adapter.SearchRecyclerViewAdapter;
+import com.player.movie.database.SearchWordDatabase;
 import com.player.movie.entity.MovieEntity;
+import com.player.movie.entity.SearchWordEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.view.FlowLayout;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -29,6 +36,9 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     EditText editText;
     ImageView clearImg;
     RecyclerView searchRecyclerView;
+    SearchWordDatabase database;
+    LinearLayout searchRecordLayout;
+    boolean searching = false;
     int pageSize = 20;
     int pageNum = 1;
     List<MovieEntity>searchMovieList = new ArrayList<>();
@@ -36,10 +46,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        initData();
+        initUI();
+        getSearchRecordData();
     }
 
-    private void initData(){
+    /**
+     * @author: wuwenqiangl
+     * @description: 初始化UI
+     * @date: 2022-08-23 22:06
+     */
+    private void initUI(){
         Intent intent = getIntent();
         movieEntity = JSON.parseObject(intent.getStringExtra("movieItem"), MovieEntity.class);
         editText = findViewById(R.id.search_input);
@@ -52,7 +68,52 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         searchRecyclerView.setLayoutManager(layoutManager);
+        searchRecordLayout = findViewById(R.id.search_record_layout);
         findViewById(R.id.search_btn).setOnClickListener(this);// 搜索按钮的点击事件
+        TextView searchTitle = findViewById(R.id.search_record_title).findViewById(R.id.module_title);
+        searchTitle.setText(R.string.search_record);
+    }
+
+    /**
+     * @author: wuwenqiangl
+     * @description: 从sqlite中获取搜索记录
+     * @date: 2022-08-24 23:00
+     */
+    private void getSearchRecordData(){
+        new Thread(() -> {
+            if(database == null)database = SearchWordDatabase.getInstance(this);
+            List<SearchWordEntity> searchWordList = database.searchWordDao().query();
+            LinearLayout searchRecordList = findViewById(R.id.search_record_list);
+            TextView noData = findViewById(R.id.search_record_no_data);
+            searchRecordList.removeAllViews();
+            if(searchWordList.size() == 0){
+                searchRecordList.setVisibility(View.GONE);
+                noData.setVisibility(View.VISIBLE);
+            }else{
+                noData.setVisibility(View.GONE);
+                for(SearchWordEntity searchWordEntity:searchWordList){
+                    TextView textView = (TextView) LayoutInflater.from(this).inflate(R.layout.search_record_item, searchRecordList, false);
+                    textView.setText(searchWordEntity.getMovieName());
+                    searchRecordList.addView(textView);
+                }
+            }
+        }).start();
+    }
+
+    /**
+     * @author: wuwenqiangl
+     * @description: 先删除再插入记录
+     * @date: 2022-08-24 23:09
+     */
+    private void insertSearchRecord(String keyword){
+        new Thread(()->{
+            SearchWordEntity searchWordEntity = new SearchWordEntity();
+            searchWordEntity.setMovieName(keyword);
+            searchWordEntity.setClassify(movieEntity.getClassify());
+            database.searchWordDao().delete(searchWordEntity);
+            searchWordEntity.setCreatTime(new Date());
+            database.searchWordDao().insert(searchWordEntity);
+        }).start();
     }
 
     @Override
@@ -63,6 +124,8 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 searchRecyclerView.setVisibility(View.GONE);
                 break;
             case R.id.search_btn:
+                searching = true;
+                searchRecordLayout.setVisibility(View.GONE);
                 String keyword = editText.getText().toString();
                 if("".equals(keyword)){
                     keyword = movieEntity.getMovieName();
@@ -85,15 +148,27 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                         }
                     });
                 }
+                insertSearchRecord(keyword);
                 break;
         }
     }
 
+    /**
+     * @author: wuwenqiangl
+     * @description: 监听搜索框内容变化
+     * @date: 2022-08-24 23:17
+     */
     @Override
     public void onViewAttachedToWindow(View v) {
-        if(editText.getText() == null || "".equals(editText.getText())){
+        if("".equals(editText.getText().toString())){// 如果搜索框内容为空，显示搜索记录
             clearImg.setVisibility(View.GONE);
+            searchRecordLayout.setVisibility(View.VISIBLE);
+            if(searching){// 如果是已经搜素过，重新获取搜索记录
+                getSearchRecordData();
+                searching = true;
+            }
         }else{
+            searchRecordLayout.setVisibility(View.GONE);
             clearImg.setVisibility(View.VISIBLE);
         }
     }
@@ -106,7 +181,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     /**
      * @author: wuwenqiangl
      * @description: 设置搜索列表
-     * @date: 2021-08-23 22:06
+     * @date: 2022-08-23 22:06
      */
     private void setSearchList(){
         searchRecyclerView.setVisibility(View.VISIBLE);

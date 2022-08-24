@@ -26,4 +26,6 @@
     <string name="detail_no_play">暂无播放资源</string>
     <string name="play_url">播放地址</string>
     <string name="search">搜索</string>
+    <string name="search_record">搜索记录</string>
+    <string name="search_record_no_data">暂无搜索记录</string>
 </resources>

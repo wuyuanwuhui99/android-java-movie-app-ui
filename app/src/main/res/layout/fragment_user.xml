@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content">
                         <ImageView
                             android:src="@mipmap/icon_play_record"
-                            android:layout_marginRight="@dimen/sm_size"
+                            android:layout_marginRight="@dimen/mini_margin_size"
                             style="@style/md_icon_size_style"/>
                         <TextView
                             android:text="@string/user_play_record_count"

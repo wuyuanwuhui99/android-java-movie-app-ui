@@ -1,7 +1,7 @@
 <resources>
     <dimen name="container_padding_size">15dp</dimen>
     <dimen name="small_margin_size">10dp</dimen>
-    <dimen name="sm_size">5dp</dimen>
+    <dimen name="mini_margin_size">5dp</dimen>
     <dimen name="normal_font_size">14sp</dimen>
     <dimen name="big_font_size">20sp</dimen>
     <dimen name="small_img_size">15dp</dimen>
@@ -22,4 +22,5 @@
     <dimen name="webview_height">200dp</dimen>
     <dimen name="movie_img_width">150dp</dimen>
     <dimen name="movie_img_height">200dp</dimen>
+    <dimen name="search_no_data_height">40dp</dimen>
 </resources>

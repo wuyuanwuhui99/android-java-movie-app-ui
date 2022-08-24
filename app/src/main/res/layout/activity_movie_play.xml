@@ -51,12 +51,12 @@
                         <ImageView
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <ImageView
                             android:layout_width="@dimen/container_padding_size"
@@ -65,10 +65,10 @@
                         <ImageView
                             android:layout_width="@dimen/container_padding_size"
                             android:layout_height="@dimen/container_padding_size"
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:src="@mipmap/icon_empty_star"/>
                         <TextView
-                            android:layout_marginLeft="@dimen/sm_size"
+                            android:layout_marginLeft="@dimen/mini_margin_size"
                             android:text="5.8"
                             android:textSize="18sp"
                             android:textColor="@color/red"

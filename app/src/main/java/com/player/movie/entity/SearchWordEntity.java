@@ -58,4 +58,6 @@ public class SearchWordEntity {
         this.classify = classify;
         this.creatTime = creatTime;
     }
+
+    public SearchWordEntity(){}
 }
