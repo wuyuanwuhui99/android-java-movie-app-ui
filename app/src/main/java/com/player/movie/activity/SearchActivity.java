@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -31,13 +33,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SearchActivity extends AppCompatActivity implements View.OnClickListener,View.OnAttachStateChangeListener{
+public class SearchActivity extends AppCompatActivity implements View.OnClickListener{
     MovieEntity movieEntity;
     EditText editText;
     ImageView clearImg;
     RecyclerView searchRecyclerView;
     SearchWordDatabase database;
     LinearLayout searchRecordLayout;
+    FlowLayout searchRecordList;
     boolean searching = false;
     int pageSize = 20;
     int pageNum = 1;
@@ -48,6 +51,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_search);
         initUI();
         getSearchRecordData();
+        addTextChangedListener();
     }
 
     /**
@@ -59,11 +63,11 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         movieEntity = JSON.parseObject(intent.getStringExtra("movieItem"), MovieEntity.class);
         editText = findViewById(R.id.search_input);
-        editText.addOnAttachStateChangeListener(this);
         editText.setHint(movieEntity.getMovieName());
         clearImg = findViewById(R.id.search_clear);
         clearImg.setOnClickListener(this);
         searchRecyclerView = findViewById(R.id.search_recycler_view);
+        searchRecordList = findViewById(R.id.search_record_list);
         //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
         LinearLayoutManager layoutManager=new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -76,6 +80,36 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
 
     /**
      * @author: wuwenqiangl
+     * @description: 监听输入框内容的变化
+     * @date: 2022-08-25 22:34
+     */
+    private void addTextChangedListener(){
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if("".equals(s)){
+                    clearImg.setVisibility(View.GONE);
+                    searchRecyclerView.setVisibility(View.GONE);
+                    searchRecordList.setVisibility(View.VISIBLE);
+                }else{
+                    clearImg.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    /**
+     * @author: wuwenqiangl
      * @description: 从sqlite中获取搜索记录
      * @date: 2022-08-24 23:00
      */
@@ -83,7 +117,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         new Thread(() -> {
             if(database == null)database = SearchWordDatabase.getInstance(this);
             List<SearchWordEntity> searchWordList = database.searchWordDao().query();
-            LinearLayout searchRecordList = findViewById(R.id.search_record_list);
+
             TextView noData = findViewById(R.id.search_record_no_data);
             searchRecordList.removeAllViews();
             if(searchWordList.size() == 0){
@@ -95,6 +129,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     TextView textView = (TextView) LayoutInflater.from(this).inflate(R.layout.search_record_item, searchRecordList, false);
                     textView.setText(searchWordEntity.getMovieName());
                     searchRecordList.addView(textView);
+                    textView.setOnClickListener(this);
                 }
             }
         }).start();
@@ -119,63 +154,55 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.search_clear:
+            case R.id.search_clear:// 点击清除按钮
                 editText.setText("");
                 searchRecyclerView.setVisibility(View.GONE);
+                searchRecordLayout.setVisibility(View.VISIBLE);
                 break;
-            case R.id.search_btn:
-                searching = true;
-                searchRecordLayout.setVisibility(View.GONE);
-                String keyword = editText.getText().toString();
-                if("".equals(keyword)){
-                    keyword = movieEntity.getMovieName();
-                    editText.setText(keyword);
-                    searchMovieList.add(movieEntity);
-                    setSearchList();
-                }else {
-                    Call<ResultEntity> call = RequestUtils.getInstance().search(null,null,null,null,null,keyword,pageSize,pageNum);
-                    call.enqueue(new Callback<ResultEntity>() {
 
-                        @Override
-                        public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                            searchMovieList = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class);
-                            setSearchList();
-                        }
+            case R.id.search_btn: // 点击搜索按钮
+                onSearch();
+                break;
 
-                        @Override
-                        public void onFailure(Call<ResultEntity> call, Throwable t) {
-
-                        }
-                    });
-                }
-                insertSearchRecord(keyword);
+            case R.id.search_record_item: // 点击搜索记录
+                TextView searchRecordItem = (TextView)v;
+                editText.setText(searchRecordItem.getText());
+                onSearch();
                 break;
         }
     }
 
     /**
      * @author: wuwenqiangl
-     * @description: 监听搜索框内容变化
-     * @date: 2022-08-24 23:17
+     * @description: 点击搜索按钮
+     * @date: 2022-08-25 22:46
      */
-    @Override
-    public void onViewAttachedToWindow(View v) {
-        if("".equals(editText.getText().toString())){// 如果搜索框内容为空，显示搜索记录
-            clearImg.setVisibility(View.GONE);
-            searchRecordLayout.setVisibility(View.VISIBLE);
-            if(searching){// 如果是已经搜素过，重新获取搜索记录
-                getSearchRecordData();
-                searching = true;
-            }
-        }else{
-            searchRecordLayout.setVisibility(View.GONE);
-            clearImg.setVisibility(View.VISIBLE);
+    private void onSearch(){
+        searching = true;
+        searchRecordLayout.setVisibility(View.GONE);
+        String keyword = editText.getText().toString();
+        if("".equals(keyword)){
+            keyword = movieEntity.getMovieName();
+            editText.setText(keyword);
+            searchMovieList.add(movieEntity);
+            setSearchList();
+        }else {
+            Call<ResultEntity> call = RequestUtils.getInstance().search(null,null,null,null,null,keyword,pageSize,pageNum);
+            call.enqueue(new Callback<ResultEntity>() {
+
+                @Override
+                public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                    searchMovieList = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class);
+                    setSearchList();
+                }
+
+                @Override
+                public void onFailure(Call<ResultEntity> call, Throwable t) {
+
+                }
+            });
         }
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(View v) {
-
+        insertSearchRecord(keyword);
     }
 
     /**

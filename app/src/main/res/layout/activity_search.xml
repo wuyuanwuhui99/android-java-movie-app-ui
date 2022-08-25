@@ -60,17 +60,24 @@
                 android:background="@drawable/border_radius"
                 android:orientation="vertical"
                 android:layout_marginTop="@dimen/container_padding_size"
-                android:padding="@dimen/container_padding_size"
+                android:paddingTop="@dimen/container_padding_size"
+                android:paddingBottom="@dimen/container_padding_size"
+                android:paddingRight="@dimen/container_padding_size"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <include layout="@layout/module_title"
-                    android:id="@+id/search_record_title"/>
                 <LinearLayout
-                    android:orientation="vertical"
+                    android:layout_marginLeft="@dimen/container_padding_size"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <include layout="@layout/module_title"
+                        android:id="@+id/search_record_title"/>
+                </LinearLayout>
+                <com.player.movie.view.FlowLayout
                     android:id="@+id/search_record_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
                 <TextView
+                    android:layout_marginLeft="@dimen/container_padding_size"
                     android:id="@+id/search_record_no_data"
                     android:text="@string/search_record_no_data"
                     android:gravity="center"

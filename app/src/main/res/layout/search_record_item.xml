@@ -2,9 +2,11 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/search_record_item_decoration"
     android:layout_width="wrap_content"
+    android:layout_marginLeft="@dimen/container_padding_size"
     android:paddingLeft="@dimen/small_margin_size"
     android:paddingRight="@dimen/small_margin_size"
     android:paddingTop="@dimen/mini_margin_size"
     android:paddingBottom="@dimen/mini_margin_size"
+    android:id="@+id/search_record_item"
     android:layout_height="wrap_content">
 </TextView>

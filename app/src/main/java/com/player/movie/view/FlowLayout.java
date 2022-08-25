@@ -1,184 +1,137 @@
 package com.player.movie.view;
 
+
 import android.content.Context;
-import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class FlowLayout extends ViewGroup {
 
-    private static final String TAG = "FlowLayout";
-
-    private List<Rect> mChildrenPositionList = new ArrayList<>();   // 记录各子 View 的位置
-    private int mMaxLines = Integer.MAX_VALUE;      // 最多显示的行数，默认无限制
-    private int mVisibleItemCount;       // 可见的 item 数
-
-    public FlowLayout(Context context) {
-        super(context);
-    }
 
     public FlowLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
+        this(context, attrs);
+    }
+
+    public FlowLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+        this(context, attrs, defStyleAttr);
+    }
+
+    @Override
+    protected LayoutParams generateDefaultLayoutParams() {
+        return new MarginLayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.MATCH_PARENT);
+    }
+
+    @Override
+    protected LayoutParams generateLayoutParams(LayoutParams p) {
+        return new MarginLayoutParams(p);
+    }
+
+    @Override
+    public LayoutParams generateLayoutParams(AttributeSet attrs) {
+        return new MarginLayoutParams(getContext(),attrs);
     }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        // 清除之前的位置
-        mChildrenPositionList.clear();
-        // 测量所有子元素（这样 child.getMeasuredXXX 才能获取到值）
-        measureChildren(widthMeasureSpec, heightMeasureSpec);
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        int widhtmode = MeasureSpec.getMode(widthMeasureSpec);
+        int heightmode = MeasureSpec.getMode(heightMeasureSpec);
 
-        int widthSize = MeasureSpec.getSize(widthMeasureSpec);
-        int widthMode = MeasureSpec.getMode(widthMeasureSpec);
-        int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-        int heightMode = MeasureSpec.getMode(heightMeasureSpec);
+        int measureWidth  = MeasureSpec.getSize(widthMeasureSpec);
+        int measureHeight  = MeasureSpec.getSize(heightMeasureSpec);
 
-        int[] a = helper(widthSize);
-        int measuredHeight = 0;
-        // EXACTLY 模式：对应指定大小和 match_parent
-        if (heightMode == MeasureSpec.EXACTLY) {
-            measuredHeight = heightSize;
-        }
-        // AT_MOST 模式，对应 wrap_content
-        else if (heightMode == MeasureSpec.AT_MOST) {
-            measuredHeight = a[0];
-        }
-        int measuredWidth = 0;
-        if (widthMode == MeasureSpec.EXACTLY) {
-            measuredWidth = widthSize;
-        }
-        else if (widthMode == MeasureSpec.AT_MOST) {
-            measuredWidth = a[1];
-        }
+        int lineWidht = 0;
+        int lineHeight = 0;
 
-        setMeasuredDimension(measuredWidth, measuredHeight);
-    }
+        int widht = 0;
+        int height = 0;
+        int childCount = getChildCount();
 
-    /**
-     * 在 wrap_content 情况下，得到布局的测量高度和测量宽度
-     * 返回值是一个有两个元素的数组 a，a[0] 代表测量高度，a[1] 代表测量宽度
-     */
-    private int[] helper(int widthSize) {
-        boolean isOneRow = true;    // 是否是单行
-        int width = getPaddingLeft();   // 记录当前行已有的宽度
-        int height = getPaddingTop();   // 记录当前行已有的高度
-        int maxHeight = 0;      // 记录当前行的最大高度
-        int currLine = 1;       // 记录当前行数
+        for (int i = 0; i < childCount; i++) {
+            View childAt = getChildAt(i);
+            measureChild(childAt,widthMeasureSpec,heightMeasureSpec);
 
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            // 获取当前子元素的 margin
-            LayoutParams params = child.getLayoutParams();
-            MarginLayoutParams mlp;
-            if (params instanceof MarginLayoutParams) {
-                mlp = (MarginLayoutParams) params;
-            } else {
-                mlp = new MarginLayoutParams(params);
+            MarginLayoutParams lp = null;
+
+            if (childAt.getLayoutParams() instanceof MarginLayoutParams){
+                lp = (MarginLayoutParams) childAt.getLayoutParams();
+            }else{
+                lp = new MarginLayoutParams(0,0);
             }
-            // 记录子元素所占宽度和高度
-            int childWidth = mlp.leftMargin + child.getMeasuredWidth() + mlp.rightMargin;
-            int childHeight = mlp.topMargin + child.getMeasuredHeight() + mlp.bottomMargin;
-            maxHeight = Math.max(maxHeight, childHeight);
 
-            // 判断是否要换行
-            if (width + childWidth + getPaddingRight() > widthSize) {
-                // 加上该行的最大高度
-                height += maxHeight;
-                // 重置 width 和 maxHeight
-                width = getPaddingLeft();
-                maxHeight = childHeight;
-                isOneRow = false;
-                currLine++;
-                if (currLine > mMaxLines) {
-                    break;
-                }
+            int childwidht = childAt.getMeasuredWidth()+lp.leftMargin+lp.rightMargin;
+            int childHeight = childAt.getMeasuredHeight()+lp.topMargin+lp.bottomMargin;
+
+
+            if (lineWidht+childwidht >measureWidth){
+                widht = lineWidht;
+                height+= lineHeight;
+
+                lineHeight = childHeight;
+                lineWidht = childwidht;
+            }else{
+                lineHeight = Math.max(lineHeight, childHeight);
+                lineWidht = childwidht;
             }
-            // 存储该子元素的位置，在 onLayout 时设置
-            Rect rect = new Rect(width + mlp.leftMargin,
-                    height + mlp.topMargin,
-                    width + childWidth - mlp.rightMargin,
-                    height + childHeight - mlp.bottomMargin);
-            mChildrenPositionList.add(rect);
 
-            // 加上该子元素的宽度
-            width += childWidth;
+            if (i == childCount-1){
+                height += lineHeight;
+                widht = Math.max(widht,lineWidht);
+            }
+
         }
+        setMeasuredDimension((widhtmode==MeasureSpec.EXACTLY)?measureWidth:widht,(heightmode==MeasureSpec.EXACTLY)?measureHeight:height);
 
-        int[] res = new int[2];
-        res[0] = height + maxHeight + getPaddingBottom();
-        res[1] = isOneRow? width + getPaddingRight() : widthSize;
-
-        return res;
     }
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        // 布置子 View 的位置
-        int n = Math.min(getChildCount(), mChildrenPositionList.size());
-        for (int i = 0; i < n; i++) {
-            View child = getChildAt(i);
-            Rect rect = mChildrenPositionList.get(i);
-            child.layout(rect.left, rect.top, rect.right, rect.bottom);
-        }
-        mVisibleItemCount = n;
-    }
+        //还是先获取所有的子view
+        int count = getChildCount();
+        //定义列宽
+        int lineWidth = 0;
+        //定义行高
+        int lineHeight = 0;
+        //定义上、左边距
+        int top = 0,left=0;
 
-    /**
-     * 设置 Adapter
-     */
-    public void setAdapter(Adapter adapter) {
-        // 移除之前的视图
-        removeAllViews();
-        // 添加 item
-        int n = adapter.getItemCount();
-        for (int i = 0; i < n; i++) {
-            ViewHolder holder = adapter.onCreateViewHolder(this);
-            adapter.onBindViewHolder(holder, i);
-            View child = holder.itemView;
-            addView(child);
-        }
-    }
-
-    /**
-     * 设置最多显示的行数
-     */
-    public void setMaxLines(int maxLines) {
-        mMaxLines = maxLines;
-    }
-
-    /**
-     * 获取显示的 item 数
-     */
-    public int getVisibleItemCount() {
-        return mVisibleItemCount;
-    }
-
-    public abstract static class Adapter<VH extends ViewHolder> {
-
-        public abstract VH onCreateViewHolder(ViewGroup parent);
-
-        public abstract void onBindViewHolder(VH holder, int position);
-
-        public abstract int getItemCount();
-
-    }
-
-    public abstract static class ViewHolder {
-        public final View itemView;
-
-        public ViewHolder(View itemView) {
-            if (itemView == null) {
-                throw new IllegalArgumentException("itemView may not be null");
+        for (int i = 0; i < count; i++) {
+            View childAt = getChildAt(i);
+            MarginLayoutParams layoutParams = (MarginLayoutParams) childAt.getLayoutParams();
+            //因为onMeasure(int widthMeasureSpec, int heightMeasureSpec)方法已经执行完，所有这里我们可以直接调用
+            //子view的宽+左右边距
+            int childWidth = childAt.getMeasuredWidth()+layoutParams.leftMargin+layoutParams.rightMargin;
+            int childHeight = childAt.getMeasuredHeight()+layoutParams.topMargin+layoutParams.bottomMargin;
+            //这里的if判断和onMeasure中是一样的逻辑，不再赘述
+            if(childWidth+lineWidth>getMeasuredWidth()){
+                //累加top
+                top+=lineHeight;
+                //因为换行了left置为0
+                left = 0;
+                lineHeight = childHeight;
+                lineWidth = childWidth;
+            }else{
+                lineHeight = Math.max(lineHeight,childHeight);
+                //行宽累加
+                lineWidth+=childWidth;
             }
-            this.itemView = itemView;
+            //计算子view的左、上、右、下的值
+            int lc = left+layoutParams.leftMargin;
+            int tc = top+layoutParams.topMargin;
+            //右边就等于自己的宽+左边的边距即lc
+            int rc = lc+childAt.getMeasuredWidth();
+            //底部逻辑同上
+            int bc = tc+childAt.getMeasuredHeight();
+            //布局
+            childAt.layout(lc,tc,rc,bc);
+            //这一句很重要，因为一行中有多个view，所有left是累加的关系。
+            left+=childWidth;
         }
+
     }
 }
