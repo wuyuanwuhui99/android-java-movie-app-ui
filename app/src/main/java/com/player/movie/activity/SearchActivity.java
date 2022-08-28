@@ -1,6 +1,7 @@
 package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,8 @@ import com.player.movie.adapter.SearchRecyclerViewAdapter;
 import com.player.movie.database.SearchWordDatabase;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.SearchWordEntity;
+import com.player.movie.fragment.LikeMovieFragment;
+import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.view.FlowLayout;
@@ -41,6 +44,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     SearchWordDatabase database;
     LinearLayout searchRecordLayout;
     FlowLayout searchRecordList;
+    LinearLayout searchRecommendLayout;
     boolean searching = false;
     int pageSize = 20;
     int pageNum = 1;
@@ -52,6 +56,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         initUI();
         getSearchRecordData();
         addTextChangedListener();
+        setRecommendList();
     }
 
     /**
@@ -76,6 +81,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.search_btn).setOnClickListener(this);// 搜索按钮的点击事件
         TextView searchTitle = findViewById(R.id.search_record_title).findViewById(R.id.module_title);
         searchTitle.setText(R.string.search_record);
+        searchRecommendLayout = findViewById(R.id.search_recommend_layout);
     }
 
     /**
@@ -96,6 +102,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                     clearImg.setVisibility(View.GONE);
                     searchRecyclerView.setVisibility(View.GONE);
                     searchRecordList.setVisibility(View.VISIBLE);
+                    searchRecommendLayout.setVisibility(View.VISIBLE);
                 }else{
                     clearImg.setVisibility(View.VISIBLE);
                 }
@@ -158,6 +165,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
                 editText.setText("");
                 searchRecyclerView.setVisibility(View.GONE);
                 searchRecordLayout.setVisibility(View.VISIBLE);
+                searchRecommendLayout.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.search_btn: // 点击搜索按钮
@@ -180,6 +188,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private void onSearch(){
         searching = true;
         searchRecordLayout.setVisibility(View.GONE);
+        searchRecommendLayout.setVisibility(View.GONE);
         String keyword = editText.getText().toString();
         if("".equals(keyword)){
             keyword = movieEntity.getMovieName();
@@ -213,5 +222,16 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
     private void setSearchList(){
         searchRecyclerView.setVisibility(View.VISIBLE);
         searchRecyclerView.setAdapter(new SearchRecyclerViewAdapter(searchMovieList,this));
+    }
+
+    /**
+     * @author: wuwenqiangl
+     * @description: 推荐列表
+     * @date: 2022-08-28 21:56
+     */
+    private void setRecommendList(){
+        FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.search_recommend_layout, new RecommendMovieFragment(movieEntity,"vertical"))
+                .commit();
     }
 }

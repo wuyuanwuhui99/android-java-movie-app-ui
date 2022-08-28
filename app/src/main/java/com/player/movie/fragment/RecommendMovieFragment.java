@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.player.movie.R;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
+import com.player.movie.adapter.GridRecyclerViewAdapter;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 public class RecommendMovieFragment extends Fragment {
     View view;
     MovieEntity movieEntity;
+    String orientation;// 方向。横向和纵向，纵向每行3个
 
     @Nullable
     @Override
@@ -40,8 +42,9 @@ public class RecommendMovieFragment extends Fragment {
         return view;
     }
 
-    public RecommendMovieFragment(MovieEntity movieEntity){
+    public RecommendMovieFragment(MovieEntity movieEntity,String orientation){
         this.movieEntity = movieEntity;
+        this.orientation = orientation;
     }
 
     /**
@@ -65,12 +68,21 @@ public class RecommendMovieFragment extends Fragment {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 List<MovieEntity> movieEntityList = JSON.parseArray(JSON.toJSONString(response.body().getData()), MovieEntity.class);
-                CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList, getContext());
                 LinearLayoutManager layoutManager=new LinearLayoutManager(getContext());  //LinearLayoutManager中定制了可扩展的布局排列接口，子类按照接口中的规范来实现就可以定制出不同排雷方式的布局了
-                layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 RecyclerView recyclerView = view.findViewById(R.id.recommend_recycler_view);
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(categoryRecyclerViewAdapter);
+                // 横向排列
+                if("horizontal".equals(orientation) || orientation == null){
+                    layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    CategoryRecyclerViewAdapter categoryRecyclerViewAdapter = new CategoryRecyclerViewAdapter(movieEntityList, getContext());
+                    recyclerView.setAdapter(categoryRecyclerViewAdapter);
+                }else{// 纵向表格排列，每行3个
+                    layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                    recyclerView.setLayoutManager(layoutManager);
+                    GridRecyclerViewAdapter gridRecyclerViewAdapter = new GridRecyclerViewAdapter(movieEntityList, getContext(),recyclerView.getWidth());
+                    recyclerView.setAdapter(gridRecyclerViewAdapter);
+                }
+
             }
 
             @Override

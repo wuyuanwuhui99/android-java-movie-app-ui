@@ -19,7 +19,6 @@ import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.utils.CommonUtils;
 import com.player.movie.view.TabLayout;
 
 import java.util.ArrayList;
@@ -96,7 +95,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
     private void addFraction(){
         FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.play_your_like_layout, new LikeMovieFragment(movieEntity))
-                .replace(R.id.play_recommend_layout, new RecommendMovieFragment(movieEntity))
+                .replace(R.id.play_recommend_layout, new RecommendMovieFragment(movieEntity,"horizontal"))
                 .commit();
     }
 

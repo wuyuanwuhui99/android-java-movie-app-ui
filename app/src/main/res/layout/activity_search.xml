@@ -86,6 +86,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/search_no_data_height"/>
             </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/search_recommend_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
             <androidx.recyclerview.widget.RecyclerView
                 android:visibility="gone"
                 android:id="@+id/search_recycler_view"

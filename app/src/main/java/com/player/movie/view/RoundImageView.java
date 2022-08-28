@@ -21,7 +21,6 @@ public class RoundImageView extends MyImageView {
     private Paint paint;
     private Paint paintBorder;
     private Bitmap mSrcBitmap;
-    private int mSize;
     /**
      * 圆角的弧度
      */

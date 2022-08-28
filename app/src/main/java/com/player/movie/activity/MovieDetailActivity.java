@@ -124,7 +124,7 @@ public class MovieDetailActivity extends AppCompatActivity {
     private void addFraction(){
         FragmentTransaction transaction =  getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.detail_your_like_layout, new LikeMovieFragment(movieEntity))
-                .replace(R.id.detail_recommend_layout, new RecommendMovieFragment(movieEntity))
+                .replace(R.id.detail_recommend_layout, new RecommendMovieFragment(movieEntity,""))
                 .commit();
     }
 
