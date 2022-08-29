@@ -28,22 +28,24 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
     private List<MovieEntity>movieEntityList;
     private Context context;
     private int itemWidth;
+    LinearLayout.LayoutParams imgLayoutParams;
     public GridRecyclerViewAdapter(List<MovieEntity> movieEntityList, Context context,int rowWidth){
         this.movieEntityList = movieEntityList;
         this.context = context;
         itemWidth = (rowWidth - CommonUtils.dip2px(context,R.dimen.container_padding_size) * 2)/3;
+
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_row, parent, false);
+        imgLayoutParams = new LinearLayout.LayoutParams(itemWidth, (int) (itemWidth/0.75));
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        LinearLayout.LayoutParams imgLayoutParams0 = new LinearLayout.LayoutParams(itemWidth, (int) (itemWidth/0.75));
         if(position == 0){
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT);
             layoutParams.topMargin = 0;
@@ -51,15 +53,14 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
         }
         String path0 = Api.HOST + movieEntityList.get(position * 3).getLocalImg();
         Glide.with(context).load(path0).into(holder.imageView0);
-        holder.imageView0.setLayoutParams(imgLayoutParams0);
+        holder.imageView0.setLayoutParams(imgLayoutParams);
         holder.textView0.setText(movieEntityList.get(position).getMovieName());
         holder.itemView0.setTag(movieEntityList.get(position));
         holder.itemView0.setOnClickListener(this);
 
 
         if(position * 3 + 1 < movieEntityList.size()){
-            LinearLayout.LayoutParams imgLayoutParams1 = new LinearLayout.LayoutParams(itemWidth, (int) (itemWidth/0.75));
-            holder.imageView1.setLayoutParams(imgLayoutParams1);
+            holder.imageView1.setLayoutParams(imgLayoutParams);
             String path1 = Api.HOST + movieEntityList.get(position * 3 + 1).getLocalImg();
             Glide.with(context).load(path1).into(holder.imageView1);
             holder.textView1.setText(movieEntityList.get(position * 3 + 1).getMovieName());
@@ -70,8 +71,7 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
         }
 
         if(position * 3 + 2 < movieEntityList.size()){
-            LinearLayout.LayoutParams imgLayoutParams2 = new LinearLayout.LayoutParams(itemWidth, (int) (itemWidth/0.75));
-            holder.imageView2.setLayoutParams(imgLayoutParams2);
+            holder.imageView2.setLayoutParams(imgLayoutParams);
             String path2 = Api.HOST + movieEntityList.get(position * 3 + 2).getLocalImg();
             Glide.with(context).load(path2).into(holder.imageView2);
             holder.textView2.setText(movieEntityList.get(position * 3 + 2).getMovieName());
