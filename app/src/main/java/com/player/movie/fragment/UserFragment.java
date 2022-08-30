@@ -1,9 +1,11 @@
 package com.player.movie.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -15,6 +17,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
+import com.player.movie.activity.UserActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
@@ -50,6 +53,7 @@ public class UserFragment extends Fragment {
         if(isInit)return;
         isInit = true;
         setUserData();
+        addClickListener();
         getUserMsg();
         getPlayRecord();
     }
@@ -124,5 +128,19 @@ public class UserFragment extends Fragment {
                 System.out.println("错误");
             }
         });
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 点击头像编辑按钮，跳转到用户信息页面
+     * @date: 2022-08-30 22:39
+     */
+    private void addClickListener(){
+        ImageView iconEdit = view.findViewById(R.id.icon_edit);
+        iconEdit.setOnClickListener(listen ->{
+            Intent intent = new Intent(getContext(), UserActivity.class);
+            startActivity(intent);
+        });
+
     }
 }

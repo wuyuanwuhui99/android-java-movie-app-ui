@@ -48,6 +48,7 @@
                             android:layout_height="wrap_content"/>
                     </LinearLayout>
                     <ImageView
+                        android:id="@+id/icon_edit"
                         android:src="@mipmap/icon_edit"
                         android:layout_width="@dimen/lg_img_size"
                         android:layout_height="@dimen/lg_img_size"/>

@@ -23,4 +23,5 @@
     <dimen name="movie_img_width">150dp</dimen>
     <dimen name="movie_img_height">200dp</dimen>
     <dimen name="search_no_data_height">40dp</dimen>
+    <dimen name="bottom_border_size">1dp</dimen>
 </resources>

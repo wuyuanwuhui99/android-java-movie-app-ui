@@ -28,4 +28,13 @@
     <string name="search">搜索</string>
     <string name="search_record">搜索记录</string>
     <string name="search_record_no_data">暂无搜索记录</string>
+    <string name="user_avater">头像</string>
+    <string name="user_username">昵称</string>
+    <string name="user_tel">电话</string>
+    <string name="user_email">邮箱</string>
+    <string name="user_birthday">出生年月日</string>
+    <string name="user_sex">性别</string>
+    <string name="user_sign">个性签名</string>
+    <string name="user_region">地区</string>
+    <string name="user_logout">退出登录</string>
 </resources>

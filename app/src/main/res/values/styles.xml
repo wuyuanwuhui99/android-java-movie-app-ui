@@ -2,7 +2,7 @@
     <style name="user_data">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">@dimen/big_font_size</item>
-        <item name="android:textColor">@color/navigate</item>
+        <item name="android:textColor">@color/main_font_color</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
@@ -18,6 +18,10 @@
     <style name="md_icon_size_style">
         <item name="android:layout_width">@dimen/md_img_size</item>
         <item name="android:layout_height">@dimen/md_img_size</item>
+    </style>
+    <style name="small_img_style">
+        <item name="android:layout_width">@dimen/small_img_size</item>
+        <item name="android:layout_height">@dimen/small_img_size</item>
     </style>
     <style name="user_category_style">
         <item name="android:layout_weight">1</item>
@@ -38,6 +42,11 @@
         <item name="android:textColor">@color/main_font_color</item>
         <item name="android:textSize">@dimen/big_font_size</item>
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+    <style name="user_title">
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 </resources>

@@ -47,7 +47,7 @@
                 <Button
                     android:id="@+id/search_btn"
                     android:layout_marginLeft="@dimen/small_margin_size"
-                    android:background="@drawable/radius_btn_decoration"
+                    android:background="@drawable/btn_radius_blue_decoration"
                     android:textColor="@color/background_white"
                     android:layout_width="@dimen/md_btn_width"
                     android:gravity="center"

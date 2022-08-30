@@ -4,15 +4,16 @@ public class UserEntity {
     private String userId;
     private String createDate;
     private String updateDate;
-    private String  username;
-    private String  telephone;
-    private String  email;
-    private String  avater;
-    private String  birthday;
-    private String  sex;
-    private String  role;
+    private String username;
+    private String telephone;
+    private String email;
+    private String avater;
+    private String birthday;
+    private String sex;
+    private String role;
     private String sign;
-    private String  password;
+    private String password;
+    private String region;
 
     public String getUserId() {
         return userId;
@@ -108,5 +109,13 @@ public class UserEntity {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
     }
 }
