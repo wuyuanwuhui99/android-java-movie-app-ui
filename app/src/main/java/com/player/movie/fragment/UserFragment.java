@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserFragment extends Fragment {
+public class UserFragment extends MyFragment {
     View view;
     boolean isInit = false;
     @Nullable
@@ -49,6 +48,7 @@ public class UserFragment extends Fragment {
      * @description: 初始化组件
      * @date: 2021-12-11 12:11
      */
+    @Override
     public void initData(){
         if(isInit)return;
         isInit = true;

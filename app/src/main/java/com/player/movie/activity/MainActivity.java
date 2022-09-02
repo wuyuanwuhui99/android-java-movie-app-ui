@@ -15,6 +15,7 @@ import com.player.movie.R;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
+import com.player.movie.fragment.MyFragment;
 import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
 import com.player.movie.http.RequestUtils;
@@ -32,7 +33,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewPager viewPager;//容器
-    private List<Fragment> listFragment = new ArrayList<Fragment>();
+    private List<MyFragment> listFragment = new ArrayList<>();
 
     //导航栏布局栏
     LinearLayout homeLinearLayout;
@@ -40,26 +41,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     LinearLayout tvLinearLayout;
     LinearLayout userLinearLayout;
 
-    //导航栏图标
-    ImageView homeImg;
-    ImageView movieImg;
-    ImageView  tvImg;
-    ImageView userImg;
-
-    //导航栏文字
-    TextView homeText;
-    TextView movieText;
-    TextView tvText;
-    TextView userText;
-
     //初始化4个切换页
     HomeFragment homeFragment;
     MovieFragment movieFragment;
     TVFragment tvFragment;
     UserFragment userFragment;
 
-    int tabIds[]={R.id.home,R.id.movie,R.id.tv,R.id.user_center};
-    int tabIndex = 0;
+    // 当前选中的导航
+    ImageView activeImage;
+    TextView activeText;
+
+    // 导航的id和图片
+    int[] tabIds = {R.id.home, R.id.movie, R.id.tv, R.id.user_center};
+    int[] tabRes = {R.mipmap.icon_home, R.mipmap.icon_movie, R.mipmap.icon_tv, R.mipmap.icon_user};
+    int[] tabActiveRes = {R.mipmap.icon_home_active, R.mipmap.icon_movie_active, R.mipmap.icon_tv_active, R.mipmap.icon_user_active};
+
+    // 导航图片和文字
+    ImageView[] tabImageView = new ImageView[4];
+    TextView[] tabTextView = new TextView[4];
+
+    int activeIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,21 +86,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         //导航栏布局栏
         homeLinearLayout = findViewById(R.id.home);
+        homeLinearLayout.setTag(0);
         movieLinearLayout = findViewById(R.id.movie);
+        movieLinearLayout.setTag(1);
         tvLinearLayout = findViewById(R.id.tv);
+        tvLinearLayout.setTag(2);
         userLinearLayout = findViewById(R.id.user_center);
+        userLinearLayout.setTag(3);
 
         //导航栏图标
-        homeImg = findViewById(R.id.home_img);
-        movieImg = findViewById(R.id.movie_img);
-        tvImg = findViewById(R.id.tv_img);
-        userImg = findViewById(R.id.user_img);
+        activeImage = tabImageView[0] = findViewById(R.id.home_img);
+        tabImageView[1] = findViewById(R.id.movie_img);
+        tabImageView[2] = findViewById(R.id.tv_img);
+        tabImageView[3] = findViewById(R.id.user_img);
 
         //导航栏文字
-        homeText = findViewById(R.id.home_text);
-        movieText = findViewById(R.id.movie_text);
-        tvText = findViewById(R.id.tv_text);
-        userText = findViewById(R.id.user_text);
+        activeText = tabTextView[0] = findViewById(R.id.home_text);
+        tabTextView[1] = findViewById(R.id.movie_text);
+        tabTextView[2] = findViewById(R.id.tv_text);
+        tabTextView[3] = findViewById(R.id.user_text);
     }
 
     /**
@@ -154,6 +159,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onPageSelected(int position) {
                 int currentItem=viewPager.getCurrentItem(); //获取当前界面
+                if(currentItem == activeIndex)return;
                 tab(currentItem); //切换图标亮度
             }
             @Override
@@ -173,92 +179,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2021-12-11 11:08
      */
     private void tab(int i){  //用于屏幕脱拖动时切换底下图标，只在监听屏幕拖动中调用
-        int color = getResources().getColor(R.color.navigate_active);
-        resetTab();
-        switch (i){
-            case 0:{
-                homeImg.setImageResource(R.mipmap.icon_home_active);
-                homeText.setTextColor(color);
-                break;
-            }
-            case 1:
-            {
-                movieImg.setImageResource(R.mipmap.icon_movie_active);
-                movieText.setTextColor(color);
-                movieFragment.initData();
-                break;
-            }
-            case 2:
-            {
-                tvImg.setImageResource(R.mipmap.icon_tv_active);
-                tvText.setTextColor(color);
-                tvFragment.initData();
-                break;
-            }
-            case 3:
-            {
-                userImg.setImageResource(R.mipmap.icon_user_active);
-                userText.setTextColor(color);
-                userFragment.initData();
-                break;
-            }
-        }
-    }
+        // 清除上次的选中的杨思
+        activeImage.setImageResource(tabRes[activeIndex]);
+        activeText.setTextColor(getResources().getColor(R.color.navigate));
 
-    //自定义一个方法
-    private void setSelect(int i){
-        viewPager.setCurrentItem(i);//切换界面
-        tabIndex = i;
+        // 当前选中的样式
+        tabImageView[i].setImageResource(tabActiveRes[i]);
+        tabTextView[i].setTextColor(getResources().getColor(R.color.navigate_active));
+
+        // 记录当前选中的样式
+        activeImage = tabImageView[i];
+        activeText = tabTextView[i];
+        activeIndex = i;
+
+        listFragment.get(i).initData();
     }
 
     //导航栏的点击事件
     @Override
     public void onClick(View view) {  //设置点击的为；亮色
-        if(view.getId() == tabIds[tabIndex])return;
-        resetTab();
-        switch (view.getId()){
-            case R.id.home:{
-                setSelect(0);
-                homeImg.setImageResource(R.mipmap.icon_home_active);
-                break;
-            }
-            case R.id.movie:
-            {
-                setSelect(1);
-                movieImg.setImageResource(R.mipmap.icon_movie_active);
-                break;
-            }
-            case R.id.tv:
-            {
-                setSelect(2);
-                tvImg.setImageResource(R.mipmap.icon_tv_active);
-                break;
-            }
-            case R.id.user_center:
-            {
-                setSelect(3);
-                userImg.setImageResource(R.mipmap.icon_user_active);
-                break;
-            }
-
-        }
-    }
-
-    /**
-     * @author: wuwenqiang
-     * @description: 重置底部导航暗色
-     * @date: 2021-12-11 11:08
-     */
-    private void resetTab() {
-        homeImg.setImageResource(R.mipmap.icon_home);
-        movieImg.setImageResource(R.mipmap.icon_movie);
-        tvImg.setImageResource(R.mipmap.icon_tv);
-        userImg.setImageResource(R.mipmap.icon_user);
-
-        int color = this.getResources().getColor(R.color.navigate);
-        homeText.setTextColor(color);
-        movieText.setTextColor(color);
-        tvText.setTextColor(color);
-        userText.setTextColor(color);
+        if(view.getId() == tabIds[activeIndex])return;
+        int index = (int) view.getTag();
+        tab(index);
+        viewPager.setCurrentItem(index);//切换界面
     }
 }

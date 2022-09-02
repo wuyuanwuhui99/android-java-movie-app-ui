@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends MyFragment {
     private View view;
     private boolean isInit = false;
     FragmentTransaction transaction;
@@ -120,5 +120,10 @@ public class HomeFragment extends Fragment {
                 System.out.println("错误");
             }
         });
+    }
+
+    @Override
+    public void initData() {
+
     }
 }

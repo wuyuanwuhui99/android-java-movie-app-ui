@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TVFragment extends Fragment {
+public class TVFragment extends MyFragment {
     boolean isInit = false;
     View view;
 
@@ -49,6 +49,7 @@ public class TVFragment extends Fragment {
      * @description: 初始化调用方法
      * @date: 2022-08-13 11:33
      */
+    @Override
     public void initData(){
         if(!isInit){
             isInit = true;
