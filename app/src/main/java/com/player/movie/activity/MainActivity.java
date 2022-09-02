@@ -35,12 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager viewPager;//容器
     private List<MyFragment> listFragment = new ArrayList<>();
 
-    //导航栏布局栏
-    LinearLayout homeLinearLayout;
-    LinearLayout movieLinearLayout;
-    LinearLayout tvLinearLayout;
-    LinearLayout userLinearLayout;
-
     //初始化4个切换页
     HomeFragment homeFragment;
     MovieFragment movieFragment;
@@ -57,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     int[] tabActiveRes = {R.mipmap.icon_home_active, R.mipmap.icon_movie_active, R.mipmap.icon_tv_active, R.mipmap.icon_user_active};
 
     // 导航图片和文字
+    LinearLayout[] tabLinearLayout = new LinearLayout[4];
     ImageView[] tabImageView = new ImageView[4];
     TextView[] tabTextView = new TextView[4];
 
@@ -85,14 +80,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         listFragment.add(userFragment);
 
         //导航栏布局栏
-        homeLinearLayout = findViewById(R.id.home);
-        homeLinearLayout.setTag(0);
-        movieLinearLayout = findViewById(R.id.movie);
-        movieLinearLayout.setTag(1);
-        tvLinearLayout = findViewById(R.id.tv);
-        tvLinearLayout.setTag(2);
-        userLinearLayout = findViewById(R.id.user_center);
-        userLinearLayout.setTag(3);
+        tabLinearLayout[0] = findViewById(R.id.home);
+        tabLinearLayout[0].setTag(0);
+        tabLinearLayout[1] = findViewById(R.id.movie);
+        tabLinearLayout[1].setTag(1);
+        tabLinearLayout[2] = findViewById(R.id.tv);
+        tabLinearLayout[2].setTag(2);
+        tabLinearLayout[3] = findViewById(R.id.user_center);
+        tabLinearLayout[3].setTag(3);
 
         //导航栏图标
         activeImage = tabImageView[0] = findViewById(R.id.home_img);
@@ -166,11 +161,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onPageScrollStateChanged(int state) {
             }
         });
-
-        homeLinearLayout.setOnClickListener(this);
-        movieLinearLayout.setOnClickListener(this);
-        tvLinearLayout.setOnClickListener(this);
-        userLinearLayout.setOnClickListener(this);
+        for(int i = 0; i < tabLinearLayout.length; i++){
+            tabLinearLayout[i].setOnClickListener(this);
+        }
     }
 
     /**
