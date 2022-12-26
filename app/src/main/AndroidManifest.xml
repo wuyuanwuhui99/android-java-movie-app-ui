@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.player.movie">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:networkSecurityConfig="@layout/network_security_policy"
         android:name=".BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.LoginActivity"></activity>
+        <activity android:name=".activity.WebViewActivity"></activity>
+        <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.EditActivity" />
         <activity android:name=".activity.UserActivity" />
         <activity android:name=".activity.SearchActivity" />

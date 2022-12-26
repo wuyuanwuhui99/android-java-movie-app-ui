@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -17,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.R;
 import com.player.movie.activity.UserActivity;
+import com.player.movie.activity.WebViewActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
@@ -24,6 +26,7 @@ import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.state.State;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +34,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserFragment extends MyFragment {
+public class UserFragment extends MyFragment implements View.OnClickListener {
     View view;
     boolean isInit = false;
     @Nullable
@@ -53,9 +56,9 @@ public class UserFragment extends MyFragment {
         if(isInit)return;
         isInit = true;
         setUserData();
-        addClickListener();
         getUserMsg();
         getPlayRecord();
+        addClickListener();
     }
 
     /**
@@ -136,11 +139,23 @@ public class UserFragment extends MyFragment {
      * @date: 2022-08-30 22:39
      */
     private void addClickListener(){
-        ImageView iconEdit = view.findViewById(R.id.icon_edit);
-        iconEdit.setOnClickListener(listen ->{
-            Intent intent = new Intent(getContext(), UserActivity.class);
-            startActivity(intent);
-        });
+        view.findViewById(R.id.icon_edit).setOnClickListener(this);
+        view.findViewById(R.id.movie_circle).setOnClickListener(this);
+    }
 
+    @Override
+    public void onClick(View v) {
+        Intent intent;
+        switch (v.getId()){
+            case R.id.icon_edit:
+                intent = new Intent(getContext(), UserActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.movie_circle:
+                intent = new Intent(getContext(), WebViewActivity.class);
+                intent.putExtra("url","http://192.168.0.103:3003/#/?token="+State.token+"&_t="+ Math.random());
+                startActivity(intent);
+                break;
+        }
     }
 }
