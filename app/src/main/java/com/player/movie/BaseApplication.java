@@ -1,12 +1,8 @@
 package com.player.movie;
 
 import android.app.Application;
-import android.content.Context;
 
-import androidx.room.Room;
-
-import com.player.movie.database.SearchWordDatabase;
-import com.player.movie.state.State;
+import com.player.movie.entity.UserEntity;
 import com.player.movie.utils.SharedPreferencesUtils;
 
 public class BaseApplication extends Application {
@@ -17,10 +13,30 @@ public class BaseApplication extends Application {
         return mApp;
     }
 
+    private String token;
+
+    private UserEntity userEntity;
+
     @Override
     public void onCreate() {
         super.onCreate();
         mApp = this;
-        State.token = (String) SharedPreferencesUtils.getParam(this,"token","");
+        token = (String) SharedPreferencesUtils.getParam(this,"token","");
+    }
+
+    public void setToken(String token){
+        this.token = token;
+    }
+
+    public String getToken(){
+        return  token;
+    }
+
+    public UserEntity getUserEntity() {
+        return userEntity;
+    }
+
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

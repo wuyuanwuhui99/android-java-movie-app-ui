@@ -1,13 +1,10 @@
 package com.player.movie.http;
 
-import com.player.movie.activity.MainActivity;
-import com.player.movie.state.State;
-import com.player.movie.utils.SharedPreferencesUtils;
+import com.player.movie.BaseApplication;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
-import okhttp3.Call;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,9 +20,10 @@ public class TokenHeaderInterceptor  implements Interceptor {
     public OkHttpClient.Builder getClient(){
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(15, TimeUnit.SECONDS);
+        String token = BaseApplication.getInstance().getToken();
         builder.addInterceptor(chain -> {
             Request build = chain.request().newBuilder()
-                    .addHeader("Authorization", State.token)
+                    .addHeader("Authorization", token)
                     .addHeader("Content-type","application/json;charset=UTF-8")
                     .build();
             return chain.proceed(build);

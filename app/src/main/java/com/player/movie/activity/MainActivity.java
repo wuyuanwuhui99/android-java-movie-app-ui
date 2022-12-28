@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.gson.Gson;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
@@ -20,7 +21,6 @@ import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.state.State;
 import com.player.movie.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -113,7 +113,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 Gson gson = new Gson();
-                State.userEntity = gson.fromJson(gson.toJson(response.body().getData()),UserEntity.class);
+                ResultEntity body = response.body();
+                BaseApplication.getInstance().setToken(body.getToken());
+                BaseApplication.getInstance().setUserEntity(gson.fromJson(gson.toJson(body.getData()),UserEntity.class));
                 SharedPreferencesUtils.setParam(MainActivity.this,"token",response.body().getToken());
                 findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
                 initView();//初始化view

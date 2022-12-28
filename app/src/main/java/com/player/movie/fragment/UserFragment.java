@@ -16,17 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
 import com.player.movie.activity.UserActivity;
 import com.player.movie.activity.WebViewActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
+import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.state.State;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -67,12 +67,13 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      * @date: 2021-12-12 19:41
      */
     public void setUserData(){
-        Glide.with(getContext()).load(Api.HOST + State.userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
+        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
+        Glide.with(getContext()).load(Api.HOST + userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
         TextView username = view.findViewById(R.id.username);
-        username.setText(State.userEntity .getUsername());
-        if(State.userEntity .getSign() != null){
+        username.setText(userEntity.getUsername());
+        if(userEntity .getSign() != null){
             TextView sign = view.findViewById(R.id.sign);
-            sign.setText(State.userEntity .getSign());
+            sign.setText(userEntity.getSign());
         }
     }
 
@@ -152,8 +153,9 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.movie_circle:
+                String token = BaseApplication.getInstance().getToken();
                 intent = new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url","http://192.168.0.103:3003/#/?token="+State.token+"&_t="+ Math.random());
+                intent.putExtra("url","http://192.168.0.103:3003/#/?token="+token+"&_t="+ Math.random());
                 startActivity(intent);
                 break;
         }

@@ -17,16 +17,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.activity.SearchActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
+import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
-import com.player.movie.state.State;
-
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -54,7 +53,8 @@ public class SearchFragment extends Fragment {
     private void initData(){
         avaterLayout = view.findViewById(R.id.avater_layout);
         avaterLayout.setVisibility(View.VISIBLE);
-        Glide.with(getContext()).load(Api.HOST + State.userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.avater));
+        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
+        Glide.with(getContext()).load(Api.HOST + userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.avater));
     }
 
     private void addSearchClickListener(){

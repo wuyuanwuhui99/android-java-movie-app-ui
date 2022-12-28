@@ -11,10 +11,11 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
-import com.player.movie.state.State;
+import com.player.movie.entity.UserEntity;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -32,35 +33,36 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2022-08-30 22:39
      */
     private void initUI(){
+        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
         RoundedImageView avater = findViewById(R.id.user_m_avater);
-        Glide.with(this).load(Api.HOST + State.userEntity.getAvater()).into(avater);
+        Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
 
         TextView userName = findViewById(R.id.user_m_name);
-        userName.setText(State.userEntity.getUsername());
+        userName.setText(userEntity.getUsername());
         userName.setTag(true);// 必填
 
         TextView tel = findViewById(R.id.user_tel);
-        tel.setText(State.userEntity.getTelephone());
+        tel.setText(userEntity.getTelephone());
         tel.setTag(false);// 非必填
 
         TextView email = findViewById(R.id.user_email);
-        email.setText(State.userEntity.getEmail());
+        email.setText(userEntity.getEmail());
         email.setTag(true);// 必填
 
         TextView birthday = findViewById(R.id.user_birthday);
-        birthday.setText(State.userEntity.getBirthday());
+        birthday.setText(userEntity.getBirthday());
         birthday.setTag(false);// 非必填
 
         TextView sex = findViewById(R.id.user_sex);
-        sex.setText(State.userEntity.getSex());
+        sex.setText(userEntity.getSex());
         sex.setTag(true);// 必填
 
         TextView sign = findViewById(R.id.user_sign);
-        sign.setText(State.userEntity.getSign());
+        sign.setText(userEntity.getSign());
         sign.setTag(false);// 必填
 
         TextView region = findViewById(R.id.user_region);
-        region.setText(State.userEntity.getRegion());
+        region.setText(userEntity.getRegion());
         region.setTag(false);// 必填
     }
 
