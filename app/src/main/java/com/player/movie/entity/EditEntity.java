@@ -2,8 +2,17 @@ package com.player.movie.entity;
 
 public class EditEntity {
     private String title;
+    private String field;
     private String value;
     private Boolean require;
+
+    public String getField() {
+        return field;
+    }
+
+    public void setField(String field) {
+        this.field = field;
+    }
 
     public String getTitle() {
         return title;
@@ -29,9 +38,16 @@ public class EditEntity {
         this.require = require;
     }
 
-    public EditEntity(String title, String value, Boolean require) {
+    public EditEntity(){}
+
+    public EditEntity(String title, String field, String value, Boolean require) {
         this.title = title;
+        this.field = field;
         this.value = value;
         this.require = require;
+    }
+
+    public void setField(String key,String value){
+//         = value;
     }
 }

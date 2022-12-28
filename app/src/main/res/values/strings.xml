@@ -37,4 +37,6 @@
     <string name="user_sign">个性签名</string>
     <string name="user_region">地区</string>
     <string name="user_logout">退出登录</string>
+    <string name="edit_cancel">取消</string>
+    <string name="edit_sure">确定</string>
 </resources>

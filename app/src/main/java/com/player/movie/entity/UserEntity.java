@@ -118,4 +118,23 @@ public class UserEntity {
     public void setRegion(String region) {
         this.region = region;
     }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "userId='" + userId + '\'' +
+                ", createDate='" + createDate + '\'' +
+                ", updateDate='" + updateDate + '\'' +
+                ", username='" + username + '\'' +
+                ", telephone='" + telephone + '\'' +
+                ", email='" + email + '\'' +
+                ", avater='" + avater + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", sex='" + sex + '\'' +
+                ", role='" + role + '\'' +
+                ", sign='" + sign + '\'' +
+                ", password='" + password + '\'' +
+                ", region='" + region + '\'' +
+                '}';
+    }
 }

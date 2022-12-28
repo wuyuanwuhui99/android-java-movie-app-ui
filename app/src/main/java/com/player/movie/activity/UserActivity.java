@@ -1,9 +1,11 @@
 package com.player.movie.activity;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,8 +18,12 @@ import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
+import com.player.movie.view.ReflectHelper;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
+
+    private UserEntity userEntity;
+    private TextView editText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +39,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2022-08-30 22:39
      */
     private void initUI(){
-        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
+        userEntity = BaseApplication.getInstance().getUserEntity();
         RoundedImageView avater = findViewById(R.id.user_m_avater);
         Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
 
@@ -86,13 +92,25 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.user_name_layout:
+                useEdit(v,"username");
+                break;
             case R.id.user_tel_layout:
+                useEdit(v,"telephone");
+                break;
             case R.id.user_email_layout:
+                useEdit(v,"email");
+                break;
             case R.id.user_birthday_layout:
+                useEdit(v,"birthday");
+                break;
             case R.id.user_sex_layout:
+                useEdit(v,"sex");
+                break;
             case R.id.user_sign_layout:
+                useEdit(v,"sign");
+                break;
             case R.id.user_region_layout:
-                useEdit(v);
+                useEdit(v,"region");
                 break;
             case R.id.user_logout:
                 logout();
@@ -105,16 +123,28 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @description: 跳转到编辑页面
      * @date: 2022-08-31 22:06
      */
-    private void useEdit(View v){
+    private void useEdit(View v,String field){
         LinearLayout ly = (LinearLayout)v;
+        editText = (TextView)ly.getChildAt(1);
         TextView nameTextView = (TextView) ly.getChildAt(0);
         String title = nameTextView.getText().toString();
         TextView valueTextView = (TextView) ly.getChildAt(1);
         String value = valueTextView.getText().toString();
         Boolean require = (Boolean) valueTextView.getTag();
         Intent intent = new Intent(this,EditActivity.class);
-        intent.putExtra("editEntity",JSON.toJSONString(new EditEntity(title,value,require)));
-        startActivity(intent);
+        intent.putExtra("editEntity",JSON.toJSONString(new EditEntity(title,field,value,require)));
+        startActivityForResult(intent,1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1 && resultCode == RESULT_OK) {
+            EditEntity editEntity = JSON.parseObject(data.getStringExtra("editEntity"),EditEntity.class);
+            ReflectHelper reflectHelper = new ReflectHelper(userEntity);//创建工具类对象
+            reflectHelper.setMethodValue(editEntity.getField(),editEntity.getValue());// 动态调用 set方法给文件对象内容赋值
+            editText.setText(editEntity.getValue());
+        }
     }
 
     /**

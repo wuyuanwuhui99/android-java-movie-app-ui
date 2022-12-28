@@ -6,6 +6,7 @@
     <color name="navigate_active">#ffae00</color>
     <color name="background_dark">#ccc</color>
     <color name="background_blue">#1890ff</color>
+    <color name="background_blue_disable">#6bb8ff</color>
     <color name="background_white">#ffffff</color>
     <color name="page_background_color">#eee</color>
 </resources>
