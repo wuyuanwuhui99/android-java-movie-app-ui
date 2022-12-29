@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.player.movie.R;
+import com.player.movie.myinterface.JavaScriptinterface;
 
 public class WebViewActivity extends AppCompatActivity {
 
@@ -26,8 +27,9 @@ public class WebViewActivity extends AppCompatActivity {
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         webView.clearCache(true);
-        deleteDatabase("webview.db");
-        deleteDatabase("webviewCache.db");
+        webView.addJavascriptInterface(new JavaScriptinterface(this),"plus");
+//        deleteDatabase("webview.db");
+//        deleteDatabase("webviewCache.db");
         webView.loadUrl(url);
         webView.setWebViewClient(new WebViewClient(){
             @Override
@@ -36,5 +38,20 @@ public class WebViewActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2) {
+//            // 从相册返回的数据
+//            Log.e(this.getClass().getName(), "Result:" + data.toString());
+//            if (data != null) {
+//                // 得到图片的全路径
+//                Uri uri = data.getData();
+//                iv_image.setImageURI(uri);
+//                Log.e(this.getClass().getName(), "Uri:" + String.valueOf(uri));
+//            }
+        }
     }
 }
