@@ -1,14 +1,19 @@
 package com.player.movie.myinterface;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
-import android.widget.Toast;
+
+import com.player.movie.utils.PlugCamera;
 
 public class JavaScriptinterface {
     Context context;
-    public JavaScriptinterface(Context c) {
-        context= c;
+    Activity activity;
+    PlugCamera plugCamera;
+    public JavaScriptinterface(Context context, Activity activity) {
+        this.context= context;
+        this.activity = activity;
     }
 
     /**
@@ -16,11 +21,11 @@ public class JavaScriptinterface {
      */
     @JavascriptInterface
     public void chooseImages() {
-        // 使用意图直接调用手机相册
-        Intent intent = new Intent(
-                Intent.ACTION_PICK,
-                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        // 打开手机相册,设置请求码
-        context.startActivity(intent);
+        plugCamera = new PlugCamera();
+        plugCamera.showCamera(context,activity);
+    }
+
+    public int getType(){
+        return plugCamera.getType();
     }
 }

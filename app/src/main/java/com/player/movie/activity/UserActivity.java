@@ -1,20 +1,15 @@
 package com.player.movie.activity;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
@@ -24,15 +19,15 @@ import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
+import com.player.movie.utils.PlugCamera;
 import com.player.movie.view.ButtomMenuDialog;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
-    private static final int REQUEST_CODE_CAMERA = 2;
     private UserEntity userEntity;
     private static int type = 1;// 1表示相机，2表示相册
     private ButtomMenuDialog dialog;
     private RoundedImageView roundedImageView;
-
+    PlugCamera plugCamera;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +122,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 logout();
                 break;
             case R.id.user_m_avater:
-                showCamera();
+                plugCamera = new PlugCamera();
+                plugCamera.showCamera(this,UserActivity.this);
                 break;
         }
     }
@@ -161,55 +157,15 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         startActivity(intent);
     }
 
-    /**
-     * 选择相机
-     */
-
-    private void showCamera() {
-        ButtomMenuDialog.Builder builder = new ButtomMenuDialog.Builder(this);
-        //添加条目，可多个
-        builder.addMenu("相机", view -> {
-            dialog.cancel();
-            type = 1;
-            ActivityCompat.requestPermissions(UserActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                            Manifest.permission.READ_EXTERNAL_STORAGE,
-                            Manifest.permission.CAMERA,
-                            Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS}
-                    , REQUEST_CODE_CAMERA);
-            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            startActivityForResult(intent, REQUEST_CODE_CAMERA);
-        }).addMenu("相册", view -> {
-            dialog.cancel();
-            type = 2;
-            Intent intent = new Intent(Intent.ACTION_PICK, null);
-            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-            startActivityForResult(intent, REQUEST_CODE_CAMERA);
-        });
-        //下面这些设置都可不写
-//        builder.setTitle("这是标题");//添加标题
-        builder.setCanCancel(true);//点击阴影时是否取消dialog，true为取消
-        builder.setShadow(true);//是否设置阴影背景，true为有阴影
-        builder.setCancelText("取消");//设置最下面取消的文本内容
-        //设置点击取消时的事件
-        builder.setCancelListener(view -> {
-            dialog.cancel();
-            Toast.makeText(UserActivity.this, "取消", Toast.LENGTH_SHORT).show();
-        });
-        dialog = builder.create();
-        dialog.show();
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_CODE_CAMERA) {
+        if (requestCode == PlugCamera.REQUEST_CODE_CAMERA) {
             // 从相册返回的数据
             Log.e(this.getClass().getName(), "Result:" + data.toString());
             if (data != null) {
                 // 得到图片的全路径
-                if(type == 1){
+                if(plugCamera.getType() == 1){
                     Bundle bundle = data.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
                     Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
                     roundedImageView.setImageBitmap(bitmap);
