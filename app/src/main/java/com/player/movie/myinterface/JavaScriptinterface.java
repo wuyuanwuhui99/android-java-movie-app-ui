@@ -9,9 +9,10 @@ import com.player.movie.BaseApplication;
 import com.player.movie.utils.PlugCamera;
 
 public class JavaScriptinterface {
-    Context context;
-    Activity activity;
-    PlugCamera plugCamera;
+    private Context context;
+    private Activity activity;
+    private PlugCamera plugCamera;
+    private String data;
     public JavaScriptinterface(Context context, Activity activity) {
         this.context= context;
         this.activity = activity;

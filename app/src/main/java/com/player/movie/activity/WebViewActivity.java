@@ -70,10 +70,7 @@ public class WebViewActivity extends AppCompatActivity {
                     base64 = "";
                 }
             }
-            Log.d("chooseImagesCallback","javascript:plug.chooseImagesCallback('"+base64+"')");
-            webView.evaluateJavascript("javascript:chooseImagesCallback()", value -> {
-                Log.d("evaluateJavascript2",value);
-            });
+            webView.evaluateJavascript("javascript:plug.chooseImagesCallback('"+base64+"')", value -> {});
         }
     }
 }
