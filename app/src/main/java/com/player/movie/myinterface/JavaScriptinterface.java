@@ -32,7 +32,15 @@ public class JavaScriptinterface {
     }
 
     /**
-     * 与js交互时用到的方法，在js里直接调用的
+     * 获取token方法，与js交互时用到的方法，在js里直接调用的
+     */
+    @JavascriptInterface
+    public String getToken(){
+        return JSON.toJSONString(BaseApplication.getInstance().getToken());
+    }
+
+    /**
+     * 获取用户信息，与js交互时用到的方法，在js里直接调用的
      */
     @JavascriptInterface
     public String getUserData(){

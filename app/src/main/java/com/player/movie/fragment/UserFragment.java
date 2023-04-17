@@ -153,9 +153,8 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.movie_circle:
-                String token = BaseApplication.getInstance().getToken();
                 intent = new Intent(getContext(), WebViewActivity.class);
-                intent.putExtra("url","http://192.168.0.103:3003/#/?token="+token+"&_t="+ Math.random());
+                intent.putExtra("url","http://192.168.0.103:3003/#/?_t="+ Math.random());
                 startActivity(intent);
                 break;
         }

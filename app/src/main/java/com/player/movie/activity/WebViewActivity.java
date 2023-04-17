@@ -39,7 +39,7 @@ public class WebViewActivity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webView.clearCache(true);
         javaScriptinterface = new JavaScriptinterface(this, WebViewActivity.this);
-        webView.addJavascriptInterface(javaScriptinterface,"plug");
+        webView.addJavascriptInterface(javaScriptinterface,"plus");
         deleteDatabase("webview.db");
         deleteDatabase("webviewCache.db");
         webView.loadUrl(url);
@@ -70,7 +70,7 @@ public class WebViewActivity extends AppCompatActivity {
                     base64 = "";
                 }
             }
-            webView.evaluateJavascript("javascript:plug.chooseImagesCallback('"+base64+"')", value -> {});
+            webView.evaluateJavascript("javascript:plus.chooseImagesCallback('"+base64+"')", value -> {});
         }
     }
 }
