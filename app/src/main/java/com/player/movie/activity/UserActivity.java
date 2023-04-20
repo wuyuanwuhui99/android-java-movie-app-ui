@@ -19,13 +19,11 @@ import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
+import com.player.movie.receiver.UpdateUserReciver;
 import com.player.movie.utils.PlugCamera;
-import com.player.movie.view.ButtomMenuDialog;
+import com.player.movie.view.ReflectHelper;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
-    private UserEntity userEntity;
-    private static int type = 1;// 1表示相机，2表示相册
-    private ButtomMenuDialog dialog;
     private RoundedImageView roundedImageView;
     PlugCamera plugCamera;
 
@@ -33,7 +31,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        initUI();
+        initUI(BaseApplication.getInstance().getUserEntity());
         setOnClickListener();
     }
 
@@ -42,38 +40,46 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @description: 设置头像
      * @date: 2022-08-30 22:39
      */
-    private void initUI(){
-        userEntity = BaseApplication.getInstance().getUserEntity();
-        RoundedImageView avater = findViewById(R.id.user_m_avater);
-        Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
-
-        TextView userName = findViewById(R.id.user_m_name);
-        userName.setText(userEntity.getUsername());
-        userName.setTag(true);// 必填
-
-        TextView tel = findViewById(R.id.user_tel);
-        tel.setText(userEntity.getTelephone());
-        tel.setTag(false);// 非必填
-
-        TextView email = findViewById(R.id.user_email);
-        email.setText(userEntity.getEmail());
-        email.setTag(true);// 必填
-
-        TextView birthday = findViewById(R.id.user_birthday);
-        birthday.setText(userEntity.getBirthday());
-        birthday.setTag(false);// 非必填
-
-        TextView sex = findViewById(R.id.user_sex);
-        sex.setText(userEntity.getSex());
-        sex.setTag(true);// 必填
-
-        TextView sign = findViewById(R.id.user_sign);
-        sign.setText(userEntity.getSign());
-        sign.setTag(false);// 必填
-
-        TextView region = findViewById(R.id.user_region);
-        region.setText(userEntity.getRegion());
-        region.setTag(false);// 必填
+    private void initUI(UserEntity userEntity){
+        if(userEntity.getAvater() != null){
+            RoundedImageView avater = findViewById(R.id.user_m_avater);
+            Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
+        }
+        if(userEntity.getUsername() != null){
+            TextView userName = findViewById(R.id.user_m_name);
+            userName.setText(userEntity.getUsername());
+            userName.setTag(true);// 必填
+        }
+        if(userEntity.getTelephone()  != null){
+            TextView tel = findViewById(R.id.user_tel);
+            tel.setText(userEntity.getTelephone());
+            tel.setTag(false);// 非必填
+        }
+        if(userEntity.getEmail()  != null){
+            TextView email = findViewById(R.id.user_email);
+            email.setText(userEntity.getEmail());
+            email.setTag(true);// 必填
+        }
+        if(userEntity.getBirthday()  != null){
+            TextView birthday = findViewById(R.id.user_birthday);
+            birthday.setText(userEntity.getBirthday());
+            birthday.setTag(false);// 非必填
+        }
+        if(userEntity.getSex() != null){
+            TextView sex = findViewById(R.id.user_sex);
+            sex.setText(userEntity.getSex());
+            sex.setTag(true);// 必填
+        }
+        if(userEntity.getSign() != null){
+            TextView sign = findViewById(R.id.user_sign);
+            sign.setText(userEntity.getSign());
+            sign.setTag(false);// 必填
+        }
+        if(userEntity.getRegion() != null){
+            TextView region = findViewById(R.id.user_region);
+            region.setText(userEntity.getRegion());
+            region.setTag(false);// 必填
+        }
     }
 
     /**
@@ -158,22 +164,31 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
         if (requestCode == PlugCamera.REQUEST_CODE_CAMERA) {
             // 从相册返回的数据
-            Log.e(this.getClass().getName(), "Result:" + data.toString());
-            if (data != null) {
+            Log.e(this.getClass().getName(), "Result:" + intent.toString());
+            if (intent != null) {
                 // 得到图片的全路径
                 if(plugCamera.getType() == 1){
-                    Bundle bundle = data.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
+                    Bundle bundle = intent.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
                     Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
                     roundedImageView.setImageBitmap(bitmap);
                 }else {
-                    Uri uri = data.getData();
+                    Uri uri = intent.getData();
                     roundedImageView.setImageURI(uri);
                 }
             }
+        }else if (resultCode == RESULT_OK){
+            EditEntity editEntity = JSON.parseObject(intent.getStringExtra("editEntity"),EditEntity.class);
+            String field = editEntity.getField();
+            String value = editEntity.getValue();
+            UserEntity userEntity = new UserEntity();
+            ReflectHelper reflectHelper = new ReflectHelper(userEntity);
+            reflectHelper.setMethodValue(field,value);
+            initUI(userEntity);
+            sendBroadcast(new Intent(UpdateUserReciver.TAG));
         }
     }
 }

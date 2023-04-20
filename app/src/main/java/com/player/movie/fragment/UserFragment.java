@@ -1,6 +1,8 @@
 package com.player.movie.fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,7 @@ import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.receiver.UpdateUserReciver;
 
 import java.util.List;
 import java.util.Map;
@@ -35,8 +38,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class UserFragment extends MyFragment implements View.OnClickListener {
-    View view;
-    boolean isInit = false;
+    private View view;
+    private boolean isInit = false;
+    private UpdateUserReciver reciver;
+    private Context context;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -44,6 +49,10 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
             view = inflater.inflate(R.layout.fragment_user,container,false);
         }
         return view;
+    }
+
+    public UserFragment(Context context){
+        this.context = context;
     }
 
     /**
@@ -55,10 +64,29 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
     public void initData(){
         if(isInit)return;
         isInit = true;
-        setUserData();
+        setUserData(BaseApplication.getInstance().getUserEntity());
         getUserMsg();
         getPlayRecord();
         addClickListener();
+        initReceiver();
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 初始化广播
+     * @date: 2023-04-20 23:13
+     */
+    private void initReceiver(){
+        reciver = new UpdateUserReciver();
+        reciver.setOnReceivedMessageListener(new UpdateUserReciver.MessageListener() {
+            @Override
+            public void OnReceived(UserEntity userEntity) {
+                setUserData(userEntity);
+            }
+        });
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.setPriority(Integer.MAX_VALUE);
+        context.registerReceiver(reciver,intentFilter);
     }
 
     /**
@@ -66,8 +94,7 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      * @description: 设置用户信息
      * @date: 2021-12-12 19:41
      */
-    public void setUserData(){
-        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
+    private void setUserData(UserEntity userEntity){
         Glide.with(getContext()).load(Api.HOST + userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
         TextView username = view.findViewById(R.id.username);
         username.setText(userEntity.getUsername());
@@ -82,7 +109,7 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      * @description: 获取用户四个指标信息，使用天数，关注，观看记录，浏览记录
      * @date: 2021-12-12 19:41
      */
-    public void getUserMsg(){
+    private void getUserMsg(){
         Call<ResultEntity> categoryListService = RequestUtils.getInstance().getUserMsg();
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
@@ -113,7 +140,7 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      * @description: 获取用户四个指标信息，使用天数，关注，观看记录，浏览记录
      * @date: 2021-12-12 19:41
      */
-    public void getPlayRecord(){
+    private void getPlayRecord(){
         Call<ResultEntity> categoryListService = RequestUtils.getInstance().getPlayRecord();
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
@@ -158,5 +185,11 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        context.unregisterReceiver(reciver);
     }
 }

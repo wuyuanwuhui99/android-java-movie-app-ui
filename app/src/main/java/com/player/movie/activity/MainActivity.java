@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         homeFragment = new HomeFragment();
         movieFragment = new MovieFragment();
         tvFragment = new TVFragment();
-        userFragment = new UserFragment();
+        userFragment = new UserFragment(MainActivity.this);
 
         //把4个切换页添加到容器内
         listFragment.add(homeFragment);
