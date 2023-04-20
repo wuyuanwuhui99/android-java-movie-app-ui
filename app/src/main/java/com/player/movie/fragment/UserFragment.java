@@ -85,6 +85,7 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
             }
         });
         IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(UpdateUserReciver.TAG);
         intentFilter.setPriority(Integer.MAX_VALUE);
         context.registerReceiver(reciver,intentFilter);
     }
