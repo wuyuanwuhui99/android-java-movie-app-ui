@@ -6,15 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
 import com.player.movie.entity.EditEntity;
+import com.player.movie.entity.UserEntity;
+import com.player.movie.http.RequestUtils;
+import com.player.movie.http.ResultEntity;
+import com.player.movie.view.ReflectHelper;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class EditActivity extends AppCompatActivity implements View.OnClickListener,TextWatcher {
 
@@ -54,11 +63,35 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 finish();
                 break;
             case R.id.edit_sure:
-                Intent intent = getIntent();
-                editEntity.setValue(editText.getText().toString());
-                intent.putExtra("editEntity",JSON.toJSONString(editEntity));
-                setResult(RESULT_OK,intent);
-                finish();
+                String field = editEntity.getField();
+                String value = editEntity.getValue();
+                UserEntity userEntity = new UserEntity();
+                UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
+                userEntity.setUserId(mUserEntity.getUserId());
+                ReflectHelper reflectHelper = new ReflectHelper(userEntity);
+                reflectHelper.setMethodValue(field,value);
+                Call<ResultEntity> userData = RequestUtils.getInstance().updateUser(userEntity);
+                userData.enqueue(new Callback<ResultEntity>() {
+                    @Override
+                    public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                        if("SUCCESS".equals(response.body().getStatus())){
+                            ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
+                            reflectHelper.setMethodValue(field,value);
+                            Intent intent = getIntent();
+                            editEntity.setValue(editText.getText().toString());
+                            setResult(RESULT_OK,intent);
+                            finish();
+                        }else{
+                            Toast.makeText(EditActivity.this,"更改用户信息失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResultEntity> call, Throwable t) {
+                        System.out.println("错误");
+                    }
+                });
+
                 break;
         }
     }
@@ -76,7 +109,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
         }else{
             sureButton.setEnabled(true);
         }
-
+        editEntity.setValue(s.toString());
     }
 
     @Override

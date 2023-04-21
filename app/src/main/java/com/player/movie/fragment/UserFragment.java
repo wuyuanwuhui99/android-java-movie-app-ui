@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -41,7 +39,6 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
     private View view;
     private boolean isInit = false;
     private UpdateUserReciver reciver;
-    private Context context;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -49,10 +46,6 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
             view = inflater.inflate(R.layout.fragment_user,container,false);
         }
         return view;
-    }
-
-    public UserFragment(Context context){
-        this.context = context;
     }
 
     /**
@@ -64,7 +57,7 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
     public void initData(){
         if(isInit)return;
         isInit = true;
-        setUserData(BaseApplication.getInstance().getUserEntity());
+        setUserData();
         getUserMsg();
         getPlayRecord();
         addClickListener();
@@ -78,16 +71,11 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      */
     private void initReceiver(){
         reciver = new UpdateUserReciver();
-        reciver.setOnReceivedMessageListener(new UpdateUserReciver.MessageListener() {
-            @Override
-            public void OnReceived(UserEntity userEntity) {
-                setUserData(userEntity);
-            }
-        });
+        reciver.setOnReceivedMessageListener(userEntity -> setUserData());
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(UpdateUserReciver.TAG);
         intentFilter.setPriority(Integer.MAX_VALUE);
-        context.registerReceiver(reciver,intentFilter);
+        getContext().registerReceiver(reciver,intentFilter);
     }
 
     /**
@@ -95,7 +83,8 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      * @description: 设置用户信息
      * @date: 2021-12-12 19:41
      */
-    private void setUserData(UserEntity userEntity){
+    private void setUserData(){
+        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
         Glide.with(getContext()).load(Api.HOST + userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
         TextView username = view.findViewById(R.id.username);
         username.setText(userEntity.getUsername());
@@ -191,6 +180,6 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        context.unregisterReceiver(reciver);
+        getContext().unregisterReceiver(reciver);
     }
 }

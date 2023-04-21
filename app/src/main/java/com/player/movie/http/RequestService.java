@@ -1,9 +1,13 @@
 package com.player.movie.http;
 
 import com.player.movie.api.Api;
+import com.player.movie.entity.UserEntity;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -54,4 +58,7 @@ public interface RequestService {
             @Query("pageNum") int pageNum
 
     );
+
+    @PUT(Api.UPDATEUSER)
+    Call<ResultEntity> updateUser(@Body UserEntity userEntity);
 }

@@ -21,17 +21,17 @@ import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.receiver.UpdateUserReciver;
 import com.player.movie.utils.PlugCamera;
-import com.player.movie.view.ReflectHelper;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
     private RoundedImageView roundedImageView;
-    PlugCamera plugCamera;
+    private PlugCamera plugCamera;
+    private String field;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
-        initUI(BaseApplication.getInstance().getUserEntity());
+        initUI();
         setOnClickListener();
     }
 
@@ -40,7 +40,8 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @description: 设置头像
      * @date: 2022-08-30 22:39
      */
-    private void initUI(UserEntity userEntity){
+    private void initUI(){
+        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
         if(userEntity.getAvater() != null){
             RoundedImageView avater = findViewById(R.id.user_m_avater);
             Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
@@ -140,6 +141,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2022-08-31 22:06
      */
     private void useEdit(View v,String field){
+        this.field = field;// 记录现在修改是哪个字段
         LinearLayout ly = (LinearLayout)v;
         TextView nameTextView = (TextView) ly.getChildAt(0);
         String title = nameTextView.getText().toString();
@@ -181,14 +183,10 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         }else if (resultCode == RESULT_OK){
-            EditEntity editEntity = JSON.parseObject(intent.getStringExtra("editEntity"),EditEntity.class);
-            String field = editEntity.getField();
-            String value = editEntity.getValue();
-            UserEntity userEntity = new UserEntity();
-            ReflectHelper reflectHelper = new ReflectHelper(userEntity);
-            reflectHelper.setMethodValue(field,value);
-            initUI(userEntity);
-            sendBroadcast(new Intent(UpdateUserReciver.TAG));
+            initUI();
+            if("username".equals(field) || "sign".equals(field)){
+                sendBroadcast(new Intent(UpdateUserReciver.TAG));
+            }
         }
     }
 }
