@@ -66,8 +66,6 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                 String field = editEntity.getField();
                 String value = editEntity.getValue();
                 UserEntity userEntity = new UserEntity();
-                UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
-                userEntity.setUserId(mUserEntity.getUserId());
                 ReflectHelper reflectHelper = new ReflectHelper(userEntity);
                 reflectHelper.setMethodValue(field,value);
                 Call<ResultEntity> userData = RequestUtils.getInstance().updateUser(userEntity);
@@ -75,6 +73,7 @@ public class EditActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                         if("SUCCESS".equals(response.body().getStatus())){
+                            UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
                             ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
                             reflectHelper.setMethodValue(field,value);
                             Intent intent = getIntent();
