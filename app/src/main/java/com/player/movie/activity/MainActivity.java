@@ -35,12 +35,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ViewPager viewPager;//容器
     private List<MyFragment> listFragment = new ArrayList<>();
 
-    //初始化4个切换页
-    HomeFragment homeFragment;
-    MovieFragment movieFragment;
-    TVFragment tvFragment;
-    UserFragment userFragment;
-
     // 当前选中的导航
     ImageView activeImage;
     TextView activeText;
@@ -67,17 +61,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void initView(){
         viewPager = findViewById(R.id.viewpager);
 
-        //初始化4个切换页
-        homeFragment = new HomeFragment();
-        movieFragment = new MovieFragment();
-        tvFragment = new TVFragment();
-        userFragment = new UserFragment();
-
         //把4个切换页添加到容器内
-        listFragment.add(homeFragment);
-        listFragment.add(movieFragment);
-        listFragment.add(tvFragment);
-        listFragment.add(userFragment);
+        listFragment.add(new HomeFragment());
+        listFragment.add(null);// 适配器中动态添加，做懒加载用
+        listFragment.add(null);
+        listFragment.add(null);
 
         //导航栏布局栏
         tabLinearLayout[0] = findViewById(R.id.home);
@@ -138,7 +126,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentPagerAdapter pageAdapter =new FragmentPagerAdapter(getSupportFragmentManager()) {  //适配器直接new出来
             @Override
             public Fragment getItem(int position) {
-                return listFragment.get(position);//直接返回
+                MyFragment myFragment = listFragment.get(position);
+                if(myFragment == null){
+                    if(position == 1){
+                        myFragment = new MovieFragment();
+                    }else if(position == 2){
+                        myFragment = new TVFragment();
+                    }else {
+                        myFragment = new UserFragment();
+                    }
+                    listFragment.set(position,myFragment);//直接返回
+                }
+                return myFragment;
             }
 
             @Override
