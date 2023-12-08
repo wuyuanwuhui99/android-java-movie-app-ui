@@ -1,7 +1,7 @@
 package com.player.movie.api;
 
 public class Api {
-    public static final String HOST = "http://192.168.0.103:5001";
+    public static final String HOST = "http://192.168.0.4:5001";
     //查询所有大分类
     public static final String GETUSERDATA = "/service/movie/getUserData";
     public static final String GETCATEGORYLIST = "/service/movie/getCategoryList";// 获取分类影片
