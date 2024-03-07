@@ -31,7 +31,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeFragment extends MyFragment {
+public class HomeFragment extends Fragment {
     private View view;
     private boolean isInit = false;
     FragmentTransaction transaction;
@@ -70,7 +70,7 @@ public class HomeFragment extends MyFragment {
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                List<MovieEntity> movieEntity = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class);
+                List<MovieEntity> movieEntity = JSON.parseArray(JSON.toJSONString(response.body().getData()),MovieEntity.class).subList(0,5);
                 Banner banner = view.findViewById(R.id.home_banner);
                 banner.setAdapter(new BannerImageAdapter<MovieEntity>(movieEntity) {
                     @Override
@@ -122,8 +122,4 @@ public class HomeFragment extends MyFragment {
         });
     }
 
-    @Override
-    public void initData() {
-
-    }
 }

@@ -14,6 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.player.movie.BaseApplication;
 import com.player.movie.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.CategoryEntity;
@@ -31,7 +32,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TVFragment extends MyFragment {
+public class TVFragment extends Fragment {
     boolean isInit = false;
     View view;
 
@@ -50,8 +51,9 @@ public class TVFragment extends MyFragment {
      * @date: 2022-08-13 11:33
      */
     @Override
-    public void initData(){
-        if(!isInit){
+    public void setUserVisibleHint(boolean isUserVisibleHint){
+        super.setUserVisibleHint(isUserVisibleHint);
+        if(getUserVisibleHint() && !isInit){
             isInit = true;
             addSearchFraction();
             getBannerData();
@@ -66,7 +68,7 @@ public class TVFragment extends MyFragment {
      */
     private void addSearchFraction(){
         FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-        transaction.replace(R.id.tv_search_layout,new SearchFragment(getResources().getString(R.string.tv)))
+        transaction.replace(R.id.tv_search_layout,new SearchFragment(BaseApplication.getInstance().getResources().getString(R.string.tv)))
                 .commit();
     }
 

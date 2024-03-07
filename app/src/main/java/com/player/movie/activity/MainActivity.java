@@ -16,7 +16,6 @@ import com.player.movie.R;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
-import com.player.movie.fragment.MyFragment;
 import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
 import com.player.movie.http.RequestUtils;
@@ -33,7 +32,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewPager viewPager;//容器
-    private List<MyFragment> listFragment = new ArrayList<>();
+    private List<Fragment> listFragment = new ArrayList<>();
 
     // 当前选中的导航
     ImageView activeImage;
@@ -126,18 +125,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentPagerAdapter pageAdapter =new FragmentPagerAdapter(getSupportFragmentManager()) {  //适配器直接new出来
             @Override
             public Fragment getItem(int position) {
-                MyFragment myFragment = listFragment.get(position);
-                if(myFragment == null){
+                Fragment fragment = listFragment.get(position);
+                if(fragment == null){
                     if(position == 1){
-                        myFragment = new MovieFragment();
+                        fragment = new MovieFragment();
                     }else if(position == 2){
-                        myFragment = new TVFragment();
+                        fragment = new TVFragment();
                     }else {
-                        myFragment = new UserFragment();
+                        fragment = new UserFragment();
                     }
-                    listFragment.set(position,myFragment);//直接返回
+                    listFragment.set(position,fragment);//直接返回
                 }
-                return myFragment;
+                return fragment;
             }
 
             @Override
@@ -185,8 +184,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         activeImage = tabImageView[i];
         activeText = tabTextView[i];
         activeIndex = i;
-
-        listFragment.get(i).initData();
     }
 
     //导航栏的点击事件

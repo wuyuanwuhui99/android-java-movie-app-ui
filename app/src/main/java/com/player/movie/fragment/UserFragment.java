@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UserFragment extends MyFragment implements View.OnClickListener {
+public class UserFragment extends Fragment implements View.OnClickListener {
     private View view;
     private boolean isInit = false;
     private UpdateUserReciver reciver;
@@ -54,14 +55,16 @@ public class UserFragment extends MyFragment implements View.OnClickListener {
      * @date: 2021-12-11 12:11
      */
     @Override
-    public void initData(){
-        if(isInit)return;
-        isInit = true;
-        setUserData();
-        getUserMsg();
-        getPlayRecord();
-        addClickListener();
-        initReceiver();
+    public void setUserVisibleHint(boolean isUserVisibleHint){
+        super.setUserVisibleHint(isUserVisibleHint);
+        if(getUserVisibleHint() && !isInit){
+            isInit = true;
+            setUserData();
+            getUserMsg();
+            getPlayRecord();
+            addClickListener();
+            initReceiver();
+        }
     }
 
     /**
