@@ -1,6 +1,5 @@
 package com.player.movie.fragment;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.BaseApplication;
 import com.player.movie.R;
+import com.player.movie.activity.MainActivity;
 import com.player.movie.activity.UserActivity;
 import com.player.movie.activity.WebViewActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
@@ -38,13 +38,17 @@ import retrofit2.Response;
 
 public class UserFragment extends Fragment implements View.OnClickListener {
     private View view;
-    private boolean isInit = false;
     private UpdateUserReciver reciver;
+    private boolean isUserVisibleHint = false;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if(view == null){
             view = inflater.inflate(R.layout.fragment_user,container,false);
+        }
+        if(isUserVisibleHint){// 从第三个tab页切换到第四个tab页，加载了view但可能没显示
+            initData();
         }
         return view;
     }
@@ -57,13 +61,9 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     @Override
     public void setUserVisibleHint(boolean isUserVisibleHint){
         super.setUserVisibleHint(isUserVisibleHint);
-        if(getUserVisibleHint() && !isInit){
-            isInit = true;
-            setUserData();
-            getUserMsg();
-            getPlayRecord();
-            addClickListener();
-            initReceiver();
+        isUserVisibleHint = getUserVisibleHint();
+        if(isUserVisibleHint && view != null){// 从第一个tab直接切花到第四个tab页，显示了但可能没有加载view
+            initData();
         }
     }
 
@@ -81,6 +81,14 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         getContext().registerReceiver(reciver,intentFilter);
     }
 
+    private void initData(){
+        setUserData();
+        getUserMsg();
+        getPlayRecord();
+        addClickListener();
+        initReceiver();
+    }
+    
     /**
      * @author: wuwenqiang
      * @description: 设置用户信息
