@@ -41,6 +41,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
         initData();
         addFraction();
         getMovieUrl();
+        savePlayRecord();
     }
 
     /**
@@ -205,5 +206,25 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
         prevUrlText = textView;
 
         actvieMovieUrlEntity = (MovieUrlEntity) textView.getTag();
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 插入播放记录
+     * @date: 2021-12-22 23:13
+     */
+    public void savePlayRecord(){
+        Call<ResultEntity> call = RequestUtils.getInstance().savePlayRecord(movieEntity);
+        call.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                System.out.println(response);
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println(t);
+            }
+        });
     }
 }

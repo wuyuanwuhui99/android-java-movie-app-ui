@@ -30,7 +30,11 @@
                 android:id="@+id/tv_category_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"></LinearLayout>
+                android:orientation="vertical"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/container_padding_size"/>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

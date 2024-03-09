@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -45,6 +46,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         addFraction();
         setModuleTitle();
         getStarList();
+        saveViewRecord();
     }
 
     /**
@@ -184,5 +186,25 @@ public class MovieDetailActivity extends AppCompatActivity {
         }else{
             Toast.makeText(getApplicationContext(), R.string.detail_no_play, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 插入浏览记录
+     * @date: 2021-12-22 23:13
+     */
+    public void saveViewRecord(){
+        Call<ResultEntity> call = RequestUtils.getInstance().saveViewRecord(movieEntity);
+        call.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                System.out.println(response);
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                System.out.println(t);
+            }
+        });
     }
 }

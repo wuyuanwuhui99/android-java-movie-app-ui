@@ -1,6 +1,7 @@
 package com.player.movie.http;
 
 import com.player.movie.api.Api;
+import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.UserEntity;
 
 import retrofit2.Call;
@@ -30,8 +31,14 @@ public interface RequestService {
     @GET(Api.GETPLAYRECORD)
     Call<ResultEntity> getPlayRecord();
 
+    @POST(Api.SAVEPLAYRECORD)
+    Call<ResultEntity> savePlayRecord(@Body MovieEntity movieEntity);
+
     @GET(Api.GETVIEWRECORD)
     Call<ResultEntity> getViewRecord();
+
+    @POST(Api.SAVEVIEWRECORD)
+    Call<ResultEntity> saveViewRecord(@Body MovieEntity movieEntity);
 
     @GET(Api.GETFAVORITE)
     Call<ResultEntity> getFavoriteList();

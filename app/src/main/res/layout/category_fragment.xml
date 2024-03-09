@@ -5,6 +5,7 @@
     android:background="@drawable/border_radius"
     android:padding="@dimen/container_padding_size"
     android:layout_marginTop="@dimen/container_padding_size"
+    android:id="@+id/categogy_wrapper"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
