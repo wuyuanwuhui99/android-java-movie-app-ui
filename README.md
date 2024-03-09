@@ -28,26 +28,50 @@
 
 后端接口项目和sql语句：https://github.com/wuyuanwuhui99/springboot-app-service
 
-flutter版本参见：https://github.com/wuyuanwuhui99/flutter-movie-app-ui
+flutter版本参见:    
+通用地址：https://github.com/wuyuanwuhui99/flutter-movie-app-ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/flutter-movie-app-ui
 
-Harmony鸿蒙版本参见：https://github.com/wuyuanwuhui99/Harmony_movie_app_ui
+react native版本参见:   
+通用地址：https://github.com/wuyuanwuhui99/react-native-app-ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/react-native-app-ui   
 
-react native版本参见: https://github.com/wuyuanwuhui99/react-native-app-ui
+在线音乐和电影后端接口项目和sql语句：   
+通用地址：https://github.com/wuyuanwuhui99/springboot-app-service   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/springboot-app-service
 
-vue在线音乐项目：https://github.com/wuyuanwuhui99/vue-music-app-ui
+harmony鸿蒙java版本参见:   
+通用地址：https://github.com/wuyuanwuhui99/Harmony_movie_app_ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/Harmony_movie_app_ui
 
-在线音乐后端项目：https://github.com/wuyuanwuhui99/koa2-music-app-service
+harmony鸿蒙arkts版本参见:   
+通用地址：https://github.com/wuyuanwuhui99/Harmony-arkts-movie-music-app-ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/Harmony-arkts-movie-music-app-ui
 
-vue3+ts明日头条项目：https://github.com/wuyuanwuhui99/vue3-ts-toutiao-app-ui
+java安卓原生版本参见：   
+通用地址：https://github.com/wuyuanwuhui99/android-java-movie-app-ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/android-java-movie-app-ui
 
-nginx配置
+kotlin安卓原生版本参见：   
+通用地址：https://github.com/wuyuanwuhui99/android-kotlin-jetpack-movie-app   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/android-kotlin-jetpack-movie-app
 
-    server{
-        listen       5001;
-        location /service/ {
-            proxy_pass http://127.0.0.1:5000;
-        }
-        location /static/ {
-            alias E:/static/;
-        }
-    }
+微信小程序版本参见：  
+通用地址: https://github.com/wuyuanwuhui99/weixin-movie-app-ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/weixin-movie-app-ui
+
+uniapp版本参见：  
+通用地址: https://github.com/wuyuanwuhui99/uniapp-vite-vue3-ts-movie-app-ui   
+国内镜像地址：https://hub.nuaa.cf/wuyuanwuhui99/uniapp-vite-vue3-ts-movie-app-ui
+
+vue2在线音乐项目：  
+通用地址: https://github.com/wuyuanwuhui99/vue-music-app-ui   
+国内镜像地址: https://hub.nuaa.cf/wuyuanwuhui99/vue-music-app-ui
+
+在线音乐后端项目：  
+通用地址: https://github.com/wuyuanwuhui99/koa2-music-app-service   
+国内镜像地址: https://hub.nuaa.cf/wuyuanwuhui99/koa2-music-app-service
+
+vue3+ts明日头条项目：  
+通用地址: https://github.com/wuyuanwuhui99/vue3-ts-toutiao-app-ui   
+国内镜像地址: https://hub.nuaa.cf/wuyuanwuhui99/vue3-ts-toutiao-app-ui

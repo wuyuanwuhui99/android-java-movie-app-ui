@@ -19,6 +19,7 @@
     <string name="user_play_record_count">观看记录</string>
     <string name="user_view_record_count">浏览记录</string>
     <string name="user_favorite">我的收藏</string>
+    <string name="no_data">暂无数据</string>
     <string name="user_record">我浏览过的电影</string>
     <string name="user_movie_talk">电影圈</string>
     <string name="user_music">音乐</string>

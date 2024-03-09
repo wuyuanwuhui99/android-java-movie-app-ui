@@ -30,6 +30,12 @@ public interface RequestService {
     @GET(Api.GETPLAYRECORD)
     Call<ResultEntity> getPlayRecord();
 
+    @GET(Api.GETVIEWRECORD)
+    Call<ResultEntity> getViewRecord();
+
+    @GET(Api.GETFAVORITE)
+    Call<ResultEntity> getFavoriteList();
+
     @GET(Api.GETSTAR)
     Call<ResultEntity> getStarList(@Path("movieId") String movieId);
 

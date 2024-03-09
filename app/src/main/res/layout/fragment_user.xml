@@ -143,7 +143,13 @@
                         <TextView
                             android:text="@string/user_play_record_count"
                             android:layout_width="match_parent"
+                            android:layout_weight="1"
                             android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:rotation="90"
+                            android:id="@+id/icon_record_arrow"
+                            android:src="@mipmap/icon_arrow"
+                            style="@style/sm_icon_size_style"/>
                     </LinearLayout>
                     <include layout="@layout/underline"/>
                 </LinearLayout>
@@ -153,10 +159,19 @@
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/no_data_play"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:text="@string/no_data"
+                    android:padding="@dimen/container_padding_size"
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_marginTop="@dimen/container_padding_size"
-                android:layout_marginBottom="@dimen/container_padding_size"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:background="@drawable/border_radius"
@@ -179,11 +194,38 @@
                             android:text="@string/user_favorite"
                             style="@style/user_category_style"/>
                         <ImageView
+                            android:id="@+id/icon_favorite_arrow"
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <include layout="@layout/underline"/>
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:padding="@dimen/container_padding_size"
+                    android:id="@+id/my_favorite_list"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/no_data_favorite"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:text="@string/no_data"
+                    android:padding="@dimen/container_padding_size"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/container_padding_size"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_radius"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -196,16 +238,44 @@
                         android:gravity="center_vertical">
                         <ImageView
                             style="@style/md_icon_size_style"
-                            android:src="@mipmap/icon_record"/>
+                            android:src="@mipmap/icon_collection"/>
                         <TextView
-                            style="@style/user_category_style"
-                            android:text="@string/user_record" />
+                            android:text="@string/user_record"
+                            style="@style/user_category_style"/>
                         <ImageView
+                            android:id="@+id/icon_view_arrow"
                             style="@style/sm_icon_size_style"
                             android:src="@mipmap/icon_arrow"/>
                     </LinearLayout>
                     <include layout="@layout/underline"/>
                 </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:padding="@dimen/container_padding_size"
+                    android:id="@+id/my_view_list"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/no_data_view"
+                    android:textAlignment="center"
+                    android:layout_width="match_parent"
+                    android:text="@string/no_data"
+                    android:padding="@dimen/container_padding_size"
+                    android:layout_height="wrap_content"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/container_padding_size"
+                android:layout_marginBottom="@dimen/container_padding_size"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:background="@drawable/border_radius"
+                android:gravity="center_vertical"
+                android:layout_height="wrap_content">
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
