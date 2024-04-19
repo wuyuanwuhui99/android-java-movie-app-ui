@@ -12,7 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.utils.CommonUtils;
 
 public class TabLayout extends LinearLayout {

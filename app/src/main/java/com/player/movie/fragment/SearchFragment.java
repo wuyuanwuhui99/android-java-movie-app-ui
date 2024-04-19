@@ -18,7 +18,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.BaseApplication;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.activity.SearchActivity;
 import com.player.movie.api.Api;

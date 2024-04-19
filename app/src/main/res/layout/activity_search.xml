@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/page_background_color"
-    tools:context=".activity.SearchActivity">
+    tools:context=".movie.activity.SearchActivity">
     <ScrollView android:padding="@dimen/container_padding_size"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -10,7 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.player.movie.R;
+import com.player.R;
 
 import java.util.ArrayList;
 import java.util.List;

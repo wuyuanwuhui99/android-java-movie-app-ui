@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.player.movie.BaseApplication;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;

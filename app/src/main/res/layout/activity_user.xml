@@ -7,7 +7,7 @@
     android:background="@color/page_background_color"
     android:padding="@dimen/container_padding_size"
     android:orientation="vertical"
-    tools:context=".activity.UserActivity">
+    tools:context=".movie.activity.UserActivity">
     <LinearLayout
         android:padding="@dimen/container_padding_size"
         android:layout_width="match_parent"

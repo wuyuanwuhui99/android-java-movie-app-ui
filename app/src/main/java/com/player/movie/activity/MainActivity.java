@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.gson.Gson;
 import com.player.movie.BaseApplication;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;

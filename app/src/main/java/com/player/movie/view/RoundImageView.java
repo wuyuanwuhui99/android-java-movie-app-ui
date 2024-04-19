@@ -15,7 +15,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.player.movie.R;
+import com.player.R;
 
 public class RoundImageView extends MyImageView {
     private Paint paint;

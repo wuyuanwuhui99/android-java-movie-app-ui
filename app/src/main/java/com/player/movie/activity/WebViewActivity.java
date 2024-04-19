@@ -13,7 +13,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.myinterface.JavaScriptinterface;
 import com.player.movie.utils.CommonUtils;
 import com.player.movie.utils.PlugCamera;

@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;

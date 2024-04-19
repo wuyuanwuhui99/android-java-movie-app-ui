@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.player.movie.BaseApplication;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.CategoryEntity;
 import com.player.movie.entity.MovieEntity;

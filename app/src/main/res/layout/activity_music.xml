@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/page_background_color"
-    android:orientation="vertical"
-    tools:context=".movie.activity.MainActivity">
+    tools:context=".music.activity.MusicActivity">
+
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/viewpager"
+        android:id="@+id/music_viewpager"
         android:layout_weight="1"/>
+
     <LinearLayout
         android:id="@+id/bottom_nav"
         android:visibility="invisible"
@@ -31,10 +32,10 @@
             <ImageView
                 android:layout_width="@dimen/lg_img_size"
                 android:layout_height="@dimen/lg_img_size"
-                android:id="@+id/home_img"
+                android:id="@+id/music_home_img"
                 android:src="@mipmap/icon_home_active"/>
             <TextView
-                android:id="@+id/home_text"
+                android:id="@+id/music_home_text"
                 android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,15 +51,15 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/small_margin_size"
             android:paddingBottom="@dimen/small_margin_size"
-            android:id="@+id/movie"
+            android:id="@+id/music_recommend"
             >
             <ImageView
                 android:layout_width="@dimen/lg_img_size"
                 android:layout_height="@dimen/lg_img_size"
-                android:id="@+id/movie_img"
+                android:id="@+id/music_recommend_img"
                 android:src="@mipmap/icon_movie"/>
             <TextView
-                android:id="@+id/movie_text"
+                android:id="@+id/music_recommend_text"
                 android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,15 +75,15 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/small_margin_size"
             android:paddingBottom="@dimen/small_margin_size"
-            android:id="@+id/tv"
+            android:id="@+id/music_circle"
             >
             <ImageView
-                android:id="@+id/tv_img"
+                android:id="@+id/music_circle_img"
                 android:layout_width="@dimen/lg_img_size"
                 android:layout_height="@dimen/lg_img_size"
                 android:src="@mipmap/icon_tv"/>
             <TextView
-                android:id="@+id/tv_text"
+                android:id="@+id/music_circle_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/small_margin_size"
@@ -98,15 +99,15 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/small_margin_size"
             android:paddingBottom="@dimen/small_margin_size"
-            android:id="@+id/user_center"
+            android:id="@+id/music_my"
             >
             <ImageView
-                android:id="@+id/user_img"
+                android:id="@+id/music_my_img"
                 android:layout_width="@dimen/lg_img_size"
                 android:layout_height="@dimen/lg_img_size"
                 android:src="@mipmap/icon_user"/>
             <TextView
-                android:id="@+id/user_text"
+                android:id="@+id/music_my_text"
                 android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

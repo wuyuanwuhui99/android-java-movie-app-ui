@@ -18,8 +18,9 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.movie.BaseApplication;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.activity.MainActivity;
+import com.player.movie.activity.SearchActivity;
 import com.player.movie.activity.UserActivity;
 import com.player.movie.activity.WebViewActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
@@ -29,6 +30,7 @@ import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.receiver.UpdateUserReciver;
+import com.player.music.activity.MusicActivity;
 
 import java.sql.Array;
 import java.util.ArrayList;
@@ -190,6 +192,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.icon_record_arrow).setOnClickListener(this);
         view.findViewById(R.id.icon_favorite_arrow).setOnClickListener(this);
         view.findViewById(R.id.icon_view_arrow).setOnClickListener(this);
+        view.findViewById(R.id.icon_music).setOnClickListener(this);
     }
 
     @Override
@@ -257,6 +260,11 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     view.findViewById(R.id.icon_view_arrow).setRotation(90);
                     view.findViewById(R.id.my_view_list).setVisibility(View.VISIBLE);
                 }
+                break;
+
+            case R.id.icon_music:
+                intent = new Intent(getContext(), MusicActivity.class);
+                startActivity(intent);
                 break;
         }
     }

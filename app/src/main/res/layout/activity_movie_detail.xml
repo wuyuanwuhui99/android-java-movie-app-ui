@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/page_background_color"
-    tools:context=".activity.MovieDetailActivity">
+    tools:context=".movie.activity.MovieDetailActivity">
     <ScrollView
         android:padding="@dimen/container_padding_size"
         android:layout_width="match_parent"

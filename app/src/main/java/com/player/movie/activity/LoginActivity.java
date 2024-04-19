@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-import com.player.movie.R;
+import com.player.R;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -281,6 +281,29 @@
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
+                    android:id="@+id/icon_music"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/container_padding_size"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical">
+                        <ImageView
+                            style="@style/md_icon_size_style"
+                            android:src="@mipmap/icon_music"/>
+                        <TextView
+                            android:text="@string/user_music"
+                            style="@style/user_category_style"/>
+                        <ImageView
+                            style="@style/sm_icon_size_style"
+                            android:src="@mipmap/icon_arrow"/>
+                    </LinearLayout>
+                    <include layout="@layout/underline"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <LinearLayout
                         android:id="@+id/movie_circle"
@@ -294,28 +317,6 @@
                             android:src="@mipmap/icon_talk"/>
                         <TextView
                             android:text="@string/user_movie_talk"
-                            style="@style/user_category_style"/>
-                        <ImageView
-                            style="@style/sm_icon_size_style"
-                            android:src="@mipmap/icon_arrow"/>
-                    </LinearLayout>
-                    <include layout="@layout/underline"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="@dimen/container_padding_size"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-                        <ImageView
-                            style="@style/md_icon_size_style"
-                            android:src="@mipmap/icon_music"/>
-                        <TextView
-                            android:text="@string/user_music"
                             style="@style/user_category_style"/>
                         <ImageView
                             style="@style/sm_icon_size_style"

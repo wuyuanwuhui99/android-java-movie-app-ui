@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.player.movie">
+    package="com.player">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.CAMERA" />
     <application
         android:networkSecurityConfig="@layout/network_security_policy"
-        android:name=".BaseApplication"
+        android:name=".movie.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activity.WebViewActivity"></activity>
-        <activity android:name=".activity.LoginActivity" />
-        <activity android:name=".activity.EditActivity" />
-        <activity android:name=".activity.UserActivity" />
-        <activity android:name=".activity.SearchActivity" />
-        <activity android:name=".activity.MoviePlayActivity" />
-        <activity android:name=".activity.MovieDetailActivity" />
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".movie.activity.WebViewActivity"/>
+        <activity android:name=".movie.activity.LoginActivity" />
+        <activity android:name=".movie.activity.EditActivity" />
+        <activity android:name=".movie.activity.UserActivity" />
+        <activity android:name=".movie.activity.SearchActivity" />
+        <activity android:name=".movie.activity.MoviePlayActivity" />
+        <activity android:name=".movie.activity.MovieDetailActivity" />
+        <activity android:name=".music.activity.MusicActivity"/>
+        <activity android:name=".movie.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

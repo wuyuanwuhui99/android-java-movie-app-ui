@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.adapter.SearchRecyclerViewAdapter;
 import com.player.movie.database.SearchWordDatabase;
 import com.player.movie.entity.MovieEntity;

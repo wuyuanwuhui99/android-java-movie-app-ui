@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSON;
-import com.player.movie.R;
+import com.player.R;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieUrlEntity;
 import com.player.movie.fragment.LikeMovieFragment;

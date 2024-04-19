@@ -5,7 +5,7 @@
     android:layout_height="fill_parent"
     android:background="@color/page_background_color"
     android:padding="@dimen/container_padding_size"
-    tools:context=".activity.EditActivity">
+    tools:context=".movie.activity.EditActivity">
     <LinearLayout
         android:background="@drawable/border_radius"
         android:orientation="vertical"
