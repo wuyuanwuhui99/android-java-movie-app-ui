@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:background="@color/page_background_color"
+    android:orientation="vertical"
     tools:context=".music.activity.MusicActivity">
 
     <androidx.viewpager.widget.ViewPager
@@ -13,11 +14,10 @@
         android:layout_weight="1"/>
 
     <LinearLayout
-        android:id="@+id/bottom_nav"
-        android:visibility="invisible"
+        android:id="@+id/music_bottom_nav"
         android:orientation="horizontal"
-        android:layout_width="match_parent"
         android:background="@drawable/top_border_stroke_white"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="0dp"
@@ -27,7 +27,7 @@
             android:gravity="center_horizontal"
             android:paddingTop="@dimen/small_margin_size"
             android:paddingBottom="@dimen/small_margin_size"
-            android:id="@+id/home"
+            android:id="@+id/music_home"
             >
             <ImageView
                 android:layout_width="@dimen/lg_img_size"
@@ -57,14 +57,14 @@
                 android:layout_width="@dimen/lg_img_size"
                 android:layout_height="@dimen/lg_img_size"
                 android:id="@+id/music_recommend_img"
-                android:src="@mipmap/icon_movie"/>
+                android:src="@mipmap/icon_recomment"/>
             <TextView
                 android:id="@+id/music_recommend_text"
                 android:paddingTop="@dimen/small_margin_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/navigate"
-                android:text="@string/movie"/>
+                android:text="@string/recommend"/>
         </LinearLayout>
 
         <LinearLayout
@@ -81,14 +81,14 @@
                 android:id="@+id/music_circle_img"
                 android:layout_width="@dimen/lg_img_size"
                 android:layout_height="@dimen/lg_img_size"
-                android:src="@mipmap/icon_tv"/>
+                android:src="@mipmap/icon_music_circle"/>
             <TextView
                 android:id="@+id/music_circle_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingTop="@dimen/small_margin_size"
                 android:textColor="@color/navigate"
-                android:text="@string/tv"/>
+                android:text="@string/music_circle"/>
         </LinearLayout>
 
         <LinearLayout

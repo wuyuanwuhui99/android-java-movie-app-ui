@@ -40,4 +40,5 @@
     <string name="user_logout">退出登录</string>
     <string name="edit_cancel">取消</string>
     <string name="edit_sure">确定</string>
+    <string name="music_circle">音乐圈</string>
 </resources>
