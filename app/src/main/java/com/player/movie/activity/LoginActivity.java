@@ -17,9 +17,6 @@ import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.utils.MD5;
 import com.player.movie.utils.SharedPreferencesUtils;
-
-import org.apache.commons.codec.digest.DigestUtils;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
