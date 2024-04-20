@@ -20,7 +20,10 @@ import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.receiver.UpdateUserReciver;
+import com.player.movie.utils.DestroyActivityUtil;
 import com.player.movie.utils.PlugCamera;
+import com.player.movie.utils.SharedPreferencesUtils;
+import com.player.movie.view.CustomDialogFragment;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
     private RoundedImageView roundedImageView;
@@ -160,9 +163,20 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2022-08-31 22:06
      */
     private void logout(){
-        Intent intent = new Intent(this,LoginActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);// 前面所有页面置空
-        startActivity(intent);
+        // 显示弹窗
+        CustomDialogFragment customDialogFragment = new CustomDialogFragment(new CustomDialogFragment.ClickSureListener() {
+            @Override
+            public void onSure() {
+                SharedPreferencesUtils.setParam(UserActivity.this,"token","");
+                Intent intent = new Intent();
+                intent.setClass(UserActivity.this,LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
+                startActivity(intent);
+                DestroyActivityUtil destroyActivityUtil = new DestroyActivityUtil();
+                destroyActivityUtil.exit();
+            }
+        });
+        customDialogFragment.show(getSupportFragmentManager(), "custom_dialog");
     }
 
     @Override

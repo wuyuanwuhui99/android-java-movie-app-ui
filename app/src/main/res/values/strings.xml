@@ -41,4 +41,6 @@
     <string name="edit_cancel">取消</string>
     <string name="edit_sure">确定</string>
     <string name="music_circle">音乐圈</string>
+    <string name="dialog_tip">提示</string>
+    <string name="dialog_logout">是否要退出登录?</string>
 </resources>

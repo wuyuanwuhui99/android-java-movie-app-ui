@@ -1,5 +1,6 @@
 package com.player.movie.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
@@ -157,7 +158,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 ResultEntity body = response.body();
                 loading = false;
-                if(body == null || body.getData() == null){
+                if(body == null || ((ArrayList)body.getData()).size() == 0){
                     view.findViewById(noDataResId).setVisibility(View.VISIBLE);
                     view.findViewById(resId).setVisibility(View.GONE);
                 }else{
@@ -195,6 +196,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
         view.findViewById(R.id.icon_music).setOnClickListener(this);
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         Intent intent;
