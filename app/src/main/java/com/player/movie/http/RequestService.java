@@ -74,4 +74,7 @@ public interface RequestService {
 
     @PUT(Api.UPDATEUSER)
     Call<ResultEntity> updateUser(@Body UserEntity userEntity);
+
+    @POST(Api.LOGIN)
+    Call<ResultEntity> login(@Body UserEntity userEntity);
 }

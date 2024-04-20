@@ -20,7 +20,7 @@ import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.receiver.UpdateUserReciver;
-import com.player.movie.utils.DestroyActivityUtil;
+import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.utils.PlugCamera;
 import com.player.movie.utils.SharedPreferencesUtils;
 import com.player.movie.view.CustomDialogFragment;
@@ -45,9 +45,11 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void initUI(){
         UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
+        RoundedImageView avater = findViewById(R.id.user_m_avater);
         if(userEntity.getAvater() != null){
-            RoundedImageView avater = findViewById(R.id.user_m_avater);
             Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
+        }else{
+            avater.setImageResource(R.mipmap.default_avater);
         }
         if(userEntity.getUsername() != null){
             TextView userName = findViewById(R.id.user_m_name);
@@ -168,12 +170,10 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onSure() {
                 SharedPreferencesUtils.setParam(UserActivity.this,"token","");
-                Intent intent = new Intent();
-                intent.setClass(UserActivity.this,LoginActivity.class);
+                Intent intent = new Intent(UserActivity.this,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
                 startActivity(intent);
-                DestroyActivityUtil destroyActivityUtil = new DestroyActivityUtil();
-                destroyActivityUtil.exit();
+                ActivityCollectorUtil.finishAllActivity();
             }
         });
         customDialogFragment.show(getSupportFragmentManager(), "custom_dialog");

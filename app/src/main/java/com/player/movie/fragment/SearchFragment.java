@@ -50,11 +50,18 @@ public class SearchFragment extends Fragment {
         this.classify = classify;
     }
 
+    public SearchFragment(){}
+
     private void initData(){
         avaterLayout = view.findViewById(R.id.avater_layout);
         avaterLayout.setVisibility(View.VISIBLE);
         UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
-        Glide.with(getContext()).load(Api.HOST + userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.avater));
+        RoundedImageView avaterImage = view.findViewById(R.id.avater);
+        if(userEntity.getAvater()!= null){
+            Glide.with(getContext()).load(Api.HOST + userEntity.getAvater()).into(avaterImage);
+        }else{
+            avaterImage.setImageResource(R.mipmap.default_avater);
+        }
     }
 
     private void addSearchClickListener(){
