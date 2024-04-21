@@ -198,14 +198,15 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             UserEntity userEntity = new UserEntity();
             ReflectHelper reflectHelper = new ReflectHelper(userEntity);
             reflectHelper.setMethodValue(field,inputValue);
-            Call<ResultEntity> userData = RequestUtils.getInstance().updateUser(userEntity);
-            userData.enqueue(new Callback<ResultEntity>() {
+            Call<ResultEntity> updateUserCall = RequestUtils.getInstance().updateUser(userEntity);
+            updateUserCall.enqueue(new Callback<ResultEntity>() {
                 @Override
                 public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                     if(Constants.SUCCESS.equals(response.body().getStatus())){
                         UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
                         ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
                         reflectHelper.setMethodValue(field,inputValue);
+                        valueTextView.setText(inputValue);
                         Toast.makeText(UserActivity.this,getResources().getString(R.string.update_success_tip), Toast.LENGTH_SHORT).show();
                     }else{
                         Toast.makeText(UserActivity.this,getResources().getString(R.string.update_fail_tip), Toast.LENGTH_SHORT).show();

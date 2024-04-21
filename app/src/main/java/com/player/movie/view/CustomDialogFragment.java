@@ -60,6 +60,7 @@ public class CustomDialogFragment extends DialogFragment implements View.OnClick
         switch (v.getId()){
             case R.id.dialog_sure:
                 clickSureListener.onSure();
+                dismiss();
                 break;
             case R.id.dialog_cancle:
                 dismiss();
