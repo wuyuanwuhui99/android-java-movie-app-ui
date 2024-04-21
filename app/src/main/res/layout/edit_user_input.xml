@@ -14,6 +14,6 @@
         android:layout_width="0dp"
         android:layout_weight="1"
         android:paddingLeft="@dimen/container_padding_size"
-        android:background="@drawable/bg_button_cancel_shape"
+        android:background="@drawable/edit_input_decoration"
         android:layout_height="@dimen/md_btn_height"/>
 </LinearLayout>

@@ -13,6 +13,7 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/border_top.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/btn_radius_blue_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/btn_radius_red_decoration.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/edit_input_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/movie_img_border_radius.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/right_border_stroke_white.xml" value="0.1" />
@@ -47,6 +48,9 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_user.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/layout_loading.xml" value="0.18541666666666667" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/logout_text.xml" value="0.22780797101449277" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/search_movie_item.xml" value="0.22780797101449277" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/search_record_item.xml" value="0.22780797101449277" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/underline.xml" value="0.22780797101449277" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/url_linear_layout.xml" value="0.165625" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/url_row.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
