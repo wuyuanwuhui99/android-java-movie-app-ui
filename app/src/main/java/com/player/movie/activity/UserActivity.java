@@ -2,33 +2,51 @@ package com.player.movie.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.EditEntity;
 import com.player.movie.entity.UserEntity;
+import com.player.movie.http.RequestUtils;
+import com.player.movie.http.ResultEntity;
 import com.player.movie.receiver.UpdateUserReciver;
 import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.utils.PlugCamera;
 import com.player.movie.utils.SharedPreferencesUtils;
 import com.player.movie.view.CustomDialogFragment;
+import com.player.movie.view.ReflectHelper;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class UserActivity extends AppCompatActivity implements View.OnClickListener{
     private RoundedImageView roundedImageView;
     private PlugCamera plugCamera;
     private String field;
+    private RelativeLayout loadingLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +124,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.user_logout).setOnClickListener(this);// 退出登录
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()){
@@ -140,24 +159,89 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    private View getEditUserLayout(String title){
+        View toInsertLayout = getLayoutInflater().inflate(R.layout.edit_user_input, null);
+        TextView editTitle = toInsertLayout.findViewById(R.id.edit_user_title);
+        editTitle.setText(title);
+        return toInsertLayout;
+    }
+
     /**
      * @author: wuwenqiang
      * @description: 跳转到编辑页面
      * @date: 2022-08-31 22:06
      */
     private void useEdit(View v,String field){
-        this.field = field;// 记录现在修改是哪个字段
         LinearLayout ly = (LinearLayout)v;
         TextView nameTextView = (TextView) ly.getChildAt(0);
         String title = nameTextView.getText().toString();
         TextView valueTextView = (TextView) ly.getChildAt(1);
         String value = valueTextView.getText().toString();
-        Boolean require = (Boolean) valueTextView.getTag();
-        Intent intent = new Intent(this,EditActivity.class);
-        intent.putExtra("editEntity",JSON.toJSONString(new EditEntity(title,field,value,require)));
-        startActivityForResult(intent,1);
-    }
+        Boolean isRequire = (Boolean) valueTextView.getTag();
 
+        View toInsertLayout = getLayoutInflater().inflate(R.layout.edit_user_input, null);
+        TextView editTitle = toInsertLayout.findViewById(R.id.edit_user_title);
+        editTitle.setText(title);
+        this.field = field;// 记录现在修改是哪个字段
+        View editUserLayout = getEditUserLayout(title);
+        EditText input = editUserLayout.findViewById(R.id.edit_user_input);
+        input.setText(value);
+
+        CustomDialogFragment customDialogFragment = new CustomDialogFragment(editUserLayout,"修改"+title,()->{
+            if(loadingLayout == null){
+                // 获取LayoutInflater服务
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                loadingLayout = inflater.inflate(R.layout.layout_loading, (ViewGroup)getWindow().getDecorView().getRootView()).findViewById(R.id.layout_loading);
+            }
+            loadingLayout.setVisibility(View.VISIBLE);
+            String inputValue = input.getText().toString();
+            UserEntity userEntity = new UserEntity();
+            ReflectHelper reflectHelper = new ReflectHelper(userEntity);
+            reflectHelper.setMethodValue(field,inputValue);
+            Call<ResultEntity> userData = RequestUtils.getInstance().updateUser(userEntity);
+            userData.enqueue(new Callback<ResultEntity>() {
+                @Override
+                public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                    if(Constants.SUCCESS.equals(response.body().getStatus())){
+                        UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
+                        ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
+                        reflectHelper.setMethodValue(field,inputValue);
+                        Toast.makeText(UserActivity.this,getResources().getString(R.string.update_success_tip), Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(UserActivity.this,getResources().getString(R.string.update_fail_tip), Toast.LENGTH_SHORT).show();
+                    }
+                    loadingLayout.setVisibility(View.GONE);
+                }
+
+                @Override
+                public void onFailure(Call<ResultEntity> call, Throwable t) {
+                    loadingLayout.setVisibility(View.GONE);
+                }
+            });
+        });
+
+        customDialogFragment.show(getSupportFragmentManager(), "custom_dialog");
+        if(isRequire){
+            input.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                    // 文本改变之前的处理
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    // 文本正在改变的处理
+                    String value = s.toString();
+                    customDialogFragment.getSureBtn().setClickable(!"".equals(value));
+                }
+
+                @Override
+                public void afterTextChanged(Editable s) {
+                    // 文本改变之后的处理
+                }
+            });
+        }
+    }
 
     /**
      * @author: wuwenqiang
@@ -165,16 +249,12 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2022-08-31 22:06
      */
     private void logout(){
-        // 显示弹窗
-        CustomDialogFragment customDialogFragment = new CustomDialogFragment(new CustomDialogFragment.ClickSureListener() {
-            @Override
-            public void onSure() {
-                SharedPreferencesUtils.setParam(UserActivity.this,"token","");
-                Intent intent = new Intent(UserActivity.this,LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
-                startActivity(intent);
-                ActivityCollectorUtil.finishAllActivity();
-            }
+        CustomDialogFragment  customDialogFragment = new CustomDialogFragment(R.layout.logout_text, getResources().getString(R.string.user_login), () -> {
+            SharedPreferencesUtils.setParam(UserActivity.this,"token","");
+            Intent intent = new Intent(UserActivity.this,LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
+            startActivity(intent);
+            ActivityCollectorUtil.finishAllActivity();
         });
         customDialogFragment.show(getSupportFragmentManager(), "custom_dialog");
     }

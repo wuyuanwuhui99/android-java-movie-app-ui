@@ -6,8 +6,11 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import com.player.R;
 import com.player.common.Constants;
@@ -22,9 +25,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    EditText userEditText;
-    EditText passwordEditText;
-    boolean isLoading = false;
+    private EditText userEditText;
+    private EditText passwordEditText;
+    private boolean isLoading = false;
+    private RelativeLayout loadingLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +58,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     void login(String userId,String password){
         if(isLoading)return;
         isLoading = true;
+        if(loadingLayout == null){
+            // 获取LayoutInflater服务
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            loadingLayout = inflater.inflate(R.layout.layout_loading, (ViewGroup)getWindow().getDecorView().getRootView()).findViewById(R.id.layout_loading);
+        }
+        loadingLayout.setVisibility(View.VISIBLE);
         String encryptedPsw = MD5.getStrMD5(password);
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(userId);
@@ -63,13 +73,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 isLoading = false;
-                if(response.body().getStatus().equals(Constants.SUCCESS)){
+                loadingLayout.setVisibility(View.GONE);
+                ResultEntity body = response.body();
+                if(body.getStatus().equals(Constants.SUCCESS)){
+                    BaseApplication.getInstance().setToken(body.getToken());// 更新token
+                    SharedPreferencesUtils.setParam(LoginActivity.this,"token",body.getToken());
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success_tip), Toast.LENGTH_SHORT).show();
                     // 延迟2000毫秒执行跳转首页
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
-                            SharedPreferencesUtils.setParam(LoginActivity.this,"token",response.body().getToken());
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
                             startActivity(intent);
@@ -83,6 +96,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onFailure(Call<ResultEntity> call, Throwable t) {
+                isLoading = false;
+                loadingLayout.setVisibility(View.GONE);
                 Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_err_tip), Toast.LENGTH_SHORT).show();
             }
         });

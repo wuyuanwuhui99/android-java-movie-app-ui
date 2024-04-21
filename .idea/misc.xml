@@ -4,15 +4,19 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable-v24/top_border_stroke_white.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_cancel_shape.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure_disabled.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure_normal.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure_normal_shape.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/border_radius.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/border_radius_btn.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/border_top.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/btn_radius_blue_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/btn_radius_red_decoration.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/movie_img_border_radius.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/right_border_stroke_white.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/rounded_border_btn.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/search_input_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/search_record_item_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/sm_active_border_decoration.xml" value="0.1" />
@@ -30,6 +34,7 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/category_fragment.xml" value="0.18177083333333333" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/custom_dialog.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/dialog_bottom_menu.xml" value="0.25364583333333335" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/edit_user_input.xml" value="0.22780797101449277" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fraction_like_movie.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_home.xml" value="0.18177083333333333" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_movie.xml" value="0.18177083333333333" />
@@ -40,6 +45,8 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_search.xml" value="0.13854166666666667" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_tv.xml" value="0.13854166666666667" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_user.xml" value="0.25364583333333335" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/layout_loading.xml" value="0.18541666666666667" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/logout_text.xml" value="0.22780797101449277" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/url_linear_layout.xml" value="0.165625" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/url_row.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />

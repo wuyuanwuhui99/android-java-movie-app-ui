@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_message"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:text="@string/dialog_logout"
+    android:paddingTop="@dimen/container_padding_size"
+    android:paddingBottom="@dimen/container_padding_size"
+    />

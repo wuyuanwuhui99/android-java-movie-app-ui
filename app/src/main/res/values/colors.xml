@@ -9,4 +9,6 @@
     <color name="background_blue_disable">#6bb8ff</color>
     <color name="background_white">#ffffff</color>
     <color name="page_background_color">#eee</color>
+    <color name="loading_background_color">#33000000</color>
+    <!--透明度设置方法：https://blog.csdn.net/qq_36570506/article/details/131551336-->
 </resources>

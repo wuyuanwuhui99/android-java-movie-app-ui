@@ -101,8 +101,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                 Gson gson = new Gson();
                 ResultEntity body = response.body();
-                BaseApplication.getInstance().setToken(body.getToken());
-                BaseApplication.getInstance().setUserEntity(gson.fromJson(gson.toJson(body.getData()),UserEntity.class));
+                BaseApplication instance = BaseApplication.getInstance();
+                if("".equals(instance.getToken()) || instance.getToken() == null){// 从登录页面重定向进来就不需要重新设置token
+                    instance.setToken(body.getToken());
+                }
+                instance.setUserEntity(gson.fromJson(gson.toJson(body.getData()),UserEntity.class));
                 SharedPreferencesUtils.setParam(MainActivity.this,"token",response.body().getToken());
                 findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
                 initView();//初始化view
