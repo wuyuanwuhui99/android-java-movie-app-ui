@@ -14,7 +14,6 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".movie.activity.WebViewActivity"/>
         <activity android:name=".movie.activity.LoginActivity" />
-        <activity android:name=".movie.activity.EditActivity" />
         <activity android:name=".movie.activity.UserActivity" />
         <activity android:name=".movie.activity.SearchActivity" />
         <activity android:name=".movie.activity.MoviePlayActivity" />

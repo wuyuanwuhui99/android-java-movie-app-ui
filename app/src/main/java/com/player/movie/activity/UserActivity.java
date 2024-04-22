@@ -13,29 +13,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.R;
 import com.player.movie.api.Api;
-import com.player.movie.entity.EditEntity;
+import com.player.movie.dialog.BottomMenu;
+import com.player.movie.dialog.DatePickerFragment;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.receiver.UpdateUserReciver;
 import com.player.movie.utils.ActivityCollectorUtil;
-import com.player.movie.utils.PlugCamera;
+import com.player.movie.dialog.PlugCamera;
 import com.player.movie.utils.SharedPreferencesUtils;
-import com.player.movie.view.CustomDialogFragment;
+import com.player.movie.dialog.CustomDialogFragment;
 import com.player.movie.view.ReflectHelper;
 
 import retrofit2.Call;
@@ -69,41 +68,40 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         }else{
             avater.setImageResource(R.mipmap.default_avater);
         }
-        if(userEntity.getUsername() != null){
-            TextView userName = findViewById(R.id.user_m_name);
-            userName.setText(userEntity.getUsername());
-            userName.setTag(true);// 必填
-        }
-        if(userEntity.getTelephone()  != null){
-            TextView tel = findViewById(R.id.user_tel);
-            tel.setText(userEntity.getTelephone());
-            tel.setTag(false);// 非必填
-        }
-        if(userEntity.getEmail()  != null){
-            TextView email = findViewById(R.id.user_email);
-            email.setText(userEntity.getEmail());
-            email.setTag(true);// 必填
-        }
-        if(userEntity.getBirthday()  != null){
-            TextView birthday = findViewById(R.id.user_birthday);
-            birthday.setText(userEntity.getBirthday());
-            birthday.setTag(false);// 非必填
-        }
-        if(userEntity.getSex() != null){
-            TextView sex = findViewById(R.id.user_sex);
-            sex.setText(userEntity.getSex());
-            sex.setTag(true);// 必填
-        }
-        if(userEntity.getSign() != null){
-            TextView sign = findViewById(R.id.user_sign);
-            sign.setText(userEntity.getSign());
-            sign.setTag(false);// 必填
-        }
-        if(userEntity.getRegion() != null){
-            TextView region = findViewById(R.id.user_region);
-            region.setText(userEntity.getRegion());
-            region.setTag(false);// 必填
-        }
+
+        TextView userName = findViewById(R.id.user_m_name);
+        userName.setText(userEntity.getUsername() == null ? "" : userEntity.getUsername());
+        userName.setTag(true);// 必填
+
+
+        TextView tel = findViewById(R.id.user_tel);
+        tel.setText(userEntity.getTelephone() == null ? "" : userEntity.getTelephone());
+        tel.setTag(false);// 非必填
+
+
+        TextView email = findViewById(R.id.user_email);
+        email.setText(userEntity.getEmail() == null ? "" : userEntity.getEmail());
+        email.setTag(true);// 必填
+
+
+        TextView birthday = findViewById(R.id.user_birthday);
+        birthday.setText(userEntity.getBirthday() == null ? "" : userEntity.getBirthday());
+        birthday.setTag(false);// 非必填
+
+
+        TextView sex = findViewById(R.id.user_sex);
+        sex.setText(userEntity.getSex() == null ? "" : userEntity.getSex());
+        sex.setTag(true);// 必填
+
+
+        TextView sign = findViewById(R.id.user_sign);
+        sign.setText(userEntity.getSign() == null ? "" : userEntity.getSign());
+        sign.setTag(false);// 必填
+
+        TextView region = findViewById(R.id.user_region);
+        region.setText(userEntity.getRegion() == null ? "" : userEntity.getRegion());
+        region.setTag(false);// 必填
+
     }
 
     /**
@@ -138,10 +136,10 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 useEdit(v,"email");
                 break;
             case R.id.user_birthday_layout:
-                useEdit(v,"birthday");
+                useDatePicker(v);
                 break;
             case R.id.user_sex_layout:
-                useEdit(v,"sex");
+                useBottomSexMenu(v);
                 break;
             case R.id.user_sign_layout:
                 useEdit(v,"sign");
@@ -159,11 +157,92 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    /**
+     * @author: wuwenqiang
+     * @description: 获取弹窗里面的布局
+     * @date: 2024-04-22 22:18
+     */
     private View getEditUserLayout(String title){
         View toInsertLayout = getLayoutInflater().inflate(R.layout.edit_user_input, null);
         TextView editTitle = toInsertLayout.findViewById(R.id.edit_user_title);
         editTitle.setText(title);
         return toInsertLayout;
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 编辑出生年月
+     * @date: 2024-04-22 22:18
+     */
+    private void useDatePicker(View v){
+        LinearLayout ly = (LinearLayout)v;
+        TextView valueTextView = (TextView) ly.getChildAt(1);
+        String value = valueTextView.getText().toString();
+        int year = 1990,month = 1,day = 1;
+        if(!"".equals(value)){
+            String[] split = value.split("-");
+            year = Integer.parseInt(split[0]);
+            month = Integer.parseInt(split[1]);
+            day = Integer.parseInt(split[2]);
+        }
+        DatePickerFragment datePickerFragment = new DatePickerFragment(year,month,day, (selectedDate)->{
+            useUpdateUser(valueTextView,"birthday",selectedDate);
+        });
+        datePickerFragment.show(getSupportFragmentManager(), "datePicker");
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 更新用户信息
+     * @date: 2024-4-22 22:39
+     */
+    private void useUpdateUser(TextView valueTextView,String field,String value){
+        if(loadingLayout == null){
+            // 获取LayoutInflater服务
+            LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+            loadingLayout = inflater.inflate(R.layout.layout_loading, (ViewGroup)getWindow().getDecorView().getRootView()).findViewById(R.id.layout_loading);
+        }
+        loadingLayout.setVisibility(View.VISIBLE);
+        UserEntity userEntity = new UserEntity();
+        ReflectHelper reflectHelper = new ReflectHelper(userEntity);
+        reflectHelper.setMethodValue(field,value);
+        Call<ResultEntity> updateUserCall = RequestUtils.getInstance().updateUser(userEntity);
+        updateUserCall.enqueue(new Callback<ResultEntity>() {
+            @Override
+            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
+                if(Constants.SUCCESS.equals(response.body().getStatus())){
+                    UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
+                    ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
+                    reflectHelper.setMethodValue(field,value);
+                    valueTextView.setText(value);
+                    Toast.makeText(UserActivity.this,getResources().getString(R.string.update_success_tip), Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(UserActivity.this,getResources().getString(R.string.update_fail_tip), Toast.LENGTH_SHORT).show();
+                }
+                loadingLayout.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onFailure(Call<ResultEntity> call, Throwable t) {
+                loadingLayout.setVisibility(View.GONE);
+            }
+        });
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 底部弹出男女选择菜单
+     * @date: 2024-4-22 22:20
+     */
+    private void useBottomSexMenu(View v){
+        LinearLayout ly = (LinearLayout)v;
+        TextView valueTextView = (TextView) ly.getChildAt(1);
+        String[] menu = {"男","女"};
+        new BottomMenu(menu, item -> {
+            if(!item.equals(valueTextView.getText().toString())){
+                useUpdateUser(valueTextView,"sex",item);
+            }
+        }).showBottomMenu(this);
     }
 
     /**
@@ -188,37 +267,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         input.setText(value);
 
         CustomDialogFragment customDialogFragment = new CustomDialogFragment(editUserLayout,"修改"+title,()->{
-            if(loadingLayout == null){
-                // 获取LayoutInflater服务
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                loadingLayout = inflater.inflate(R.layout.layout_loading, (ViewGroup)getWindow().getDecorView().getRootView()).findViewById(R.id.layout_loading);
-            }
-            loadingLayout.setVisibility(View.VISIBLE);
-            String inputValue = input.getText().toString();
-            UserEntity userEntity = new UserEntity();
-            ReflectHelper reflectHelper = new ReflectHelper(userEntity);
-            reflectHelper.setMethodValue(field,inputValue);
-            Call<ResultEntity> updateUserCall = RequestUtils.getInstance().updateUser(userEntity);
-            updateUserCall.enqueue(new Callback<ResultEntity>() {
-                @Override
-                public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                    if(Constants.SUCCESS.equals(response.body().getStatus())){
-                        UserEntity mUserEntity = BaseApplication.getInstance().getUserEntity();
-                        ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
-                        reflectHelper.setMethodValue(field,inputValue);
-                        valueTextView.setText(inputValue);
-                        Toast.makeText(UserActivity.this,getResources().getString(R.string.update_success_tip), Toast.LENGTH_SHORT).show();
-                    }else{
-                        Toast.makeText(UserActivity.this,getResources().getString(R.string.update_fail_tip), Toast.LENGTH_SHORT).show();
-                    }
-                    loadingLayout.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onFailure(Call<ResultEntity> call, Throwable t) {
-                    loadingLayout.setVisibility(View.GONE);
-                }
-            });
+            useUpdateUser(valueTextView,field,input.getText().toString());
         });
 
         customDialogFragment.show(getSupportFragmentManager(), "custom_dialog");

@@ -1,4 +1,4 @@
-package com.player.movie.utils;
+package com.player.movie.dialog;
 
 import android.Manifest;
 import android.app.Activity;
@@ -35,8 +35,6 @@ public class PlugCamera {
             intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
             activity.startActivityForResult(intent, REQUEST_CODE_CAMERA);
         });
-        //下面这些设置都可不写
-//        builder.setTitle("这是标题");//添加标题
         builder.setCanCancel(true);//点击阴影时是否取消dialog，true为取消
         builder.setShadow(true);//是否设置阴影背景，true为有阴影
         builder.setCancelText("取消");//设置最下面取消的文本内容

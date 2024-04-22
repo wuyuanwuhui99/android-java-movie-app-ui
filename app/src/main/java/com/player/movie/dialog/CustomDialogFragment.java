@@ -1,4 +1,4 @@
-package com.player.movie.view;
+package com.player.movie.dialog;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;

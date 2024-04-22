@@ -7,8 +7,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
-import android.webkit.ValueCallback;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,9 +14,8 @@ import android.webkit.WebViewClient;
 import com.player.R;
 import com.player.movie.myinterface.JavaScriptinterface;
 import com.player.movie.utils.CommonUtils;
-import com.player.movie.utils.PlugCamera;
+import com.player.movie.dialog.PlugCamera;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class WebViewActivity extends AppCompatActivity {

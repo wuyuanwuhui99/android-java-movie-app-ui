@@ -6,7 +6,7 @@ import android.webkit.JavascriptInterface;
 
 import com.alibaba.fastjson.JSON;
 import com.player.movie.BaseApplication;
-import com.player.movie.utils.PlugCamera;
+import com.player.movie.dialog.PlugCamera;
 
 public class JavaScriptinterface {
     private Context context;
