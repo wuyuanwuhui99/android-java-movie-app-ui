@@ -23,12 +23,12 @@ public class JavaScriptinterface {
      */
     @JavascriptInterface
     public void chooseImages() {
-        plugCamera = new PlugCamera();
-        plugCamera.showCamera(context,activity);
+        plugCamera = new PlugCamera(context,activity);
+        plugCamera.showCamera();
     }
 
-    public int getType(){
-        return plugCamera.getType();
+    public String getCheck(){
+        return plugCamera.getCheck();
     }
 
     /**

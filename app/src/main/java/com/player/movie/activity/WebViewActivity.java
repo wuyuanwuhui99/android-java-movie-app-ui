@@ -54,7 +54,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PlugCamera.REQUEST_CODE_CAMERA) {
             String base64;
-            if(javaScriptinterface.getType() == 1){
+            if("相机".equals(javaScriptinterface.getCheck())){
                 Bundle bundle = data.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
                 Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
                 base64 = CommonUtils.bitmapToBase64(bitmap);

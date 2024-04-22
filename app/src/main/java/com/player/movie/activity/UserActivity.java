@@ -151,10 +151,19 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 logout();
                 break;
             case R.id.user_m_avater:
-                plugCamera = new PlugCamera();
-                plugCamera.showCamera(this,UserActivity.this);
+                PlugCamera plugCamera = new PlugCamera(this,UserActivity.this);
+                plugCamera.showCamera();
                 break;
         }
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description:
+     * @date: 2024-04-22 23:09
+     */
+    private void useCamera(){
+
     }
 
     /**
@@ -317,7 +326,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
             Log.e(this.getClass().getName(), "Result:" + intent.toString());
             if (intent != null) {
                 // 得到图片的全路径
-                if(plugCamera.getType() == 1){
+                if("相机".equals(plugCamera.getCheck())){
                     Bundle bundle = intent.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
                     Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
                     roundedImageView.setImageBitmap(bitmap);
