@@ -18,6 +18,7 @@ import com.player.movie.BaseApplication;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
+import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.utils.MD5;
 import com.player.movie.utils.SharedPreferencesUtils;
 import retrofit2.Call;
@@ -121,6 +122,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
                 break;
             case R.id.user_register:
+                Intent intent = new Intent(LoginActivity.this,RegisterActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
+                startActivity(intent);
                 break;
         }
     }

@@ -151,19 +151,10 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                 logout();
                 break;
             case R.id.user_m_avater:
-                PlugCamera plugCamera = new PlugCamera(this,UserActivity.this);
+                plugCamera = new PlugCamera(this,UserActivity.this);
                 plugCamera.showCamera();
                 break;
         }
-    }
-
-    /**
-     * @author: wuwenqiang
-     * @description:
-     * @date: 2024-04-22 23:09
-     */
-    private void useCamera(){
-
     }
 
     /**

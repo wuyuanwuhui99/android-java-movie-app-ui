@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable-v24/top_border_stroke_white.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_cancel.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_cancel_shape.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_disabled_shape.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure_disabled.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure_normal.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/bg_button_sure_normal_shape.xml" value="0.1" />
@@ -21,6 +24,14 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/search_input_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/search_record_item_decoration.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/sm_active_border_decoration.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/sm_border_decoration.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/tab_left_active.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/tab_left_normal.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/tab_middle_active.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/tab_middle_normal.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/tab_right_active.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/tab_right_normal.xml" value="0.1" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/title_background.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/drawable/top_border_stroke_white.xml" value="0.1" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_edit.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_login.xml" value="0.25364583333333335" />
@@ -28,6 +39,7 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_movie_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_movie_play.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_music.xml" value="0.25364583333333335" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_register.xml" value="0.22780797101449277" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_search.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_user.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_web_view.xml" value="0.25364583333333335" />

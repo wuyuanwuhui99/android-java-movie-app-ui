@@ -33,7 +33,7 @@
     <string name="user_username">昵称</string>
     <string name="user_tel">电话</string>
     <string name="user_email">邮箱</string>
-    <string name="user_birthday">出生年月日</string>
+    <string name="user_birthday">出生日期</string>
     <string name="user_sex">性别</string>
     <string name="user_sign">个性签名</string>
     <string name="user_region">地区</string>
@@ -53,4 +53,7 @@
     <string name="no_null_tip">登录成功</string>
     <string name="update_success_tip">更改用户信息成功</string>
     <string name="update_fail_tip">更改用户信息失败</string>
+    <string name="user_id">账号</string>
+    <string name="password">密码</string>
+    <string name="confirm_password">确认密码</string>
 </resources>

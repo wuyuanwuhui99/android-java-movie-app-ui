@@ -25,4 +25,5 @@
     <dimen name="search_no_data_height">40dp</dimen>
     <dimen name="bottom_border_size">1dp</dimen>
     <dimen name="movie_logo_size">100dp</dimen>
+    <dimen name="title_width">80dp</dimen>
 </resources>
