@@ -56,4 +56,13 @@
     <string name="user_id">账号</string>
     <string name="password">密码</string>
     <string name="confirm_password">确认密码</string>
+    <string name="user_exist_tip">账号已存在</string>
+    <string name="error_tip">服务器错误</string>
+    <string name="user_verified_tip">请输入大于或等于6位数的账号</string>
+    <string name="password_verified_tip">请输入大于或等于6位数的密码</string>
+    <string name="confirm_password_length_tip">请输入大于或等于6位数的确认密码</string>
+    <string name="confirm_password_verified_tip">确认密码和密码不一致</string>
+    <string name="username_empty_tip">用户名不能为空</string>
+    <string name="register_success_tip">注册用户成功</string>
+    <string name="register_fail_tip">注册用户失败</string>
 </resources>

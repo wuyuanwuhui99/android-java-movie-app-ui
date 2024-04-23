@@ -77,4 +77,10 @@ public interface RequestService {
 
     @POST(Api.LOGIN)
     Call<ResultEntity> login(@Body UserEntity userEntity);
+
+    @POST(Api.REGISTER)
+    Call<ResultEntity> register(@Body UserEntity userEntity);
+
+    @GET(Api.GETUSERBYID)
+    Call<ResultEntity> getUserById(@Query("userId") String userId);
 }

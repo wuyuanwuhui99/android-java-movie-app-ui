@@ -30,4 +30,6 @@ public class Api {
     public static final String GETTOPCOMMENTLIST = "/service/social/getTopCommentList";//获取一级评论
     public static final String GETREPLYCOMMENTLIST = "/service/social/getReplyCommentList";//获取一级评论
     public static final String INSERTCOMMENTSERVICE = "/service/social-getway/insertComment";//新增评论
+    public static final String REGISTER = "/service/user/register";//注册
+    public static final String GETUSERBYID =  "/service/user/getUserById";// 校验账号是否存在
 }

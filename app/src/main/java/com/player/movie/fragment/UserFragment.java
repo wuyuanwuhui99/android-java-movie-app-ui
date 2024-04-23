@@ -106,7 +106,12 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      */
     private void setUserData(){
         UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
-        Glide.with(getContext()).load(Api.HOST + userEntity .getAvater()).into((RoundedImageView)view.findViewById(R.id.user_avater));
+        RoundedImageView avaterImage = (RoundedImageView)view.findViewById(R.id.user_avater);
+        if("".equals(userEntity.getAvater()) || userEntity.getAvater() == null){
+            avaterImage.setImageResource(R.mipmap.default_avater);
+        }else{
+            Glide.with(getContext()).load(Api.HOST + userEntity.getAvater()).into(avaterImage);
+        }
         TextView username = view.findViewById(R.id.username);
         username.setText(userEntity.getUsername());
         if(userEntity .getSign() != null){
