@@ -215,6 +215,9 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
                     ReflectHelper reflectHelper = new ReflectHelper(mUserEntity);
                     reflectHelper.setMethodValue(field,value);
                     valueTextView.setText(value);
+                    if("username".equals(field) || "sign".equals(field)){
+                        sendBroadcast(new Intent(UpdateUserReciver.TAG));
+                    }
                     Toast.makeText(UserActivity.this,getResources().getString(R.string.update_success_tip), Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(UserActivity.this,getResources().getString(R.string.update_fail_tip), Toast.LENGTH_SHORT).show();
@@ -315,22 +318,17 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == PlugCamera.REQUEST_CODE_CAMERA) {
             // 从相册返回的数据
             Log.e(this.getClass().getName(), "Result:" + intent.toString());
-            if (intent != null) {
-                // 得到图片的全路径
-                if("相机".equals(plugCamera.getCheck())){
-                    Bundle bundle = intent.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
-                    Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
-                    roundedImageView.setImageBitmap(bitmap);
-                }else {
-                    Uri uri = intent.getData();
-                    roundedImageView.setImageURI(uri);
-                }
+            // 得到图片的全路径
+            if("相机".equals(plugCamera.getCheck())){
+                Bundle bundle = intent.getExtras(); // 从data中取出传递回来缩略图的信息，图片质量差，适合传递小图片
+                Bitmap bitmap = (Bitmap) bundle.get("data"); // 将data中的信息流解析为Bitmap类型
+                roundedImageView.setImageBitmap(bitmap);
+            }else {
+                Uri uri = intent.getData();
+                roundedImageView.setImageURI(uri);
             }
         }else if (resultCode == RESULT_OK){
             initUI();
-            if("username".equals(field) || "sign".equals(field)){
-                sendBroadcast(new Intent(UpdateUserReciver.TAG));
-            }
         }
     }
 }

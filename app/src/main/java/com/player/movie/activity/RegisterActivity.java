@@ -27,6 +27,7 @@ import com.player.movie.http.RequestUtils;
 import com.player.movie.http.ResultEntity;
 import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.utils.MD5;
+import com.player.movie.utils.SharedPreferencesUtils;
 import com.player.movie.view.ReflectHelper;
 
 import retrofit2.Call;
@@ -188,6 +189,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
                     if(Constants.SUCCESS.equals(response.body().getStatus())){
                         BaseApplication.getInstance().setToken(response.body().getToken());
+                        SharedPreferencesUtils.setParam(RegisterActivity.this,"token",response.body().getToken());
                         Toast.makeText(RegisterActivity.this,getResources().getString(R.string.register_success_tip), Toast.LENGTH_SHORT).show();
                         // 延迟2000毫秒执行跳转首页
                         new Handler().postDelayed(new Runnable() {
