@@ -18,8 +18,8 @@ import com.player.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.CategoryEntity;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -66,7 +66,7 @@ public class HomeFragment extends Fragment {
      * @date: 2021-12-07 23:32
      */
     public void getBannerData(){
-        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getCategoryList("轮播","电影");
+        Call<ResultEntity> categoryListService = RequestUtils.getMovieInstance().getCategoryList("轮播","电影");
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -97,7 +97,7 @@ public class HomeFragment extends Fragment {
      * @date: 2021-12-07 23:32
      */
     public void getAllCategoryListByPageName(){
-        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getAllCategoryListByPageName("首页");
+        Call<ResultEntity> categoryListService = RequestUtils.getMovieInstance().getAllCategoryListByPageName("首页");
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

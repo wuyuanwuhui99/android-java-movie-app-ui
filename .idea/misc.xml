@@ -39,6 +39,7 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_movie_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_movie_play.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_music.xml" value="0.25364583333333335" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_music_search.xml" value="0.11354166666666667" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_register.xml" value="0.22780797101449277" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_search.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/activity_user.xml" value="0.25364583333333335" />
@@ -55,6 +56,7 @@
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_music_circle.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_music_home.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_music_recommend.xml" value="0.25364583333333335" />
+        <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_music_search.xml" value="0.2" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_music_user.xml" value="0.25364583333333335" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_search.xml" value="0.13854166666666667" />
         <entry key="..\:/android/android-java-movie-app-ui/app/src/main/res/layout/fragment_tv.xml" value="0.13854166666666667" />

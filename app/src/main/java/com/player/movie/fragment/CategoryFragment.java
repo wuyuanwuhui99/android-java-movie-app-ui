@@ -16,8 +16,8 @@ import com.alibaba.fastjson.JSON;
 import com.player.R;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import java.util.List;
 
 import retrofit2.Call;
@@ -41,7 +41,7 @@ public class CategoryFragment extends Fragment {
     }
 
     public void getCategoryData(String category,String classify){
-        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getCategoryList(category,classify);
+        Call<ResultEntity> categoryListService = RequestUtils.getMovieInstance().getCategoryList(category,classify);
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

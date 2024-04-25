@@ -22,10 +22,9 @@ import com.player.movie.adapter.SearchRecyclerViewAdapter;
 import com.player.movie.database.SearchWordDatabase;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.SearchWordEntity;
-import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.view.FlowLayout;
 
 import java.util.ArrayList;
@@ -163,6 +162,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()){
             case R.id.search_clear:// 点击清除按钮
                 editText.setText("");
+                clearImg.setVisibility(View.GONE);
                 searchRecyclerView.setVisibility(View.GONE);
                 searchRecordLayout.setVisibility(View.VISIBLE);
                 searchRecommendLayout.setVisibility(View.VISIBLE);
@@ -196,7 +196,7 @@ public class SearchActivity extends AppCompatActivity implements View.OnClickLis
             searchMovieList.add(movieEntity);
             setSearchList();
         }else {
-            Call<ResultEntity> call = RequestUtils.getInstance().search(null,null,null,null,null,keyword,pageSize,pageNum);
+            Call<ResultEntity> call = RequestUtils.getMovieInstance().search(null,null,null,null,null,keyword,pageSize,pageNum);
             call.enqueue(new Callback<ResultEntity>() {
 
                 @Override

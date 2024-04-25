@@ -18,8 +18,8 @@ import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
 import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.utils.SharedPreferencesUtils;
 
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      * @date: 2021-12-04 15:59
      */
     private void getUserData(){
-        Call<ResultEntity> userData = RequestUtils.getInstance().getUserData();
+        Call<ResultEntity> userData = RequestUtils.getMovieInstance().getUserData();
         userData.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

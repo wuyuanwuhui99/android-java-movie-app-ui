@@ -3,18 +3,14 @@ package com.player.movie.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.player.R;
@@ -23,12 +19,11 @@ import com.player.movie.BaseApplication;
 import com.player.movie.dialog.BottomMenu;
 import com.player.movie.dialog.DatePickerFragment;
 import com.player.movie.entity.UserEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.utils.MD5;
 import com.player.movie.utils.SharedPreferencesUtils;
-import com.player.movie.view.ReflectHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -127,7 +122,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if(userIdInput.getText().toString().length() < 6){
             Toast.makeText(RegisterActivity.this,getResources().getString(R.string.user_verified_tip), Toast.LENGTH_SHORT).show();
         }else if(userIdInput.getText().toString().length() >= 6){
-            Call<ResultEntity> getUserByIdCall = RequestUtils.getInstance().getUserById(userIdInput.getText().toString());
+            Call<ResultEntity> getUserByIdCall = RequestUtils.getMovieInstance().getUserById(userIdInput.getText().toString());
             getUserByIdCall.enqueue(new Callback<ResultEntity>() {
                 @Override
                 public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -183,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 loadingLayout = inflater.inflate(R.layout.layout_loading, (ViewGroup)getWindow().getDecorView().getRootView()).findViewById(R.id.layout_loading);
             }
             loadingLayout.setVisibility(View.VISIBLE);
-            Call<ResultEntity> registerCall = RequestUtils.getInstance().register(userEntity);
+            Call<ResultEntity> registerCall = RequestUtils.getMovieInstance().register(userEntity);
             registerCall.enqueue(new Callback<ResultEntity>() {
                 @Override
                 public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -227,7 +222,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         Toast.makeText(RegisterActivity.this,getResources().getString(R.string.user_verified_tip), Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    Call<ResultEntity> getUserByIdCall = RequestUtils.getInstance().getUserById(userIdInput.getText().toString());
+                    Call<ResultEntity> getUserByIdCall = RequestUtils.getMovieInstance().getUserById(userIdInput.getText().toString());
                     getUserByIdCall.enqueue(new Callback<ResultEntity>() {
                         @Override
                         public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

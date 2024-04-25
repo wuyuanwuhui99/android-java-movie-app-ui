@@ -23,8 +23,8 @@ import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.UserEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.receiver.UpdateUserReciver;
 import com.player.music.activity.MusicActivity;
 import java.util.ArrayList;
@@ -86,7 +86,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
     private void initData(){
         setUserData();
         getUserMsg();
-        getMoviList(RequestUtils.getInstance().getPlayRecord(),R.id.play_record_list,R.id.no_data_play);
+        getMoviList(RequestUtils.getMovieInstance().getPlayRecord(),R.id.play_record_list,R.id.no_data_play);
         addClickListener();
         initReceiver();
     }
@@ -118,7 +118,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
      * @date: 2021-12-12 19:41
      */
     private void getUserMsg(){
-        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getUserMsg();
+        Call<ResultEntity> categoryListService = RequestUtils.getMovieInstance().getUserMsg();
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -221,7 +221,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                     // 如果是收起状态，点击后展开
                     isExpandRecord = true;
                     // 展开后重新获取播放记录
-                    getMoviList(RequestUtils.getInstance().getPlayRecord(),R.id.play_record_list,R.id.no_data_play);
+                    getMoviList(RequestUtils.getMovieInstance().getPlayRecord(),R.id.play_record_list,R.id.no_data_play);
                     view.findViewById(R.id.icon_record_arrow).setRotation(90);
                     view.findViewById(R.id.play_record_list).setVisibility(View.VISIBLE);
                 }
@@ -238,7 +238,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 }else{
                     // 如果是收起状态，点击后展开
                     isExpandFavorite = true;
-                    getMoviList(RequestUtils.getInstance().getFavoriteList(),R.id.my_favorite_list,R.id.no_data_favorite);
+                    getMoviList(RequestUtils.getMovieInstance().getFavoriteList(),R.id.my_favorite_list,R.id.no_data_favorite);
                     view.findViewById(R.id.icon_favorite_arrow).setRotation(90);
                     view.findViewById(R.id.my_favorite_list).setVisibility(View.VISIBLE);
                 }
@@ -255,7 +255,7 @@ public class UserFragment extends Fragment implements View.OnClickListener {
                 }else{
                     // 如果是收起状态，点击后展开
                     isExpandView = true;
-                    getMoviList(RequestUtils.getInstance().getViewRecord(),R.id.my_view_list,R.id.no_data_view);
+                    getMoviList(RequestUtils.getMovieInstance().getViewRecord(),R.id.my_view_list,R.id.no_data_view);
                     view.findViewById(R.id.icon_view_arrow).setRotation(90);
                     view.findViewById(R.id.my_view_list).setVisibility(View.VISIBLE);
                 }

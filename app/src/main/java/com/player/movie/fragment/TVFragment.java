@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.alibaba.fastjson.JSON;
@@ -19,8 +18,8 @@ import com.player.R;
 import com.player.movie.api.Api;
 import com.player.movie.entity.CategoryEntity;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -78,7 +77,7 @@ public class TVFragment extends Fragment {
      * @date: 2021-12-07 23:32
      */
     public void getBannerData(){
-        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getCategoryList("轮播","电视剧");
+        Call<ResultEntity> categoryListService = RequestUtils.getMovieInstance().getCategoryList("轮播","电视剧");
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -110,7 +109,7 @@ public class TVFragment extends Fragment {
      * @date: 2021-12-07 23:32
      */
     public void getAllCategoryListByPageName(){
-        Call<ResultEntity> categoryListService = RequestUtils.getInstance().getAllCategoryListByPageName("电视剧");
+        Call<ResultEntity> categoryListService = RequestUtils.getMovieInstance().getAllCategoryListByPageName("电视剧");
         categoryListService.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

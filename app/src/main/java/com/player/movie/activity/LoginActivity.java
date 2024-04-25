@@ -16,9 +16,8 @@ import com.player.R;
 import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.movie.entity.UserEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
-import com.player.movie.utils.ActivityCollectorUtil;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.utils.MD5;
 import com.player.movie.utils.SharedPreferencesUtils;
 import retrofit2.Call;
@@ -69,7 +68,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         UserEntity userEntity = new UserEntity();
         userEntity.setUserId(userId);
         userEntity.setPassword(encryptedPsw);
-        Call<ResultEntity> loginCall = RequestUtils.getInstance().login(userEntity);
+        Call<ResultEntity> loginCall = RequestUtils.getMovieInstance().login(userEntity);
         loginCall.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

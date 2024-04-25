@@ -1,5 +1,6 @@
-package com.player.movie.http;
+package com.player.movie.service;
 
+import com.player.http.ResultEntity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.UserEntity;
@@ -12,7 +13,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
-public interface RequestService {
+public interface RequestMusicService {
     @GET(Api.GETUSERDATA)
     Call<ResultEntity> getUserData();
 

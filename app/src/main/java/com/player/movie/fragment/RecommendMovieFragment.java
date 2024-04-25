@@ -13,12 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.player.R;
-import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.adapter.GridRecyclerViewAdapter;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 
 import java.util.List;
 
@@ -63,7 +62,7 @@ public class RecommendMovieFragment extends Fragment {
      * @date: 2021-12-11 12:11
      */
     private void getRecommend(){
-        Call<ResultEntity> userData = RequestUtils.getInstance().getRecommend(movieEntity.getClassify());
+        Call<ResultEntity> userData = RequestUtils.getMovieInstance().getRecommend(movieEntity.getClassify());
         userData.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

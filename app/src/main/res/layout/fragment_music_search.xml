@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/music_avater_layout"
+    android:visibility="invisible"
+    android:background="@drawable/border_radius"
+    android:padding="@dimen/container_padding_size"
+    android:orientation="horizontal">
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:layout_width="@dimen/md_avater_size"
+        android:layout_height="@dimen/md_avater_size"
+        android:src="@mipmap/icon_avater"
+        android:id="@+id/music_avater"
+        app:riv_oval="true" />
+    <LinearLayout
+        android:id="@+id/music_search_layout"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/md_avater_size"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/container_padding_size"
+        android:background="@drawable/rounded_corner_search_box"
+        >
+        <TextView
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_marginLeft="@dimen/small_margin_size"
+            android:paddingLeft="@dimen/small_margin_size"
+            android:textColor="@color/background_dark"
+            android:gravity="center_vertical"
+            android:id="@+id/music_search_key"/>
+        <ImageView
+            android:src="@mipmap/icon_search"
+            android:scaleType="fitCenter"
+            android:layout_marginRight="@dimen/small_margin_size"
+            android:layout_width="@dimen/lg_img_size"
+            android:layout_height="@dimen/lg_img_size"/>
+    </LinearLayout>
+</LinearLayout>

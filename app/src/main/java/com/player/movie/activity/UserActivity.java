@@ -28,8 +28,8 @@ import com.player.movie.api.Api;
 import com.player.movie.dialog.BottomMenu;
 import com.player.movie.dialog.DatePickerFragment;
 import com.player.movie.entity.UserEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.receiver.UpdateUserReciver;
 import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.dialog.PlugCamera;
@@ -206,7 +206,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         UserEntity userEntity = new UserEntity();
         ReflectHelper reflectHelper = new ReflectHelper(userEntity);
         reflectHelper.setMethodValue(field,value);
-        Call<ResultEntity> updateUserCall = RequestUtils.getInstance().updateUser(userEntity);
+        Call<ResultEntity> updateUserCall = RequestUtils.getMovieInstance().updateUser(userEntity);
         updateUserCall.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

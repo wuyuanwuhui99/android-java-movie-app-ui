@@ -13,11 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.fastjson.JSON;
 import com.player.R;
-import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.adapter.CategoryRecyclerViewAdapter;
 import com.player.movie.entity.MovieEntity;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 
 import java.util.List;
 
@@ -64,9 +63,9 @@ public class LikeMovieFragment extends Fragment {
         Call<ResultEntity> yourLikesService;
         if(label == null){
             String category = movieEntity.getCategory().equals("轮播") ? null : movieEntity.getCategory();
-            yourLikesService = RequestUtils.getInstance().getTopMovieList(movieEntity.getClassify(),category);
+            yourLikesService = RequestUtils.getMovieInstance().getTopMovieList(movieEntity.getClassify(),category);
         }else{
-            yourLikesService = RequestUtils.getInstance().getYourLikes(label, movieEntity.getClassify());
+            yourLikesService = RequestUtils.getMovieInstance().getYourLikes(label, movieEntity.getClassify());
         }
         yourLikesService.enqueue(new Callback<ResultEntity>() {
             @Override

@@ -17,8 +17,8 @@ import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieUrlEntity;
 import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 import com.player.movie.view.TabLayout;
 
 import java.util.ArrayList;
@@ -106,8 +106,8 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
      * @date: 2021-12-04 15:59
      */
     private void getMovieUrl(){
-        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(100L);
-//        Call<ResultEntity> call = RequestUtils.getInstance().getMovieUrl(movieEntity.getMovieId());
+        Call<ResultEntity> call = RequestUtils.getMovieInstance().getMovieUrl(100L);
+//        Call<ResultEntity> call = RequestUtils.getMovieInstance().getMovieUrl(movieEntity.getMovieId());
         call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -214,7 +214,7 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
      * @date: 2021-12-22 23:13
      */
     public void savePlayRecord(){
-        Call<ResultEntity> call = RequestUtils.getInstance().savePlayRecord(movieEntity);
+        Call<ResultEntity> call = RequestUtils.getMovieInstance().savePlayRecord(movieEntity);
         call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {

@@ -1,4 +1,4 @@
-package com.player.movie.http;
+package com.player.http;
 
 public class ResultEntity {
     private Object data;

@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import com.player.R;
+import com.player.movie.fragment.SearchFragment;
 
 public class MusicHomeFragment extends Fragment {
     private View view;
@@ -20,8 +21,21 @@ public class MusicHomeFragment extends Fragment {
         if(!isInit){
             view = inflater.inflate(R.layout.fragment_music_home,container,false);
             transaction = getFragmentManager().beginTransaction();
+            addSearchFraction();
             isInit = true;
         }
         return view;
+    }
+
+    /**
+     * @author: wuwenqiang
+     * @description: 设置搜索和头像
+     * @date: 2022-08-13 11:19
+     */
+    private void addSearchFraction(){
+        getFragmentManager()
+                .beginTransaction()
+                .replace(R.id.music_search_layout,new MusicSearchFragment())
+                .commit();
     }
 }

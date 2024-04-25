@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -26,8 +25,8 @@ import com.player.movie.entity.MovieEntity;
 import com.player.movie.entity.MovieStarEntity;
 import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
-import com.player.movie.http.RequestUtils;
-import com.player.movie.http.ResultEntity;
+import com.player.http.RequestUtils;
+import com.player.http.ResultEntity;
 
 import java.util.List;
 
@@ -153,7 +152,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             findViewById(R.id.detail_star_layout).setVisibility(View.GONE);
             return;
         }
-        Call<ResultEntity> call = RequestUtils.getInstance().getStarList(movieEntity.getMovieId().toString());
+        Call<ResultEntity> call = RequestUtils.getMovieInstance().getStarList(movieEntity.getMovieId().toString());
         call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
@@ -194,7 +193,7 @@ public class MovieDetailActivity extends AppCompatActivity {
      * @date: 2021-12-22 23:13
      */
     public void saveViewRecord(){
-        Call<ResultEntity> call = RequestUtils.getInstance().saveViewRecord(movieEntity);
+        Call<ResultEntity> call = RequestUtils.getMovieInstance().saveViewRecord(movieEntity);
         call.enqueue(new Callback<ResultEntity>() {
             @Override
             public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
