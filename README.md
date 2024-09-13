@@ -79,7 +79,6 @@ java安卓原生版本参见：
 https://github.com/wuyuanwuhui99/android-java-movie-app-ui   
 https://gitee.com/wuyuanwuhui99/android-java-movie-app-ui   
 
-
 kotlin安卓原生版本参见：   
 https://github.com/wuyuanwuhui99/android-kotlin-jetpack-movie-app   
 
@@ -99,3 +98,12 @@ https://github.com/wuyuanwuhui99/koa2-music-app-service
 
 vue3+ts明日头条项目：   
 https://github.com/wuyuanwuhui99/vue3-ts-toutiao-app-ui
+
+本地调试请把 http://192.168.0.5:5001 改成 http://254a2y1767.qicp.vip    
+该地址是映射到本人电脑的地址，需要本人电脑开机才能访问，一般在工作日晚上八点半之后或者周末白天会开机   
+如需了解是否已开机，请用浏览器直接打开该地址：http://254a2y1767.qicp.vip，如出现以下提示，则正常使用   
+![外网映射正常访问提示](外网映射正常访问提示.png)
+
+本站所有视频和图片均来自互联网收集而来，版权归原创者所有，本网站只提供web页面服务，并不提供资源存储，也不参与录制、上传 若本站收录的节目无意侵犯了贵司版权，请联系   
+
+联系方式：（微信）wuwenqiang_99、（邮箱）275018723@qq.com
