@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     void initView(){
         String userId = BaseApplication.getInstance().getUserEntity().getUserId();
         userEditText = findViewById(R.id.user_input);
-        userEditText.setText(userId);
+        if(userId != null)userEditText.setText(userId);
         passwordEditText = findViewById(R.id.password_input);
         findViewById(R.id.user_login).setOnClickListener(this);
         findViewById(R.id.user_register).setOnClickListener(this);

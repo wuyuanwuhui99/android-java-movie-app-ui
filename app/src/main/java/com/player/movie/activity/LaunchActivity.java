@@ -26,19 +26,16 @@ public class LaunchActivity extends AppCompatActivity{
      */
     void init(){
         Handler handler = new Handler();
-        Runnable runnable = new Runnable() {
-            @Override
-            public void run() {
-                String token = (String) SharedPreferencesUtils.getParam(LaunchActivity.this, Constants.TOKEN,"");
-                Intent intent;
-                if("".equals(token) && token != null){
-                    BaseApplication.getInstance().setToken(token);
-                    intent = new Intent(LaunchActivity.this,MainActivity.class);
-                }else{
-                    intent = new Intent(LaunchActivity.this,LoginActivity.class);
-                }
-                startActivity(intent);
+        Runnable runnable = () -> {
+            String token = (String) SharedPreferencesUtils.getParam(LaunchActivity.this, Constants.TOKEN,"");
+            Intent intent;
+            if("".equals(token) && token != null){
+                BaseApplication.getInstance().setToken(token);
+                intent = new Intent(LaunchActivity.this,MainActivity.class);
+            }else{
+                intent = new Intent(LaunchActivity.this,LoginActivity.class);
             }
+            startActivity(intent);
         };
         handler.postDelayed(runnable, 1000); // 延时1000毫秒执行
     }
