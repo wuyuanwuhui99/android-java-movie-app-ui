@@ -19,6 +19,7 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.R;
+import com.player.common.Constants;
 import com.player.movie.adapter.StarRecyclerViewAdapter;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
@@ -61,7 +62,7 @@ public class MovieDetailActivity extends AppCompatActivity {
         RoundedImageView imageView = findViewById(R.id.detail_movie_img);
 
         Glide.with(imageView)
-                .load(Api.HOST + movieEntity.getLocalImg())
+                .load(Constants.HOST + movieEntity.getLocalImg())
                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                 .into(imageView);
 

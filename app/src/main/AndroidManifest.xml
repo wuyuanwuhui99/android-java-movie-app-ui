@@ -22,12 +22,13 @@
             android:exported="true" />
         <activity android:name=".movie.activity.WebViewActivity" />
         <activity android:name=".movie.activity.LoginActivity" />
+        <activity android:name=".movie.activity.MainActivity" />
         <activity android:name=".movie.activity.UserActivity" />
         <activity android:name=".movie.activity.SearchActivity" />
         <activity android:name=".movie.activity.MoviePlayActivity" />
         <activity android:name=".movie.activity.MovieDetailActivity" />
         <activity android:name=".music.activity.MusicActivity" />
-        <activity android:name=".movie.activity.MainActivity">
+        <activity android:name=".movie.activity.LaunchActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

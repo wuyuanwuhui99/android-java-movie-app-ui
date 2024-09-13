@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.R;
+import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.movie.api.Api;
 import com.player.movie.entity.UserEntity;
@@ -48,7 +49,7 @@ public class MusicSearchFragment extends Fragment {
         UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
         RoundedImageView avaterImage = view.findViewById(R.id.music_avater);
         if(userEntity.getAvater()!= null){
-            Glide.with(getContext()).load(Api.HOST + userEntity.getAvater()).into(avaterImage);
+            Glide.with(getContext()).load(Constants.HOST + userEntity.getAvater()).into(avaterImage);
         }else{
             avaterImage.setImageResource(R.mipmap.default_avater);
         }

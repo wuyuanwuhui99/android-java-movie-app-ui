@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.google.gson.Gson;
+import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.R;
 import com.player.movie.entity.UserEntity;
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     instance.setToken(body.getToken());
                 }
                 instance.setUserEntity(gson.fromJson(gson.toJson(body.getData()),UserEntity.class));
-                SharedPreferencesUtils.setParam(MainActivity.this,"token",response.body().getToken());
+                SharedPreferencesUtils.setParam(MainActivity.this, Constants.TOKEN,response.body().getToken());
                 findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
                 initView();//初始化view
                 initEvent();//初始化事件

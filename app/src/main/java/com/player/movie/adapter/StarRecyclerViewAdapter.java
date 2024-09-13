@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
+import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.R;
 import com.player.movie.activity.MovieDetailActivity;
@@ -42,7 +43,7 @@ public class StarRecyclerViewAdapter extends RecyclerView.Adapter<StarRecyclerVi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String path = Api.HOST + movieStarList.get(position).getLocalImg();
+        String path = Constants.HOST + movieStarList.get(position).getLocalImg();
 //        String path = movieStarList.get(position).getImg();
         Glide.with(context).load(path).into(holder.imageView);
         holder.textView.setText(movieStarList.get(position).getStarName());

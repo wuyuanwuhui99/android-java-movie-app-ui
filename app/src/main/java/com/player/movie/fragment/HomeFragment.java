@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.player.R;
+import com.player.common.Constants;
 import com.player.movie.api.Api;
 import com.player.movie.entity.CategoryEntity;
 import com.player.movie.entity.MovieEntity;
@@ -77,7 +78,7 @@ public class HomeFragment extends Fragment {
                     public void onBindView(BannerImageHolder holder, MovieEntity movieEntity, int position, int size) {
                         //图片加载自己实现
                         Glide.with(holder.imageView)
-                                .load(Api.HOST + movieEntity.getLocalImg())
+                                .load(Constants.HOST + movieEntity.getLocalImg())
                                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                                 .into(holder.imageView);
                     }

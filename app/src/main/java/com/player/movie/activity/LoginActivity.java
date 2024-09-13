@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 ResultEntity body = response.body();
                 if(body.getStatus().equals(Constants.SUCCESS)){
                     BaseApplication.getInstance().setToken(body.getToken());// 更新token
-                    SharedPreferencesUtils.setParam(LoginActivity.this,"token",body.getToken());
+                    SharedPreferencesUtils.setParam(LoginActivity.this,Constants.TOKEN,body.getToken());
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success_tip), Toast.LENGTH_SHORT).show();
                     // 延迟2000毫秒执行跳转首页
                     new Handler().postDelayed(new Runnable() {

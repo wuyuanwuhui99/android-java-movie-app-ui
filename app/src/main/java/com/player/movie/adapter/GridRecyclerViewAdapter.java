@@ -16,6 +16,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.R;
+import com.player.common.Constants;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
@@ -51,7 +52,7 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
             layoutParams.topMargin = 0;
             holder.itemView.setLayoutParams(layoutParams);
         }
-        String path0 = Api.HOST + movieEntityList.get(position * 3).getLocalImg();
+        String path0 = Constants.HOST + movieEntityList.get(position * 3).getLocalImg();
         Glide.with(context).load(path0).into(holder.imageView0);
         holder.imageView0.setLayoutParams(imgLayoutParams);
         holder.textView0.setText(movieEntityList.get(position).getMovieName());
@@ -61,7 +62,7 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
 
         if(position * 3 + 1 < movieEntityList.size()){
             holder.imageView1.setLayoutParams(imgLayoutParams);
-            String path1 = Api.HOST + movieEntityList.get(position * 3 + 1).getLocalImg();
+            String path1 = Constants.HOST + movieEntityList.get(position * 3 + 1).getLocalImg();
             Glide.with(context).load(path1).into(holder.imageView1);
             holder.textView1.setText(movieEntityList.get(position * 3 + 1).getMovieName());
             holder.itemView1.setTag(movieEntityList.get(position * 3 + 1));
@@ -72,7 +73,7 @@ public class GridRecyclerViewAdapter extends RecyclerView.Adapter<GridRecyclerVi
 
         if(position * 3 + 2 < movieEntityList.size()){
             holder.imageView2.setLayoutParams(imgLayoutParams);
-            String path2 = Api.HOST + movieEntityList.get(position * 3 + 2).getLocalImg();
+            String path2 = Constants.HOST + movieEntityList.get(position * 3 + 2).getLocalImg();
             Glide.with(context).load(path2).into(holder.imageView2);
             holder.textView2.setText(movieEntityList.get(position * 3 + 2).getMovieName());
             holder.itemView2.setTag(movieEntityList.get(position * 3 + 2));

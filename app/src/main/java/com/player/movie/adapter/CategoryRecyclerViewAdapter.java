@@ -15,6 +15,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.makeramen.roundedimageview.RoundedImageView;
 import com.player.R;
+import com.player.common.Constants;
 import com.player.movie.activity.MovieDetailActivity;
 import com.player.movie.api.Api;
 import com.player.movie.entity.MovieEntity;
@@ -39,7 +40,7 @@ public class CategoryRecyclerViewAdapter extends RecyclerView.Adapter<CategoryRe
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        String path = Api.HOST + movieEntityList.get(position).getLocalImg();
+        String path = Constants.HOST + movieEntityList.get(position).getLocalImg();
         Glide.with(context).load(path).into(holder.imageView);
         holder.textView.setText(movieEntityList.get(position).getMovieName());
         holder.itemView.setTag(movieEntityList.get(position));

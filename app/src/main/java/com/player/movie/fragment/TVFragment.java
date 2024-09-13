@@ -13,6 +13,7 @@ import com.alibaba.fastjson.JSON;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
+import com.player.common.Constants;
 import com.player.movie.BaseApplication;
 import com.player.R;
 import com.player.movie.api.Api;
@@ -88,7 +89,7 @@ public class TVFragment extends Fragment {
                     public void onBindView(BannerImageHolder holder, MovieEntity movieEntity, int position, int size) {
                         //图片加载自己实现
                         Glide.with(holder.imageView)
-                                .load(Api.HOST + movieEntity.getLocalImg())
+                                .load(Constants.HOST + movieEntity.getLocalImg())
                                 .apply(RequestOptions.bitmapTransform(new RoundedCorners(30)))
                                 .into(holder.imageView);
                     }

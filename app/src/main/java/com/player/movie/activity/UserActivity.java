@@ -64,7 +64,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
         UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
         RoundedImageView avater = findViewById(R.id.user_m_avater);
         if(userEntity.getAvater() != null){
-            Glide.with(this).load(Api.HOST + userEntity.getAvater()).into(avater);
+            Glide.with(this).load(Constants.HOST + userEntity.getAvater()).into(avater);
         }else{
             avater.setImageResource(R.mipmap.default_avater);
         }
@@ -303,7 +303,7 @@ public class UserActivity extends AppCompatActivity implements View.OnClickListe
      */
     private void logout(){
         CustomDialogFragment  customDialogFragment = new CustomDialogFragment(R.layout.logout_text, getResources().getString(R.string.user_login), () -> {
-            SharedPreferencesUtils.setParam(UserActivity.this,"token","");
+            SharedPreferencesUtils.setParam(UserActivity.this,Constants.TOKEN,"");
             Intent intent = new Intent(UserActivity.this,LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
             startActivity(intent);

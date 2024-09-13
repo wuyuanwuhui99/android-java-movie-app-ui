@@ -1,5 +1,6 @@
 package com.player.http;
 
+import com.player.common.Constants;
 import com.player.movie.api.Api;
 import com.player.movie.service.RequestMusicService;
 
@@ -10,7 +11,7 @@ public  class  RequestUtils {
 
    static public RequestMusicService getMovieInstance(){
       return new Retrofit.Builder()
-              .baseUrl(Api.HOST)
+              .baseUrl(Constants.HOST)
               .client(new TokenHeaderInterceptor().getClient().build())
               .addConverterFactory(GsonConverterFactory.create())
               .build().create(RequestMusicService.class);
@@ -18,7 +19,7 @@ public  class  RequestUtils {
 
    static public com.player.music.service.RequestMusicService getMusicInstance(){
       return new Retrofit.Builder()
-              .baseUrl(Api.HOST)
+              .baseUrl(Constants.HOST)
               .client(new TokenHeaderInterceptor().getClient().build())
               .addConverterFactory(GsonConverterFactory.create())
               .build().create(com.player.music.service.RequestMusicService.class);
