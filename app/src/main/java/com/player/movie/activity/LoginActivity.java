@@ -18,6 +18,7 @@ import com.player.movie.BaseApplication;
 import com.player.movie.entity.UserEntity;
 import com.player.http.RequestUtils;
 import com.player.http.ResultEntity;
+import com.player.movie.utils.ActivityCollectorUtil;
 import com.player.movie.utils.MD5;
 import com.player.movie.utils.SharedPreferencesUtils;
 import retrofit2.Call;
@@ -42,10 +43,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
      * @date: 2024-04-20 18:42
      */
     void initView(){
-        String userId = BaseApplication.getInstance().getUserEntity().getUserId();
+        UserEntity userEntity = BaseApplication.getInstance().getUserEntity();
+        String userId = "吴时吴刻";
+        if(userEntity != null){
+            userId = userEntity.getUserId();
+        }
         userEditText = findViewById(R.id.user_input);
-        if(userId != null)userEditText.setText(userId);
+        userEditText.setText(userId);
+        String password = (String) SharedPreferencesUtils.getParam(LoginActivity.this, userId, "123456");
         passwordEditText = findViewById(R.id.password_input);
+        passwordEditText.setText(password);
         findViewById(R.id.user_login).setOnClickListener(this);
         findViewById(R.id.user_register).setOnClickListener(this);
     }
@@ -78,6 +85,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(body.getStatus().equals(Constants.SUCCESS)){
                     BaseApplication.getInstance().setToken(body.getToken());// 更新token
                     SharedPreferencesUtils.setParam(LoginActivity.this,Constants.TOKEN,body.getToken());
+                    SharedPreferencesUtils.setParam(LoginActivity.this,userId,password);
+
                     Toast.makeText(LoginActivity.this, getResources().getString(R.string.login_success_tip), Toast.LENGTH_SHORT).show();
                     // 延迟2000毫秒执行跳转首页
                     new Handler().postDelayed(new Runnable() {
@@ -86,7 +95,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);// 前面所有页面置空
                             startActivity(intent);
-                            finish();
+                            ActivityCollectorUtil.finishAllActivity();
                         }
                     }, 2000);
                 }else{

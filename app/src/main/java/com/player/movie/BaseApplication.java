@@ -2,6 +2,7 @@ package com.player.movie;
 
 import android.app.Application;
 
+import com.player.common.Constants;
 import com.player.movie.entity.UserEntity;
 import com.player.movie.utils.SharedPreferencesUtils;
 
@@ -21,7 +22,7 @@ public class BaseApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mApp = this;
-        token = (String) SharedPreferencesUtils.getParam(this,"token","");
+        token = (String) SharedPreferencesUtils.getParam(this, Constants.TOKEN,"");
     }
 
     public void setToken(String token){

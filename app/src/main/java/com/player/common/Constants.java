@@ -6,4 +6,5 @@ public class Constants {
     public final static String SUCCESS = "SUCCESS";
     public final static String TOKEN = "TOKEN";
     public static final String FAIL = "FAIL";
+    public static final String PASSWORD = "PASSWORD";
 }

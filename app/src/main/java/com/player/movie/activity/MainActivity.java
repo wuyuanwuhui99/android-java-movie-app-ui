@@ -10,30 +10,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.google.gson.Gson;
-import com.player.common.Constants;
-import com.player.movie.BaseApplication;
 import com.player.R;
-import com.player.movie.entity.UserEntity;
 import com.player.movie.fragment.HomeFragment;
 import com.player.movie.fragment.MovieFragment;
 import com.player.movie.fragment.TVFragment;
 import com.player.movie.fragment.UserFragment;
-import com.player.http.RequestUtils;
-import com.player.http.ResultEntity;
-import com.player.movie.utils.SharedPreferencesUtils;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ViewPager viewPager;//容器
-    private List<Fragment> listFragment = new ArrayList<>();
+    private final List<Fragment> listFragment = new ArrayList<>();
 
     // 当前选中的导航
     ImageView activeImage;
@@ -55,7 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getUserData();
+        findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
+        initView();//初始化view
+        initEvent();//初始化事件
     }
 
     private void initView(){
@@ -88,36 +78,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tabTextView[1] = findViewById(R.id.movie_text);
         tabTextView[2] = findViewById(R.id.tv_text);
         tabTextView[3] = findViewById(R.id.user_text);
-    }
-
-    /**
-     * @author: wuwenqiang
-     * @description: 获取用户信息
-     * @date: 2021-12-04 15:59
-     */
-    private void getUserData(){
-        Call<ResultEntity> userData = RequestUtils.getMovieInstance().getUserData();
-        userData.enqueue(new Callback<ResultEntity>() {
-            @Override
-            public void onResponse(Call<ResultEntity> call, Response<ResultEntity> response) {
-                Gson gson = new Gson();
-                ResultEntity body = response.body();
-                BaseApplication instance = BaseApplication.getInstance();
-                if("".equals(instance.getToken()) || instance.getToken() == null){// 从登录页面重定向进来就不需要重新设置token
-                    instance.setToken(body.getToken());
-                }
-                instance.setUserEntity(gson.fromJson(gson.toJson(body.getData()),UserEntity.class));
-                SharedPreferencesUtils.setParam(MainActivity.this, Constants.TOKEN,response.body().getToken());
-                findViewById(R.id.bottom_nav).setVisibility(View.VISIBLE);
-                initView();//初始化view
-                initEvent();//初始化事件
-            }
-
-            @Override
-            public void onFailure(Call<ResultEntity> call, Throwable t) {
-                System.out.println("错误");
-            }
-        });
     }
 
     /**

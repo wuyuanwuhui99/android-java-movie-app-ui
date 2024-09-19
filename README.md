@@ -77,7 +77,7 @@ https://gitee.com/wuyuanwuhui99/Harmony-arkts-movie-music-app-ui
 
 java安卓原生版本参见：   
 https://github.com/wuyuanwuhui99/android-java-movie-app-ui   
-https://gitee.com/wuyuanwuhui99/android-java-movie-app-ui   
+https://gitee.com/wuyuanwuhui99/android-java-movie-app-ui
 
 kotlin安卓原生版本参见：   
 https://github.com/wuyuanwuhui99/android-kotlin-jetpack-movie-app   

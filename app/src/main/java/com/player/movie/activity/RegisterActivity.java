@@ -185,6 +185,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     if(Constants.SUCCESS.equals(response.body().getStatus())){
                         BaseApplication.getInstance().setToken(response.body().getToken());
                         SharedPreferencesUtils.setParam(RegisterActivity.this,Constants.TOKEN,response.body().getToken());
+                        SharedPreferencesUtils.setParam(RegisterActivity.this,userIdInput.getText().toString(),password);
                         Toast.makeText(RegisterActivity.this,getResources().getString(R.string.register_success_tip), Toast.LENGTH_SHORT).show();
                         // 延迟2000毫秒执行跳转首页
                         new Handler().postDelayed(new Runnable() {
