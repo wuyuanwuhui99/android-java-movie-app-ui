@@ -19,7 +19,6 @@ import com.player.movie.fragment.LikeMovieFragment;
 import com.player.movie.fragment.RecommendMovieFragment;
 import com.player.http.RequestUtils;
 import com.player.http.ResultEntity;
-import com.player.movie.view.TabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -142,21 +141,22 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
      * @date: 2022-1-20 23:26
      */
     private void setTab(){
-        String [] mTitles = new String[playGroup.size()];
         LinearLayout playUrlLayout = findViewById(R.id.play_url_layout);
         for (int i=0;i<playGroup.size();i++){
-            mTitles[i] = "播放地址"+(i+1);
-            LinearLayout tabLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.url_linear_layout, playUrlLayout, false);
             List<MovieUrlEntity> movieUrlEntityList = playGroup.get(i);
-            int rows = (int) Math.ceil(movieUrlEntityList.size()/5);
+            String label = movieUrlEntityList.get(0).getLabel();
+            label = (label == null || "".equals(label)) ? "播放地址"+(i+1) : label;
+            LinearLayout groupLinearLayout = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.url_linear_layout, playUrlLayout, false);
+            TextView lableTextView = groupLinearLayout.findViewById(R.id.url_lable);
+            lableTextView.setText(label);
+            int rows = (int) Math.ceil(movieUrlEntityList.size()/4);
             for(int j = 0; j < rows; j++){
-                View rowView = LayoutInflater.from(this).inflate(R.layout.url_row, tabLinearLayout, false);
+                View rowView = LayoutInflater.from(this).inflate(R.layout.url_row, groupLinearLayout, false);
                 TextView []textView = new TextView[]{
                         rowView.findViewById(R.id.url_btn_0),
                         rowView.findViewById(R.id.url_btn_1),
                         rowView.findViewById(R.id.url_btn_2),
                         rowView.findViewById(R.id.url_btn_3),
-                        rowView.findViewById(R.id.url_btn_4)
                 };
                 // 如果是第一个tab而且是一个text，设置成激活状态
                 if(j == 0 && i == 0){
@@ -165,9 +165,9 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
                     prevUrlText = textView[0];
                     actvieMovieUrlEntity = movieUrlEntityList.get(0);
                 }
-                for(int k = 0; k < 5; k++){
-                    if(j * 5 + k < movieUrlEntityList.size()){
-                        MovieUrlEntity movieUrlEntity = movieUrlEntityList.get(j * 5 + k);
+                for(int k = 0; k < 4; k++){
+                    if(j * 4 + k < movieUrlEntityList.size()){
+                        MovieUrlEntity movieUrlEntity = movieUrlEntityList.get(j * 4 + k);
                         textView[k].setTag(movieUrlEntity);
                         textView[k].setText(movieUrlEntity.getLabel());
                         textView[k].setTag(movieUrlEntity);
@@ -176,23 +176,10 @@ public class MoviePlayActivity extends AppCompatActivity implements View.OnClick
                         textView[k].setVisibility(View.GONE);
                     }
                 }
-                tabLinearLayout.addView(rowView);
+                groupLinearLayout.addView(rowView);
             }
-            if(i==0){
-                prevUrlTabLayout = tabLinearLayout;
-            }else{
-                tabLinearLayout.setVisibility(View.GONE);
-            }
-            playUrlLayout.addView(tabLinearLayout);
+            playUrlLayout.addView(groupLinearLayout);
         }
-        TabLayout tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setTabData(mTitles);
-        tabLayout.setOnTabSelectListener(position -> {
-            View activeUrlGrid =  playUrlLayout.getChildAt(position);
-            activeUrlGrid.setVisibility(View.VISIBLE);
-            prevUrlTabLayout.setVisibility(View.GONE);
-            prevUrlTabLayout = activeUrlGrid;
-        });
     }
 
     @Override

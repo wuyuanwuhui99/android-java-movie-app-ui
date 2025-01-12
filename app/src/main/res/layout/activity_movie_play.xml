@@ -104,27 +104,12 @@
                     android:background="@drawable/border_radius"
                     android:orientation="vertical"
                     android:padding="@dimen/container_padding_size"
+                    android:id="@+id/play_url_layout"
                     android:layout_marginTop="@dimen/container_padding_size"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:gravity="center_horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <com.player.movie.view.TabLayout
-                            android:id="@+id/tab_layout"
-                            android:orientation="horizontal"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                        <LinearLayout
-                            android:orientation="vertical"
-                            android:id="@+id/play_url_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-                        </LinearLayout>
-                    </LinearLayout>
                 </LinearLayout>
+
                 <FrameLayout
                     android:id="@+id/play_your_like_layout"
                     android:layout_width="match_parent"

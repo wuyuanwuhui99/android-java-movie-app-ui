@@ -38,13 +38,4 @@
         android:gravity="center"
         android:layout_width="0dp"
         android:layout_height="@dimen/md_btn_height"/>
-    <TextView
-        android:id="@+id/url_btn_4"
-        android:layout_marginLeft="@dimen/container_padding_size"
-        android:background="@drawable/sm_border_decoration"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/md_btn_height"/>
-
 </LinearLayout>
